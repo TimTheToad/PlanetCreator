@@ -1,0 +1,105 @@
+[gd_scene load_steps=7 format=2]
+
+[sub_resource type="SphereMesh" id=1]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type spatial;
+
+uniform vec4 planet_color : hint_color;
+uniform vec4 water_color : hint_color;
+uniform sampler2D heightmap : hint_white;
+uniform float slider : hint_range(0.0, 1.0, 0.01);
+
+void vertex() {
+	VERTEX = VERTEX + NORMAL * texture(heightmap, UV).rgb * slider;
+}
+
+void fragment() {
+	ALBEDO = planet_color.rgb;
+}"
+
+[sub_resource type="OpenSimplexNoise" id=4]
+
+[sub_resource type="NoiseTexture" id=5]
+noise = SubResource( 4 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/planet_color = Color( 0.231373, 0.654902, 0.25098, 1 )
+shader_param/water_color = Color( 0.513726, 0.6, 0.933333, 1 )
+shader_param/slider = 0.27
+shader_param/heightmap = SubResource( 5 )
+
+[sub_resource type="ViewportTexture" id=6]
+viewport_path = NodePath("Viewport")
+
+[node name="Spatial" type="Spatial"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = SubResource( 3 )
+
+[node name="GUI" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.10803
+margin_bottom = 1.10803
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="GUI"]
+margin_right = 247.0
+margin_bottom = 66.0
+
+[node name="HBoxContainer" type="VBoxContainer" parent="GUI/Panel"]
+margin_right = 245.0
+margin_bottom = 109.0
+
+[node name="Label" type="Label" parent="GUI/Panel/HBoxContainer"]
+margin_right = 245.0
+margin_bottom = 14.0
+text = "Slider landscape: "
+
+[node name="Label2" type="Label" parent="GUI/Panel/HBoxContainer"]
+margin_top = 18.0
+margin_right = 245.0
+margin_bottom = 32.0
+text = "Slider water: "
+
+[node name="Label3" type="Label" parent="GUI/Panel/HBoxContainer"]
+margin_top = 36.0
+margin_right = 245.0
+margin_bottom = 50.0
+text = "Slider water: "
+
+[node name="Panel2" type="Panel" parent="GUI"]
+anchor_left = 0.768
+anchor_right = 0.889
+margin_left = -72.432
+margin_right = 115.664
+margin_bottom = 300.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="GUI/Panel2"]
+anchor_left = 0.215
+anchor_right = 0.323
+margin_left = -39.4738
+margin_top = 12.1053
+margin_right = 216.526
+margin_bottom = 268.105
+texture = SubResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 4.2697, 0, 0 )
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 256, 256 )
+
+[node name="Camera" type="Camera" parent="Viewport"]
+transform = Transform( -0.731921, 0.454592, -0.507579, 0, 0.744919, 0.667155, 0.681389, 0.488305, -0.545222, -4.38541, 5.76412, -4.71064 )
