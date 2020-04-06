@@ -6,7 +6,9 @@
 code = "shader_type spatial;
 
 // Colors
-uniform vec4 planet_color : hint_color;
+uniform vec4 ground_color : hint_color;
+uniform vec4 mountain_color : hint_color;
+uniform vec4 snow_color : hint_color;
 uniform vec4 water_color : hint_color;
 
 // Noise textures
@@ -14,41 +16,58 @@ uniform sampler2D heightmap : hint_white;
 
 uniform float slider : hint_range(0.0, 1.0, 0.01);
 uniform float water_amount : hint_range(0.0, 1.0, 0.01);
+uniform float mountain_amount : hint_range(0.0, 1.0, 0.01);
+uniform float snow_amount : hint_range(0.0, 1.0, 0.01);
 
 varying float vertex_height;
 
 void vertex() {
 	VERTEX = VERTEX + NORMAL * texture(heightmap, UV).rgb * slider;
-	vertex_height = length(VERTEX);
+	vertex_height = length(VERTEX) - 1.0;
 }
 
 void fragment() {
-	float t = step(water_amount, vertex_height);
 	
-	ALBEDO = planet_color.rgb * t + water_color.rgb * (1.0 - t) ;
+	// Water coloring
+	float isWater = step(water_amount, vertex_height);
+	float isMountain = step(vertex_height, mountain_amount);
+	float isSnow = step(vertex_height, snow_amount);
+	
+	vec4 color = ground_color * isWater * isMountain;
+	color += water_color * (1.0 - isWater);
+	color += mountain_color * (1.0 - isMountain);
+	color += snow_color * (1.0 - isSnow);
+	
+	// Mountain color
+	ALBEDO = color.rgb;
 }"
 
-[sub_resource type="OpenSimplexNoise" id=3]
+[sub_resource type="OpenSimplexNoise" id=5]
 
-[sub_resource type="NoiseTexture" id=4]
-noise = SubResource( 3 )
+[sub_resource type="NoiseTexture" id=6]
+seamless = true
+noise = SubResource( 5 )
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=3]
 shader = SubResource( 2 )
-shader_param/planet_color = Color( 0.231373, 0.498039, 0.654902, 1 )
+shader_param/ground_color = Color( 0.0666667, 0.694118, 0.239216, 1 )
+shader_param/mountain_color = Color( 0.396078, 0.337255, 0.2, 1 )
+shader_param/snow_color = Color( 1, 1, 1, 1 )
 shader_param/water_color = Color( 0.513726, 0.6, 0.933333, 1 )
-shader_param/slider = 0.36
-shader_param/water_amount = 0.12
-shader_param/heightmap = SubResource( 4 )
+shader_param/slider = 0.7
+shader_param/water_amount = 0.32
+shader_param/mountain_amount = 0.42
+shader_param/snow_amount = 0.46
+shader_param/heightmap = SubResource( 6 )
 
-[sub_resource type="ViewportTexture" id=6]
+[sub_resource type="ViewportTexture" id=4]
 viewport_path = NodePath("Viewport")
 
 [node name="Spatial" type="Spatial"]
 
 [node name="Planet Mesh" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
-material/0 = SubResource( 5 )
+material/0 = SubResource( 3 )
 
 [node name="GUI" type="Control" parent="."]
 anchor_right = 1.0
@@ -103,7 +122,7 @@ margin_left = -65.5
 margin_top = -64.5
 margin_right = 190.5
 margin_bottom = 191.5
-texture = SubResource( 6 )
+texture = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
