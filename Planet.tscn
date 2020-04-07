@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://GUI/AlternateViewport.gd" type="Script" id=1]
 [ext_resource path="res://Planet/Planet Mesh.tscn" type="PackedScene" id=2]
 [ext_resource path="res://GUI/OptionPanel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://GUI/PlanetSettingsPanel.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("Viewport")
@@ -28,6 +29,8 @@ margin_bottom = 2.27435
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="PlanetSettingsPanel" parent="GUI" instance=ExtResource( 4 )]
 
 [node name="OptionPanel" parent="GUI" instance=ExtResource( 3 )]
 
@@ -75,33 +78,6 @@ stretch_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="PlanetSettingsPanel" type="Control" parent="GUI"]
-margin_right = 166.0
-margin_bottom = 278.0
-
-[node name="Panel" type="Panel" parent="GUI/PlanetSettingsPanel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="MarginContainer" type="MarginContainer" parent="GUI/PlanetSettingsPanel/Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 10.0
-margin_top = 10.0
-margin_right = -10.0
-margin_bottom = -10.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/PlanetSettingsPanel/Panel/MarginContainer"]
-margin_right = 146.0
-margin_bottom = 258.0
-
-[node name="HSeparator" type="HSeparator" parent="GUI/PlanetSettingsPanel/Panel/MarginContainer/VBoxContainer"]
-margin_right = 146.0
-margin_bottom = 4.0
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 4.2697, 0, 0 )
