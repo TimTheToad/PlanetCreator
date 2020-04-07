@@ -19,10 +19,26 @@ var MIN_SNOW_AMOUNT = 0.0
 
 onready var material = self.get_surface_material(0);
 
+var timer = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomizePlanetColors()
 	pass # Replace with function body.
+
+func _process(delta):
+	timer += delta
+	
+	if timer > 0.5:
+		randomizePlanetColors()
+		randomizePlanetAttributes()
+		timer = 0
+
+func randomizePlanetAttributes():
+	self.setSnowThreshold(randf())
+	self.setMountainThreshold(randf())
+	self.setWaterThreshold(randf())
+	self.setHeight(randf())
 
 func randomizePlanetColors():
 	self.setGroundColor(randomizeColor())
