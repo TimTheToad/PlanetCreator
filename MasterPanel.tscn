@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://MasterPanel.gd" type="Script" id=1]
+
+[node name="MasterPanel" type="Control"]
+margin_right = 236.0
+margin_bottom = 208.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="exitbutton" type="Button" parent="."]
+anchor_left = 0.978
+anchor_right = 0.978
+margin_left = -20.0
+margin_top = 3.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+text = "X"
+__meta__ = {
+"_edit_use_anchors_": false
+}
