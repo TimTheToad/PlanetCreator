@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://AlternateViewport.gd" type="Script" id=1]
 [ext_resource path="res://Planet Mesh.tscn" type="PackedScene" id=2]
+[ext_resource path="res://OptionsPanel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://MasterPanel.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("Viewport")
@@ -28,76 +30,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="History" type="Panel" parent="GUI"]
-anchor_top = 0.645
-anchor_bottom = 0.882
-margin_right = 247.0
-margin_bottom = 66.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/History"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 235.0
-margin_bottom = 109.0
-size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Title" type="Label" parent="GUI/History/VBoxContainer"]
-margin_right = 225.0
-margin_bottom = 31.0
-text = "History
-"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="GUI/History/VBoxContainer"]
-margin_top = 35.0
-margin_right = 225.0
-margin_bottom = 127.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Panel" type="PanelContainer" parent="GUI/History/VBoxContainer/VBoxContainer2"]
-margin_right = 225.0
-margin_bottom = 28.0
-
-[node name="Label" type="Label" parent="GUI/History/VBoxContainer/VBoxContainer2/Panel"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 218.0
-margin_bottom = 21.0
-text = "CTRL+Z"
-
-[node name="Panel2" type="PanelContainer" parent="GUI/History/VBoxContainer/VBoxContainer2"]
-margin_top = 32.0
-margin_right = 225.0
-margin_bottom = 60.0
-
-[node name="Label2" type="Label" parent="GUI/History/VBoxContainer/VBoxContainer2/Panel2"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 218.0
-margin_bottom = 21.0
-text = "CTRL+C"
-
-[node name="Panel3" type="PanelContainer" parent="GUI/History/VBoxContainer/VBoxContainer2"]
-margin_top = 64.0
-margin_right = 225.0
-margin_bottom = 92.0
-
-[node name="Label3" type="Label" parent="GUI/History/VBoxContainer/VBoxContainer2/Panel3"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 218.0
-margin_bottom = 21.0
-text = "Modified Heightmap texture"
+[node name="MasterPanel" parent="GUI" instance=ExtResource( 4 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -208.0
+margin_bottom = 0.0
+scene = ExtResource( 3 )
 
 [node name="AlternateView" type="Panel" parent="GUI"]
 anchor_left = 1.0
