@@ -10,7 +10,7 @@ uniform vec4 water_color : hint_color;
 uniform sampler2D heightmap : hint_white;
 
 uniform float slider : hint_range(0.0, 1.0, 0.01);
-uniform float water_amount : hint_range(0.0, 1.0, 0.01);
+uniform float water_amount : hint_range(0.1, 1.0, 0.01);
 uniform float mountain_amount : hint_range(0.0, 1.0, 0.01);
 uniform float snow_amount : hint_range(0.0, 1.0, 0.01);
 
@@ -18,7 +18,6 @@ varying float vertex_height;
 
 void vertex() {
 	float noise = texture(heightmap, UV).r;
-	vertex_height = noise;
 	vec3 offset = NORMAL * noise * slider;
 	float isWater = step(water_amount, noise);
 	
@@ -29,6 +28,8 @@ void vertex() {
 	float waveNoise = texture(heightmap, UV + TIME * 0.1).r;
 	offset = NORMAL * noise * (slider - 0.1) + NORMAL * waveNoise * 0.05;
 	VERTEX += offset * (1.0 - isWater);
+	
+	vertex_height = length(VERTEX) - 1.0;
 }
 
 void fragment() {

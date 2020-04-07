@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Planet.shader" type="Shader" id=1]
+[ext_resource path="res://Planet Mesh.gd" type="Script" id=2]
 
 [sub_resource type="SphereMesh" id=1]
 radial_segments = 256
@@ -20,13 +21,14 @@ shader = ExtResource( 1 )
 shader_param/ground_color = Color( 0.0666667, 0.694118, 0.239216, 1 )
 shader_param/mountain_color = Color( 0.396078, 0.337255, 0.2, 1 )
 shader_param/snow_color = Color( 1, 1, 1, 1 )
-shader_param/water_color = Color( 0.513726, 0.6, 0.933333, 1 )
-shader_param/slider = 0.0
-shader_param/water_amount = 0.11
-shader_param/mountain_amount = 0.7
-shader_param/snow_amount = 0.91
+shader_param/water_color = Color( 0.513726, 0.54902, 0.933333, 1 )
+shader_param/slider = 0.6
+shader_param/water_amount = 0.31
+shader_param/mountain_amount = 0.37
+shader_param/snow_amount = 0.4
 shader_param/heightmap = SubResource( 3 )
 
 [node name="Planet Mesh" type="MeshInstance"]
 mesh = SubResource( 1 )
 material/0 = SubResource( 4 )
+script = ExtResource( 2 )

@@ -1,16 +1,16 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://AlternateView.gd" type="Script" id=1]
+[ext_resource path="res://AlternateViewport.gd" type="Script" id=1]
 [ext_resource path="res://Planet Mesh.tscn" type="PackedScene" id=2]
 
-[sub_resource type="ViewportTexture" id=5]
+[sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("Viewport")
 
-[sub_resource type="OpenSimplexNoise" id=6]
+[sub_resource type="OpenSimplexNoise" id=2]
 
-[sub_resource type="NoiseTexture" id=7]
+[sub_resource type="NoiseTexture" id=3]
 seamless = true
-noise = SubResource( 6 )
+noise = SubResource( 2 )
 
 [node name="Spatial" type="Spatial"]
 
@@ -106,7 +106,6 @@ margin_left = -140.0
 margin_bottom = 270.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -127,7 +126,7 @@ margin_right = 128.0
 margin_bottom = 128.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = SubResource( 5 )
+texture = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -138,7 +137,7 @@ margin_right = 128.0
 margin_bottom = 256.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = SubResource( 7 )
+texture = SubResource( 3 )
 expand = true
 stretch_mode = 1
 __meta__ = {
@@ -150,6 +149,7 @@ transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 4.2697,
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 128, 128 )
+script = ExtResource( 1 )
 
 [node name="Camera" type="Camera" parent="Viewport"]
-transform = Transform( -0.731921, 0.454592, -0.507579, 0, 0.744919, 0.667155, 0.681389, 0.488305, -0.545222, -4.38541, 5.76412, -4.71064 )
+transform = Transform( -0.825033, 0.337536, -0.453198, 0, 0.802002, 0.597321, 0.565083, 0.49281, -0.661678, -1.57217, 2.23403, -2.40254 )
