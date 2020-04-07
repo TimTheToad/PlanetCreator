@@ -1,6 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://AlternateView.gd" type="Script" id=1]
 
 [sub_resource type="SphereMesh" id=1]
+radial_segments = 256
+rings = 128
 
 [sub_resource type="Shader" id=2]
 code = "shader_type spatial;
@@ -22,8 +26,18 @@ uniform float snow_amount : hint_range(0.0, 1.0, 0.01);
 varying float vertex_height;
 
 void vertex() {
-	VERTEX = VERTEX + NORMAL * texture(heightmap, UV).rgb * slider;
-	vertex_height = length(VERTEX) - 1.0;
+	float noise = texture(heightmap, UV).r;
+	vertex_height = noise;
+	vec3 offset = NORMAL * noise * slider;
+	float isWater = step(water_amount, noise);
+	
+	// Landscape
+	VERTEX += offset * isWater;
+	
+	// Waves
+	float waveNoise = texture(heightmap, UV + TIME * 0.1).r;
+	offset = NORMAL * noise * (slider - 0.1) + NORMAL * waveNoise * 0.05;
+	VERTEX += offset * (1.0 - isWater);
 }
 
 void fragment() {
@@ -40,34 +54,48 @@ void fragment() {
 	
 	// Mountain color
 	ALBEDO = color.rgb;
+	METALLIC = 0.1 * (1.0 - isWater);
+	ROUGHNESS = 0.4 * (isWater);
 }"
 
-[sub_resource type="OpenSimplexNoise" id=5]
+[sub_resource type="OpenSimplexNoise" id=3]
+seed = 23
 
-[sub_resource type="NoiseTexture" id=6]
+[sub_resource type="NoiseTexture" id=4]
+width = 1024
+height = 1024
 seamless = true
-noise = SubResource( 5 )
+noise = SubResource( 3 )
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=5]
 shader = SubResource( 2 )
 shader_param/ground_color = Color( 0.0666667, 0.694118, 0.239216, 1 )
 shader_param/mountain_color = Color( 0.396078, 0.337255, 0.2, 1 )
 shader_param/snow_color = Color( 1, 1, 1, 1 )
 shader_param/water_color = Color( 0.513726, 0.6, 0.933333, 1 )
-shader_param/slider = 0.7
-shader_param/water_amount = 0.32
-shader_param/mountain_amount = 0.42
-shader_param/snow_amount = 0.46
-shader_param/heightmap = SubResource( 6 )
+shader_param/slider = 0.26
+shader_param/water_amount = 0.39
+shader_param/mountain_amount = 0.47
+shader_param/snow_amount = 0.66
+shader_param/heightmap = SubResource( 4 )
 
-[sub_resource type="ViewportTexture" id=4]
+[sub_resource type="ViewportTexture" id=6]
 viewport_path = NodePath("Viewport")
+
+[sub_resource type="OpenSimplexNoise" id=7]
+
+[sub_resource type="NoiseTexture" id=8]
+seamless = true
+noise = SubResource( 7 )
 
 [node name="Spatial" type="Spatial"]
 
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.598842, 0.800867, 0, -0.800867, 0.598842, 0, 3.7832, 0 )
+
 [node name="Planet Mesh" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
-material/0 = SubResource( 3 )
+material/0 = SubResource( 5 )
 
 [node name="GUI" type="Control" parent="."]
 anchor_right = 1.0
@@ -78,51 +106,119 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="Panel" parent="GUI"]
+[node name="History" type="Panel" parent="GUI"]
+anchor_top = 0.645
+anchor_bottom = 0.882
 margin_right = 247.0
 margin_bottom = 66.0
-
-[node name="HBoxContainer" type="VBoxContainer" parent="GUI/Panel"]
-margin_right = 245.0
-margin_bottom = 109.0
-
-[node name="Label" type="Label" parent="GUI/Panel/HBoxContainer"]
-margin_right = 245.0
-margin_bottom = 14.0
-text = "Slider landscape: "
-
-[node name="Label2" type="Label" parent="GUI/Panel/HBoxContainer"]
-margin_top = 18.0
-margin_right = 245.0
-margin_bottom = 32.0
-text = "Slider water: "
-
-[node name="Label3" type="Label" parent="GUI/Panel/HBoxContainer"]
-margin_top = 36.0
-margin_right = 245.0
-margin_bottom = 50.0
-text = "Slider water: "
-
-[node name="AlternateView" type="Panel" parent="GUI"]
-anchor_left = 0.768
-anchor_right = 0.889
-margin_left = 74.568
-margin_right = 115.664
-margin_bottom = 148.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="GUI/AlternateView"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/History"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 235.0
+margin_bottom = 109.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="GUI/History/VBoxContainer"]
+margin_right = 225.0
+margin_bottom = 31.0
+text = "History
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="GUI/History/VBoxContainer"]
+margin_top = 35.0
+margin_right = 225.0
+margin_bottom = 127.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="PanelContainer" parent="GUI/History/VBoxContainer/VBoxContainer2"]
+margin_right = 225.0
+margin_bottom = 28.0
+
+[node name="Label" type="Label" parent="GUI/History/VBoxContainer/VBoxContainer2/Panel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 218.0
+margin_bottom = 21.0
+text = "CTRL+Z"
+
+[node name="Panel2" type="PanelContainer" parent="GUI/History/VBoxContainer/VBoxContainer2"]
+margin_top = 32.0
+margin_right = 225.0
+margin_bottom = 60.0
+
+[node name="Label2" type="Label" parent="GUI/History/VBoxContainer/VBoxContainer2/Panel2"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 218.0
+margin_bottom = 21.0
+text = "CTRL+C"
+
+[node name="Panel3" type="PanelContainer" parent="GUI/History/VBoxContainer/VBoxContainer2"]
+margin_top = 64.0
+margin_right = 225.0
+margin_bottom = 92.0
+
+[node name="Label3" type="Label" parent="GUI/History/VBoxContainer/VBoxContainer2/Panel3"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 218.0
+margin_bottom = 21.0
+text = "Modified Heightmap texture"
+
+[node name="AlternateView" type="Panel" parent="GUI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -140.0
+margin_bottom = 270.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/AlternateView"]
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -65.5
-margin_top = -64.5
-margin_right = 190.5
-margin_bottom = 191.5
-texture = SubResource( 4 )
+margin_left = -64.0
+margin_top = 7.0
+margin_right = 64.0
+margin_bottom = 263.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewportTex" type="TextureRect" parent="GUI/AlternateView/VBoxContainer"]
+margin_right = 128.0
+margin_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NoiseTex" type="TextureRect" parent="GUI/AlternateView/VBoxContainer"]
+margin_top = 132.0
+margin_right = 128.0
+margin_bottom = 256.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 8 )
+expand = true
+stretch_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
