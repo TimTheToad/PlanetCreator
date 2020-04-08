@@ -1,6 +1,5 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://GUI/AlternateViewport.gd" type="Script" id=1]
 [ext_resource path="res://Planet/Planet Mesh.tscn" type="PackedScene" id=2]
 [ext_resource path="res://GUI/OptionPanel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Camera.gd" type="Script" id=4]
@@ -10,10 +9,28 @@
 viewport_path = NodePath("Viewport")
 
 [sub_resource type="OpenSimplexNoise" id=2]
+period = 15.1
+persistence = 0.332
+lacunarity = 1.99
 
 [sub_resource type="NoiseTexture" id=3]
 seamless = true
 noise = SubResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 6 )
+shader_param/ground_color = Color( 0.223529, 0.815686, 0.117647, 1 )
+shader_param/mountain_color = Color( 0.756863, 0.482353, 0.239216, 1 )
+shader_param/snow_color = Color( 0.984314, 0.984314, 0.984314, 1 )
+shader_param/water_color = Color( 0.478431, 0.368627, 0.858824, 1 )
+shader_param/slider = 0.29
+shader_param/water_amount = 0.14
+shader_param/mountain_amount = 0.19
+shader_param/snow_amount = 0.2
+shader_param/heightmap = SubResource( 3 )
+
+[sub_resource type="ViewportTexture" id=4]
+viewport_path = NodePath("Viewport")
 
 [node name="Spatial" type="Spatial"]
 
@@ -21,6 +38,7 @@ noise = SubResource( 2 )
 transform = Transform( 1, 0, 0, 0, 0.598842, 0.800867, 0, -0.800867, 0.598842, 0, 3.7832, 0 )
 
 [node name="Planet Mesh" parent="." instance=ExtResource( 2 )]
+material/0 = SubResource( 1 )
 
 [node name="GUI" type="Control" parent="."]
 anchor_right = 1.0
@@ -87,7 +105,6 @@ script = ExtResource( 4 )
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 128, 128 )
-script = ExtResource( 1 )
 
 [node name="Camera" type="Camera" parent="Viewport"]
 transform = Transform( -0.825033, 0.337536, -0.453198, 0, 0.802002, 0.597321, 0.565083, 0.49281, -0.661678, -1.57217, 2.23403, -2.40254 )
