@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Camera.gd" type="Script" id=1]
+[ext_resource path="res://OrbitalCamera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Planet/Planet Mesh.tscn" type="PackedScene" id=2]
 [ext_resource path="res://GUI/OptionPanel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://GUI/AlternateView.tscn" type="PackedScene" id=5]
@@ -29,13 +29,7 @@ __meta__ = {
 [node name="AlternateView" parent="GUI" instance=ExtResource( 5 )]
 viewportTex = SubResource( 1 )
 
-[node name="CameraHolderY" type="Spatial" parent="."]
-
-[node name="ComeraHolderX" type="Spatial" parent="CameraHolderY"]
-
-[node name="Camera" type="Camera" parent="CameraHolderY/ComeraHolderX"]
-transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 4.26192, 0, -0.00301409 )
-script = ExtResource( 1 )
+[node name="CameraHolderY" parent="." instance=ExtResource( 1 )]
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 128, 128 )
