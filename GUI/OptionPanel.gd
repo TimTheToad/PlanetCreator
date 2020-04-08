@@ -26,11 +26,17 @@ func _ready():
 	pass # Replace with function body.
 
 func _PlanetSettings():
-	PlanetSettingsInstance.showWindow()
+	#PlanetSettingsInstance.showWindow()
+	PlanetSettingsInstance.visible = true
+	PlanetSettingsInstance.anchor_left = 0.5
+	PlanetSettingsInstance.anchor_top = 0.5
 	
 
 func _WorldPopup():
-	worldInstance._showWindow()
+	#worldInstance._showWindow()
+	worldInstance.visible = true
+	worldInstance.anchor_left = 0.5
+	worldInstance.anchor_top = 0.5
 	print("snopp")
 	pass
 

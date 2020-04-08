@@ -12,7 +12,8 @@ export(Vector3) var cameraOffset
 var cameraNewRotation
 var direction
 var mouseIsMoving = false
-var cameraHolder
+var cameraHolderX
+var cameraHolderY
 var canMove = false
 
 # Called when the node enters the scene tree for the first time.
@@ -20,9 +21,10 @@ func _ready():
 	
 	cameraOffset = Vector3(5, 0, 0)
 	self.translate(cameraOffset)
-	cameraHolder = self.get_parent()
-	direction = cameraHolder.get_translation() - self.get_translation()
-	self.look_at(cameraHolder.get_translation(), Vector3(0.0, 1.0, 0.0))
+	cameraHolderX = self.get_parent()
+	cameraHolderY = self.get_parent().get_parent()
+	direction = cameraHolderX.get_translation() - self.get_translation()
+	self.look_at(cameraHolderX.get_translation(), Vector3(0.0, 1.0, 0.0))
 	pass # Replace with function body.
 
 
@@ -32,12 +34,26 @@ func _process(delta):
 	if Input.is_mouse_button_pressed(BUTTON_MIDDLE):
 			canMove = true
 			print("middle butrton pressed")
-			cameraHolder.rotate_x(cameraNewRotation[1] * 0.01)
-			cameraHolder.rotate_y(cameraNewRotation[0] * 0.01)
+			
+			if cameraHolderX.rotation.x < deg2rad(80):
+				print(cameraHolderX.rotation.x )
+				print(deg2rad(80))
+				cameraHolderX.rotate_x(cameraNewRotation[1] * 0.01)
+			else:
+				cameraHolderX.rotation.x = deg2rad(79)
+				
+			if cameraHolderX.rotation.x > -deg2rad(80):
+				print(cameraHolderX.rotation.x )
+				print(deg2rad(80))
+				cameraHolderX.rotate_x(cameraNewRotation[1] * 0.01)
+			else:
+				cameraHolderX.rotation.x = -deg2rad(79)
+				
+			cameraHolderY.rotate_y(cameraNewRotation[0] * 0.01)
 			cameraNewRotation = Vector2(0.0, 0.0)
 			
-	direction = cameraHolder.get_translation() - self.get_translation()
-	self.look_at(cameraHolder.get_translation(), Vector3(0.0, 1.0, 0.0))
+	direction = cameraHolderX.get_translation() - self.get_translation()
+	self.look_at(cameraHolderX.get_translation(), Vector3(0.0, 1.0, 0.0))
 	pass
 
 

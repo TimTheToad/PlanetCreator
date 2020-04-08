@@ -29,9 +29,11 @@ __meta__ = {
 [node name="AlternateView" parent="GUI" instance=ExtResource( 5 )]
 viewportTex = SubResource( 1 )
 
-[node name="Spatial" type="Spatial" parent="."]
+[node name="CameraHolderY" type="Spatial" parent="."]
 
-[node name="Camera" type="Camera" parent="Spatial"]
+[node name="ComeraHolderX" type="Spatial" parent="CameraHolderY"]
+
+[node name="Camera" type="Camera" parent="CameraHolderY/ComeraHolderX"]
 transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 4.26192, 0, -0.00301409 )
 script = ExtResource( 1 )
 
