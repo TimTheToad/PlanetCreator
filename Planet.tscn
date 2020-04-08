@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://GUI/AlternateViewport.gd" type="Script" id=1]
 [ext_resource path="res://Planet/Planet Mesh.tscn" type="PackedScene" id=2]
 [ext_resource path="res://GUI/OptionPanel.tscn" type="PackedScene" id=3]
-[ext_resource path="res://GUI/PlanetSettingsPanel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Camera.gd" type="Script" id=4]
+[ext_resource path="res://MainGUI.gd" type="Script" id=5]
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("Viewport")
@@ -24,13 +25,14 @@ transform = Transform( 1, 0, 0, 0, 0.598842, 0.800867, 0, -0.800867, 0.598842, 0
 [node name="GUI" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 2.27438
-margin_bottom = 2.27435
+margin_left = 3.4285
+margin_top = 1.78671
+margin_right = 3.42847
+margin_bottom = 1.78668
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="PlanetSettingsPanel" parent="GUI" instance=ExtResource( 4 )]
 
 [node name="OptionPanel" parent="GUI" instance=ExtResource( 3 )]
 
@@ -81,6 +83,7 @@ __meta__ = {
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 4.2697, 0, 0 )
+script = ExtResource( 4 )
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 128, 128 )
