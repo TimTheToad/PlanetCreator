@@ -6,6 +6,7 @@
 margin_right = 266.0
 margin_bottom = 232.0
 rect_min_size = Vector2( 250, 250 )
+popup_exclusive = true
 resizable = true
 script = ExtResource( 1 )
 
