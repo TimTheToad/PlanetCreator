@@ -31,20 +31,15 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	if Input.is_mouse_button_pressed(BUTTON_MIDDLE):
+	if Input.is_mouse_button_pressed(BUTTON_RIGHT):
 			canMove = true
-			print("middle butrton pressed")
 			
 			if cameraHolderX.rotation.x < deg2rad(80):
-				print(cameraHolderX.rotation.x )
-				print(deg2rad(80))
 				cameraHolderX.rotate_x(cameraNewRotation[1] * 0.01)
 			else:
 				cameraHolderX.rotation.x = deg2rad(79)
 				
 			if cameraHolderX.rotation.x > -deg2rad(80):
-				print(cameraHolderX.rotation.x )
-				print(deg2rad(80))
 				cameraHolderX.rotate_x(cameraNewRotation[1] * 0.01)
 			else:
 				cameraHolderX.rotation.x = -deg2rad(79)
@@ -64,12 +59,10 @@ func _input(event):
 		
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_WHEEL_UP:
-			self.set_translation(self.get_translation() + direction * 0.01)
-			print(self.get_translation())
+			self.set_translation(self.get_translation() + direction * 0.1)
 			
 		if event.button_index == BUTTON_WHEEL_DOWN:
-			self.set_translation(self.get_translation() - direction * 0.01)
-			print(self.get_translation())
+			self.set_translation(self.get_translation() - direction * 0.1)
 	pass
 
 func MoveAroundPlanet():
