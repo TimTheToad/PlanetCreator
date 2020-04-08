@@ -4,15 +4,19 @@ extends Control
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-
-onready var boxContainer = get_child(0).get_child(0).get_child(0).get_child(1)
 onready var worldScene = preload("res://GUI/TestPanel.tscn")
 onready var worldInstance = worldScene.instance()
+
+onready var PlanetSettingsScene = preload("res://GUI/PlanetSettings/PlanetSettingsPanel.tscn")
+onready var PlanetSettingsInstance = PlanetSettingsScene.instance()
+
+onready var boxContainer = get_child(0).get_child(0).get_child(0).get_child(1)
 onready var parent = get_parent()
-onready var buttons = [["World", "_WorldPopup"], ["Add Item", "_AddItemPopup"]]
+onready var buttons = [["World", "_WorldPopup"], ["Planet Settings", "_PlanetSettings"]]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	parent.call_deferred("add_child", worldInstance)
+	parent.call_deferred("add_child", PlanetSettingsInstance)
 	
 	for item in buttons:
 		var instance = Button.new()
@@ -21,6 +25,9 @@ func _ready():
 		boxContainer.add_child(instance)
 	pass # Replace with function body.
 
+func _PlanetSettings():
+	PlanetSettingsInstance.showWindow()
+	
 
 func _WorldPopup():
 	worldInstance._showWindow()

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://GUI/PlanetSettings/PlanetSettingsPanel.gd" type="Script" id=1]
+[ext_resource path="res://GUI/PlanetSettings/PlanetSettingSlider.tscn" type="PackedScene" id=2]
 
 [node name="PlanetSettingsPanel" type="WindowDialog"]
 margin_right = 300.0
@@ -10,6 +11,7 @@ popup_exclusive = true
 window_title = "Planet Settings"
 resizable = true
 script = ExtResource( 1 )
+sliderScene = ExtResource( 2 )
 
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
