@@ -4,7 +4,7 @@ extends Control
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-onready var worldScene = preload("res://GUI/TestPanel.tscn")
+onready var worldScene = preload("res://GUI/PanelFolder/TestPanel.tscn")
 onready var worldInstance = worldScene.instance()
 
 onready var PlanetSettingsScene = preload("res://GUI/PlanetSettings/PlanetSettingsPanel.tscn")
