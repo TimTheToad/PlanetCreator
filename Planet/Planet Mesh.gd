@@ -19,20 +19,12 @@ var MIN_SNOW_AMOUNT = 0.0
 
 onready var material = self.get_surface_material(0);
 
-var timer = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	randomizePlanetColors()
+#	randomizePlanetColors()
+#	randomizePlanetAttributes()
 	pass # Replace with function body.
-
-func _process(delta):
-	timer += delta
-	
-	if timer > 0.5:
-		randomizePlanetColors()
-		randomizePlanetAttributes()
-		timer = 0
 
 func randomizePlanetAttributes():
 	self.setSnowThreshold(randf())
@@ -50,6 +42,15 @@ func randomizeColor():
 	randomize()
 	var color = Color(randf(), randf(), randf(), 1.0)
 	return color
+
+func getGroundColor(color):
+	return material.set_shader_param("ground_color", color)
+func getWaterColor(color):
+	return material.set_shader_param("water_color", color)
+func getMountainColor(color):
+	return material.set_shader_param("mountain_color", color)
+func getSnowColor(color):
+	return material.set_shader_param("snow_color", color)
 
 func setGroundColor(color):
 	material.set_shader_param("ground_color", color)
@@ -90,3 +91,15 @@ func setHeight(height):
 	else:
 		print("height values must be between: ", MIN_HEIGHT, " - ", MAX_HEIGHT)
 	pass
+
+func getMountainThreshold():
+	return material.get_shader_param("mountain_amount")
+	
+func getSnowThreshold():
+	return material.get_shader_param("snow_amount")
+
+func getWaterThreshold():
+	return material.get_shader_param("water_amount")
+
+func getHeight():
+	return material.get_shader_param("slider")

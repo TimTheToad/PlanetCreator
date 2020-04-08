@@ -5,6 +5,7 @@ export(int) var parentsToClimb;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	self.connect("pressed", self, "_on_ExitButton_pressed")
 	pass # Replace with function body.
 
 

@@ -1,18 +1,11 @@
-extends Viewport
+extends Control
 
+onready var viewportTexContainer = $VBoxContainer/ViewportTex
 
-onready var camera = self.get_child(0)
+export(Texture) var viewportTex;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if (viewportTex):
+		viewportTexContainer.texture = viewportTex;
 	pass # Replace with function body.
-
-
-func _process(delta):
-	_rotateCamera(PI * 0.25 * delta, Vector3(0, 1, 0))
-	pass
-
-
-func _rotateCamera(speed, vector):
-	var pos = camera.translation
-#	camera.global_rotate(vector, speed)

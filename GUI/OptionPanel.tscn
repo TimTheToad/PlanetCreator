@@ -65,4 +65,3 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 parentsToClimb = 5
-[connection signal="pressed" from="Panel/Container/VBoxContainer/HSeperator/ExitButton" to="Panel/Container/VBoxContainer/HSeperator/ExitButton" method="_on_ExitButton_pressed"]
