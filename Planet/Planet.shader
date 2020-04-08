@@ -1,10 +1,10 @@
 shader_type spatial;
 
 // Colors
+uniform vec4 water_color : hint_color;
 uniform vec4 ground_color : hint_color;
 uniform vec4 mountain_color : hint_color;
 uniform vec4 snow_color : hint_color;
-uniform vec4 water_color : hint_color;
 
 // Noise textures
 uniform sampler2D heightmap : hint_white;

@@ -1,32 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Planet/Planet Mesh.tscn" type="PackedScene" id=2]
-[ext_resource path="res://GUI/PlanetSettingsPanel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://GUI/AlternateView.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Planet/Planet.shader" type="Shader" id=6]
 
-[sub_resource type="OpenSimplexNoise" id=2]
-period = 15.1
-persistence = 0.332
-lacunarity = 1.99
-
-[sub_resource type="NoiseTexture" id=3]
-seamless = true
-noise = SubResource( 2 )
-
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 6 )
-shader_param/ground_color = Color( 0.223529, 0.815686, 0.117647, 1 )
-shader_param/mountain_color = Color( 0.756863, 0.482353, 0.239216, 1 )
-shader_param/snow_color = Color( 0.984314, 0.984314, 0.984314, 1 )
-shader_param/water_color = Color( 0.478431, 0.368627, 0.858824, 1 )
-shader_param/slider = 0.29
-shader_param/water_amount = 0.14
-shader_param/mountain_amount = 0.19
-shader_param/snow_amount = 0.2
-shader_param/heightmap = SubResource( 3 )
-
-[sub_resource type="ViewportTexture" id=4]
+[sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("Viewport")
 
 [node name="Spatial" type="Spatial"]
@@ -35,7 +12,6 @@ viewport_path = NodePath("Viewport")
 transform = Transform( 1, 0, 0, 0, 0.598842, 0.800867, 0, -0.800867, 0.598842, 0, 3.7832, 0 )
 
 [node name="Planet Mesh" parent="." instance=ExtResource( 2 )]
-material/0 = SubResource( 1 )
 
 [node name="GUI" type="Control" parent="."]
 anchor_right = 1.0
@@ -46,16 +22,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlanetSettingsPanel" parent="GUI" instance=ExtResource( 4 )]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 26.5924
-margin_top = -193.377
-margin_right = 367.592
-margin_bottom = -24.3772
-
 [node name="AlternateView" parent="GUI" instance=ExtResource( 5 )]
-viewportTex = SubResource( 4 )
+viewportTex = SubResource( 1 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 4.26192, 0, -0.00301409 )
