@@ -4,6 +4,8 @@
 [ext_resource path="res://Planet/PlanetMaterial.tres" type="Material" id=2]
 
 [sub_resource type="SphereMesh" id=1]
+radial_segments = 256
+rings = 128
 
 [node name="Planet" type="Spatial"]
 script = ExtResource( 1 )

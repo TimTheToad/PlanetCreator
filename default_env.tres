@@ -5,4 +5,9 @@
 [resource]
 background_mode = 2
 background_sky = SubResource( 1 )
-background_energy = 0.35
+background_energy = 0.83
+ambient_light_color = Color( 0.796078, 0.796078, 0.796078, 1 )
+ambient_light_sky_contribution = 0.0
+auto_exposure_scale = 0.24
+auto_exposure_max_luma = 5.9
+ss_reflections_fade_in = 0.178381

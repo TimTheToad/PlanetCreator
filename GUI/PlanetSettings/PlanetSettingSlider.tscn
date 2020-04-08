@@ -1,9 +1,12 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
 
-[node name="Height Slider" type="HSplitContainer"]
+[ext_resource path="res://GUI/PlanetSettings/PlanetSettingSlider.gd" type="Script" id=1]
+
+[node name="PlanetSettingSlider" type="HSplitContainer"]
 margin_right = 272.0
 margin_bottom = 16.0
 dragger_visibility = 1
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -14,7 +17,7 @@ margin_right = 46.0
 margin_bottom = 15.0
 text = "Height:"
 
-[node name="HeightSlider" type="HSlider" parent="."]
+[node name="Slider" type="HSlider" parent="."]
 margin_left = 58.0
 margin_right = 272.0
 margin_bottom = 16.0
