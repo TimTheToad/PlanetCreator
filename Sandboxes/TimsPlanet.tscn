@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://OrbitalCamera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Planet/Planet Mesh.tscn" type="PackedScene" id=2]
 [ext_resource path="res://GUI/OptionPanel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sandboxes/DirectionalLight.gd" type="Script" id=4]
-[ext_resource path="res://GUI/AlternateView.tscn" type="PackedScene" id=5]
 
 [sub_resource type="SphereMesh" id=1]
 radius = 10.0
@@ -17,9 +16,6 @@ emission = Color( 0.72549, 0.635294, 0.215686, 1 )
 emission_energy = 7.82
 emission_operator = 0
 emission_on_uv2 = false
-
-[sub_resource type="ViewportTexture" id=3]
-viewport_path = NodePath("Viewport")
 
 [node name="Spatial" type="Spatial"]
 
@@ -47,13 +43,10 @@ __meta__ = {
 
 [node name="OptionPanel" parent="GUI" instance=ExtResource( 3 )]
 
-[node name="AlternateView" parent="GUI" instance=ExtResource( 5 )]
-viewportTex = SubResource( 3 )
-
 [node name="CameraHolderY" parent="." instance=ExtResource( 1 )]
 
 [node name="Viewport" type="Viewport" parent="."]
-size = Vector2( 128, 128 )
+size = Vector2( 256, 256 )
 
 [node name="Camera" type="Camera" parent="Viewport"]
 transform = Transform( -0.825033, 0.337536, -0.453198, 0, 0.802002, 0.597321, 0.565083, 0.49281, -0.661678, -1.57217, 2.23403, -2.40254 )

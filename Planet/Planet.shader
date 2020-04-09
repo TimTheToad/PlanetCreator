@@ -15,13 +15,18 @@ uniform float water_amount : hint_range(0.1, 1.0, 0.01);
 uniform float mountain_amount : hint_range(0.0, 1.0, 0.01);
 uniform float snow_amount : hint_range(0.0, 1.0, 0.01);
 
+uniform float water_speed : hint_range(0.0, 0.1, 0.001);
+
 varying float vertexDist;
+
+const float water_offset_factor = 0.6;
 
 void vertex() {
 	float magnitude = slider;
 	float noise = texture(heightmap, UV).r;
 	vec3 offset = NORMAL * noise * magnitude;
-	vec3 water_offset = offset * 0.9;
+	noise = texture(heightmap, UV + TIME * water_speed).r;
+	vec3 water_offset =  NORMAL * noise * magnitude * water_offset_factor;
 	
 	vertexDist = length(offset);
 	float isWater = step(water_amount, vertexDist);
@@ -42,7 +47,7 @@ void fragment() {
 	color += snow_color * (1.0 - isSnow);
 	
 	// Mountain color
-//	ALPHA = isWater;
+	NORMALMAP = texture(normalmap, UV  + TIME * water_speed * (1.0 - isWater)).xyz;
 	ALBEDO = color.rgb;
 	METALLIC = 0.4 * (1.0 - isWater);
 	ROUGHNESS = 0.3 * (isWater);

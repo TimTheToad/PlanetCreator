@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=6 format=2]
+[gd_resource type="ShaderMaterial" load_steps=5 format=2]
 
 [ext_resource path="res://Planet/Planet.shader" type="Shader" id=1]
 
@@ -11,17 +11,11 @@ lacunarity = 2.83
 seamless = true
 noise = SubResource( 1 )
 
-[sub_resource type="OpenSimplexNoise" id=3]
-seed = 1
-period = 32.4
-persistence = 0.264
-lacunarity = 2.83
-
-[sub_resource type="NoiseTexture" id=4]
+[sub_resource type="NoiseTexture" id=3]
 seamless = true
 as_normalmap = true
-bump_strength = 0.0
-noise = SubResource( 3 )
+bump_strength = 30.9
+noise = SubResource( 1 )
 
 [resource]
 shader = ExtResource( 1 )
@@ -33,5 +27,6 @@ shader_param/slider = 0.27
 shader_param/water_amount = 0.12
 shader_param/mountain_amount = 0.15
 shader_param/snow_amount = 0.5
+shader_param/water_speed = 0.008
 shader_param/heightmap = SubResource( 2 )
-shader_param/normalmap = SubResource( 4 )
+shader_param/normalmap = SubResource( 3 )
