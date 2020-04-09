@@ -3,8 +3,9 @@ extends Spatial
 var planetMaterial;
 var terrainTexture
 var terrainNoise
-
+var tempHistory
 var planetInstance
+var updated = false
 
 var planetColorAttributes = ["ground_color", "mountain_color", "snow_color"]
 var planetSliderAttributes = ["slider", "mountain_amount", "snow_amount"]
@@ -18,7 +19,10 @@ func getPlanetAttribute(name):
 	return planetMaterial.get_shader_param(name)
 
 func setPlanetAttribute(name, value):
+	tempHistory = [name, value]
+	updated = true
 	planetMaterial.set_shader_param(name, value)
+
 	
 func getPlanetAttributeNames():
 	return [planetSliderAttributes, planetColorAttributes];
@@ -32,8 +36,16 @@ func _PlanetInitilise():
 	
 	planetMaterial = planetInstance.get_surface_material(0)
 	terrainTexture = planetMaterial.get_shader_param("heightmap")
-	terrainNoise = terrainTexture.noise
+	#terrainNoise = terrainTexture.noise
+
 	
-	var normalMap = terrainTexture.duplicate()
-	normalMap.as_normalmap = true
-	planetMaterial.set_shader_param("normal_map", normalMap)
+func _process(delta):
+	self.rotate_y(PI*0.02 * delta)
+	
+func _input(event):
+	if event is InputEventMouseButton:
+		if !event.pressed:
+			if(updated):
+				planetHistory.append(tempHistory)
+				print(planetHistory)
+				updated = false

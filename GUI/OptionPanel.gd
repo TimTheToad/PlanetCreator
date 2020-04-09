@@ -12,7 +12,7 @@ onready var alternateViewInstance = alternateViewScene.instance()
 onready var boxContainer = get_child(0).get_child(0).get_child(0).get_child(1)
 onready var parent = get_parent()
 onready var buttons = [
-	["World", "_WorldPopup"],
+	["History", "_WorldPopup"],
 	["Planet Settings", "_PlanetSettings"],
 	["Alternate view", "_AlternateView"]
 ]
