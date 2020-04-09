@@ -6,8 +6,8 @@ var terrainNoise
 
 var planetInstance
 
-var planetColorAttributes = ["water_color", "ground_color", "mountain_color", "snow_color"]
-var planetSliderAttributes = ["slider", "water_amount", "mountain_amount", "snow_amount"]
+var planetColorAttributes = ["ground_color", "mountain_color", "snow_color"]
+var planetSliderAttributes = ["slider", "mountain_amount", "snow_amount"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
