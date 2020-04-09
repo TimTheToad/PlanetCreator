@@ -12,7 +12,7 @@ onready var PlanetSettingsInstance = PlanetSettingsScene.instance()
 
 onready var boxContainer = get_child(0).get_child(0).get_child(0).get_child(1)
 onready var parent = get_parent()
-onready var buttons = [["World", "_WorldPopup"], ["Planet Settings", "_PlanetSettings"]]
+onready var buttons = [["History", "_WorldPopup"], ["Planet Settings", "_PlanetSettings"]]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	parent.call_deferred("add_child", worldInstance)
