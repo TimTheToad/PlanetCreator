@@ -1,13 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://OrbitalCamera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Planet/Planet Mesh.tscn" type="PackedScene" id=2]
 [ext_resource path="res://GUI/OptionPanel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Planet/Sun.tscn" type="PackedScene" id=4]
 
 [node name="Spatial" type="Spatial"]
 
-[node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.517042, 0.85596, 0, -0.85596, 0.517042, 0, 3.7832, 1.61651 )
+[node name="Sunholder" parent="." instance=ExtResource( 4 )]
 
 [node name="Planet Mesh" parent="." instance=ExtResource( 2 )]
 

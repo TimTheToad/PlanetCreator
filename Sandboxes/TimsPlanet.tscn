@@ -1,34 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://OrbitalCamera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Planet/Planet Mesh.tscn" type="PackedScene" id=2]
 [ext_resource path="res://GUI/OptionPanel.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Sandboxes/DirectionalLight.gd" type="Script" id=4]
-
-[sub_resource type="SphereMesh" id=1]
-radius = 10.0
-height = 20.0
-
-[sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0.792157, 0.929412, 0, 1 )
-emission_enabled = true
-emission = Color( 0.72549, 0.635294, 0.215686, 1 )
-emission_energy = 7.82
-emission_operator = 0
-emission_on_uv2 = false
+[ext_resource path="res://Planet/Sun.tscn" type="PackedScene" id=4]
 
 [node name="Spatial" type="Spatial"]
 
-[node name="Sunholder" type="Spatial" parent="."]
-
-[node name="Sun" type="MeshInstance" parent="Sunholder"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 139.497 )
-mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
-script = ExtResource( 4 )
-sunOffset = 100
-
-[node name="DirectionalLight" type="DirectionalLight" parent="Sunholder/Sun"]
+[node name="Sunholder" parent="." instance=ExtResource( 4 )]
 
 [node name="Planet Mesh" parent="." instance=ExtResource( 2 )]
 

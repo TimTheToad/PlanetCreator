@@ -2,35 +2,41 @@
 
 [ext_resource path="res://Planet/Planet.shader" type="Shader" id=1]
 
-[sub_resource type="OpenSimplexNoise" id=8]
+[sub_resource type="OpenSimplexNoise" id=1]
 seed = 1
-period = 52.6
+period = 61.2
 persistence = 0.264
 lacunarity = 2.83
 
-[sub_resource type="NoiseTexture" id=3]
+[sub_resource type="NoiseTexture" id=2]
+width = 1024
+height = 1024
 seamless = true
-noise = SubResource( 8 )
+noise = SubResource( 1 )
 
-[sub_resource type="OpenSimplexNoise" id=6]
+[sub_resource type="OpenSimplexNoise" id=3]
 seed = 1
 period = 52.6
 persistence = 0.264
 lacunarity = 2.83
 
-[sub_resource type="NoiseTexture" id=7]
+[sub_resource type="NoiseTexture" id=4]
+width = 1024
+height = 1024
 seamless = true
 as_normalmap = true
-bump_strength = 32.0
-noise = SubResource( 6 )
+bump_strength = 4.6
+noise = SubResource( 3 )
 
 [resource]
 shader = ExtResource( 1 )
+shader_param/sand_color = Color( 0.917647, 0.917647, 0.576471, 1 )
 shader_param/ground_color = Color( 0, 1, 0.27451, 1 )
 shader_param/mountain_color = Color( 0.533333, 0.439216, 0.25098, 1 )
 shader_param/snow_color = Color( 1, 1, 1, 1 )
-shader_param/slider = 0.8
-shader_param/mountain_amount = 0.52
-shader_param/snow_amount = 0.58
-shader_param/heightmap = SubResource( 3 )
-shader_param/normalmap = SubResource( 7 )
+shader_param/slider = 1.0
+shader_param/sand_amount = 0.44
+shader_param/mountain_amount = 0.58
+shader_param/snow_amount = 0.66
+shader_param/heightmap = SubResource( 2 )
+shader_param/normalmap = SubResource( 4 )

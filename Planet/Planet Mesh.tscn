@@ -5,34 +5,35 @@
 [ext_resource path="res://Planet/Water.shader" type="Shader" id=3]
 
 [sub_resource type="SphereMesh" id=1]
-radial_segments = 256
-rings = 128
+radius = 4.0
+height = 8.0
+radial_segments = 128
+rings = 64
 
-[sub_resource type="OpenSimplexNoise" id=6]
+[sub_resource type="OpenSimplexNoise" id=2]
 seed = 1
 period = 3.0
 persistence = 0.264
 lacunarity = 2.83
 
-[sub_resource type="NoiseTexture" id=7]
+[sub_resource type="NoiseTexture" id=3]
 seamless = true
-noise = SubResource( 6 )
+noise = SubResource( 2 )
 
-[sub_resource type="NoiseTexture" id=8]
-width = 1024
-height = 1024
+[sub_resource type="NoiseTexture" id=4]
 seamless = true
 as_normalmap = true
-noise = SubResource( 6 )
+bump_strength = 1.0
+noise = SubResource( 2 )
 
 [sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 3 )
 shader_param/water_color = Color( 0.133333, 0.611765, 0.847059, 1 )
-shader_param/slider = 0.14
-shader_param/water_speed = 0.006
-shader_param/wave_height = 0.0
-shader_param/heightmap = SubResource( 7 )
-shader_param/normalmap = SubResource( 8 )
+shader_param/slider = 0.13
+shader_param/wave_speed = 0.004
+shader_param/wave_height = 0.078
+shader_param/heightmap = SubResource( 3 )
+shader_param/normalmap = SubResource( 4 )
 
 [node name="Planet" type="Spatial"]
 script = ExtResource( 1 )
