@@ -1,5 +1,6 @@
 extends Tabs
 
+var param = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -9,9 +10,7 @@ func _ready():
 	pass # Replace with function body.
 
 func color_callback(value):
-	var text = self.name
-	emit_signal("updated", text, value)
+	emit_signal("updated", param, value)
 
 func random_callback():
-	var text = self.name
-	emit_signal("random", text)
+	emit_signal("random", param)

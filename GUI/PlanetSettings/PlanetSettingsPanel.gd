@@ -24,11 +24,12 @@ func _createColorPickers():
 		# Terrain Settings
 		var params = Planet.getTerrainAttributeNames()[1]
 		var colorContainer = terrainTab.get_child(0).get_child(1).get_child(0)
-		for name in params:
+		for i in range(params[0].size()):
 			var instance = colorTabScene.instance()
-			instance.name = name
+			instance.param = params[0][i]
+			instance.name = params[1][i]
 			var colorPickerNode = instance.get_child(0).get_child(0)
-			colorPickerNode.color = Planet.getPlanetAttribute(name)
+			colorPickerNode.color = Planet.getPlanetAttribute(instance.param)
 			colorPickerNode.edit_alpha = false
 			colorPickerNode.raw_mode = true
 			# Add signal to slider
@@ -42,11 +43,12 @@ func _createColorPickers():
 			
 		params = Planet.getWaterAttributeNames()[1]
 		colorContainer = waterTab.get_child(0).get_child(1).get_child(0)
-		for name in params:
+		for i in range(params[0].size()):
 			var instance = colorTabScene.instance()
-			instance.name = name
+			instance.param = params[0][i]
+			instance.name = params[1][i]
 			var colorPickerNode = instance.get_child(0).get_child(0)
-			colorPickerNode.color = Planet.getPlanetAttribute(name)
+			colorPickerNode.color = Planet.getPlanetAttribute(instance.param)
 			colorPickerNode.edit_alpha = false
 			colorPickerNode.raw_mode = true
 			# Add signal to slider
@@ -63,11 +65,12 @@ func _createSlider():
 	if sliderScene:
 		var sliders = Planet.getTerrainAttributeNames()[0]
 		var sliderContainer = terrainTab.get_child(0).get_child(0).get_child(0)
-		for name in sliders:
+		for i in range(sliders[0].size()):
 			var instance = sliderScene.instance()
-			instance.get_child(0).text = name
+			instance.param = sliders[0][i]
+			instance.setText(sliders[1][i])
 			var sliderNode = instance.get_child(1)
-			sliderNode.value = Planet.getPlanetAttribute(name)
+			sliderNode.value = Planet.getPlanetAttribute(instance.param)
 			
 			# Add signal to slider
 			instance.add_user_signal("updated", [["param", TYPE_STRING], ["value", TYPE_REAL]])
@@ -77,11 +80,12 @@ func _createSlider():
 		
 		sliders = Planet.getWaterAttributeNames()[0]
 		sliderContainer = waterTab.get_child(0).get_child(0).get_child(0)
-		for name in sliders:
+		for i in range(sliders[0].size()):
 			var instance = sliderScene.instance()
-			instance.get_child(0).text = name
+			instance.param = sliders[0][i]
+			instance.setText(sliders[1][i])
 			var sliderNode = instance.get_child(1)
-			sliderNode.value = Planet.getPlanetAttribute(name)
+			sliderNode.value = Planet.getPlanetAttribute(instance.param)
 			
 			# Add signal to slider
 			instance.add_user_signal("updated", [["param", TYPE_STRING], ["value", TYPE_REAL]])

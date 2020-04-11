@@ -19,10 +19,20 @@ var planetHistory = []
 
 var updated = false
 
-var terrainColorAttributes = ["sand_color", "ground_color", "mountain_color", "snow_color"]
-var terrainSliderAttributes = ["terrain_magnitude", "sand_amount", "mountain_amount", "snow_amount"]
-var waterColorAttributes = ["water_color"]
-var waterSliderAttributes = ["water_magnitude", "wave_speed", "wave_height"]
+var terrainColorAttributes = [
+	["sand_color", "ground_color", "mountain_color", "snow_color"],
+	["Sand", "Ground", "Mountain", "Snow"],
+	]
+var terrainSliderAttributes = [
+	["terrain_magnitude", "sand_amount", "mountain_amount", "snow_amount"],
+	["Magnitude", "Sand Threshold", "Mountain Threshold", "Snow Threshold"],
+	]
+	
+var waterColorAttributes = [["water_color"], ["Water"]]
+var waterSliderAttributes = [
+	["water_magnitude", "wave_speed", "wave_height"],
+	["Magnitude", "Wave speed", "Wave height"]
+	]
 
 
 # Called when the node enters the scene tree for the first time.
@@ -35,14 +45,14 @@ func randomisePlanetAttribute(name, material = PLANET_MAT.TERRAIN):
 		AddHistoryItem(name)
 	
 	if material == PLANET_MAT.TERRAIN:
-		if terrainColorAttributes.count(name) > 0:
+		if terrainColorAttributes[0].count(name) > 0:
 			terrainMaterial.set_shader_param(name, Color(randf(), randf(), randf(), 0))
-		elif terrainSliderAttributes.count(name) > 0:
+		elif terrainSliderAttributes[0].count(name) > 0:
 			terrainMaterial.set_shader_param(name, randf())
 	elif material == PLANET_MAT.WATER:
-		if waterColorAttributes.count(name) > 0:
+		if waterColorAttributes[0].count(name) > 0:
 			terrainMaterial.set_shader_param(name, Color(randf(), randf(), randf(), 0))
-		elif waterSliderAttributes.count(name) > 0:
+		elif waterSliderAttributes[0].count(name) > 0:
 			terrainMaterial.set_shader_param(name, randf())
 	
 func randomiseWaterAttribute(name, material = PLANET_MAT.TERRAIN):
@@ -50,20 +60,20 @@ func randomiseWaterAttribute(name, material = PLANET_MAT.TERRAIN):
 		AddHistoryItem(name)
 	
 	if material == PLANET_MAT.TERRAIN:
-		if terrainColorAttributes.count(name) > 0:
+		if terrainColorAttributes[0].count(name) > 0:
 			waterMaterial.set_shader_param(name, Color(randf(), randf(), randf(), 0))
-		elif terrainSliderAttributes.count(name) > 0:
+		elif terrainSliderAttributes[0].count(name) > 0:
 			waterMaterial.set_shader_param(name, randf())
 	elif material == PLANET_MAT.WATER:
-		if waterColorAttributes.count(name) > 0:
+		if waterColorAttributes[0].count(name) > 0:
 			waterMaterial.set_shader_param(name, Color(randf(), randf(), randf(), 0))
-		elif waterSliderAttributes.count(name) > 0:
+		elif waterSliderAttributes[0].count(name) > 0:
 			waterMaterial.set_shader_param(name, randf())
 
 func getPlanetAttribute(name):
 	
 	var  material = PLANET_MAT.TERRAIN
-	if waterColorAttributes.count(name) > 0 or waterSliderAttributes.count(name):
+	if waterColorAttributes[0].count(name) > 0 or waterSliderAttributes[0].count(name):
 		material = PLANET_MAT.WATER
 		
 	if material == PLANET_MAT.TERRAIN:
@@ -77,7 +87,7 @@ func setPlanetAttribute(name, value):
 		AddHistoryItem(name)
 	
 	var  material = PLANET_MAT.TERRAIN
-	if waterColorAttributes.count(name) > 0 or waterSliderAttributes.count(name):
+	if waterColorAttributes[0].count(name) > 0 or waterSliderAttributes[0].count(name):
 		material = PLANET_MAT.WATER
 	
 	if material == PLANET_MAT.TERRAIN:
@@ -88,7 +98,7 @@ func setPlanetAttribute(name, value):
 
 func _setPlanetAttribute(name, value):	
 	var  material = PLANET_MAT.TERRAIN
-	if waterColorAttributes.count(name) > 0 or waterSliderAttributes.count(name):
+	if waterColorAttributes[0].count(name) > 0 or waterSliderAttributes[0].count(name):
 		material = PLANET_MAT.WATER
 	
 	if material == PLANET_MAT.TERRAIN:
