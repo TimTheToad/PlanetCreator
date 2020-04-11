@@ -7,19 +7,17 @@ uniform vec4 water_color : hint_color;
 uniform sampler2D heightmap : hint_white;
 uniform sampler2D normalmap : hint_white;
 
-uniform float slider : hint_range(0.0, 1.0, 0.01);
+uniform float water_magnitude : hint_range(0.0, 1.0, 0.01);
 uniform float wave_speed : hint_range(0.0, 0.1, 0.001);
 uniform float wave_height : hint_range(0.0, 0.1, 0.001);
 
 varying vec2 uv;
 
 void vertex() {
-	float magnitude = slider;
-	
 	uv = vec2(UV.x + sin(UV.x)+ TIME * wave_speed, UV.y);
 	
 	float noise = texture(heightmap, uv).r;
-	vec3 offset = NORMAL * magnitude + NORMAL * noise * wave_height;
+	vec3 offset = NORMAL * water_magnitude + NORMAL * noise * wave_height;
 	
 	// Landscape
 	VERTEX += offset;

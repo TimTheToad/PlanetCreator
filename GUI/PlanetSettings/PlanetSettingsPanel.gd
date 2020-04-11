@@ -27,13 +27,16 @@ func _createColorPickers():
 		for name in params:
 			var instance = colorTabScene.instance()
 			instance.name = name
-			var colorPickerNode = instance.get_child(0)
-			colorPickerNode.color = Planet.getPlanetAttribute(name, Planet.PLANET_MAT.TERRAIN)
+			var colorPickerNode = instance.get_child(0).get_child(0)
+			colorPickerNode.color = Planet.getPlanetAttribute(name)
 			colorPickerNode.edit_alpha = false
 			colorPickerNode.raw_mode = true
 			# Add signal to slider
 			instance.add_user_signal("updated", [["param", TYPE_STRING], ["value", TYPE_COLOR]])
 			instance.connect("updated", self, "_TerrainUpdateParam")
+			
+			instance.add_user_signal("random", [["param", TYPE_STRING]])
+			instance.connect("random", self, "_TerrainRandomizeParam")
 			
 			colorContainer.add_child(instance)
 			
@@ -42,13 +45,16 @@ func _createColorPickers():
 		for name in params:
 			var instance = colorTabScene.instance()
 			instance.name = name
-			var colorPickerNode = instance.get_child(0)
-			colorPickerNode.color = Planet.getPlanetAttribute(name, Planet.PLANET_MAT.WATER)
+			var colorPickerNode = instance.get_child(0).get_child(0)
+			colorPickerNode.color = Planet.getPlanetAttribute(name)
 			colorPickerNode.edit_alpha = false
 			colorPickerNode.raw_mode = true
 			# Add signal to slider
 			instance.add_user_signal("updated", [["param", TYPE_STRING], ["value", TYPE_COLOR]])
 			instance.connect("updated", self, "_WaterUpdateParam")
+			
+			instance.add_user_signal("random", [["param", TYPE_STRING]])
+			instance.connect("random", self, "_WaterRandomizeParam")
 			
 			colorContainer.add_child(instance)
 	pass
@@ -61,14 +67,11 @@ func _createSlider():
 			var instance = sliderScene.instance()
 			instance.get_child(0).text = name
 			var sliderNode = instance.get_child(1)
-			sliderNode.value = Planet.getPlanetAttribute(name, Planet.PLANET_MAT.TERRAIN)
+			sliderNode.value = Planet.getPlanetAttribute(name)
 			
 			# Add signal to slider
 			instance.add_user_signal("updated", [["param", TYPE_STRING], ["value", TYPE_REAL]])
 			instance.connect("updated", self, "_TerrainUpdateParam")
-			
-			instance.add_user_signal("randomise", [["param", TYPE_STRING]])
-			instance.connect("randomise", self, "_TerrainRandomizeParam")
 			
 			sliderContainer.add_child(instance)
 		
@@ -78,14 +81,11 @@ func _createSlider():
 			var instance = sliderScene.instance()
 			instance.get_child(0).text = name
 			var sliderNode = instance.get_child(1)
-			sliderNode.value = Planet.getPlanetAttribute(name, Planet.PLANET_MAT.WATER)
+			sliderNode.value = Planet.getPlanetAttribute(name)
 			
 			# Add signal to slider
 			instance.add_user_signal("updated", [["param", TYPE_STRING], ["value", TYPE_REAL]])
 			instance.connect("updated", self, "_WaterUpdateParam")
-			
-			instance.add_user_signal("randomise", [["param", TYPE_STRING]])
-			instance.connect("randomise", self, "_WaterRandomizeParam")
 			
 			sliderContainer.add_child(instance)
 			
@@ -97,7 +97,7 @@ func _WaterRandomizeParam(param):
 	Planet.randomiseWaterAttribute(param, Planet.PLANET_MAT.WATER)
 
 func _TerrainUpdateParam(param, value):
-	Planet.setPlanetAttribute(param, value, Planet.PLANET_MAT.TERRAIN)
+	Planet.setPlanetAttribute(param, value)
 
 func _WaterUpdateParam(param, value):
-	Planet.setPlanetAttribute(param, value, Planet.PLANET_MAT.WATER)
+	Planet.setPlanetAttribute(param, value)

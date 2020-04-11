@@ -5,6 +5,7 @@
 [ext_resource path="res://GUI/PlanetSettings/PlanetSettingsColorPicker.tscn" type="PackedScene" id=3]
 
 [node name="PlanetSettingsPanel" type="WindowDialog"]
+visible = true
 margin_right = 357.0
 margin_bottom = 522.0
 rect_min_size = Vector2( 300, 140 )
@@ -18,6 +19,7 @@ colorTabScene = ExtResource( 3 )
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_bottom = 50.0
 size_flags_horizontal = 5
 size_flags_vertical = 5
 __meta__ = {
@@ -37,7 +39,7 @@ __meta__ = {
 
 [node name="TabContainer" type="TabContainer" parent="Panel/MarginContainer"]
 margin_right = 337.0
-margin_bottom = 502.0
+margin_bottom = 552.0
 
 [node name="Terrain" type="Tabs" parent="Panel/MarginContainer/TabContainer"]
 anchor_right = 1.0

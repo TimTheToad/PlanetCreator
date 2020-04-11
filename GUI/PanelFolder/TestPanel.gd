@@ -5,7 +5,9 @@ extends WindowDialog
 # var a = 2
 # var b = "text"
 
-onready var boxContainer = self.get_node("PanelContainer/Panel/VBoxContainer")
+onready var boxContainer = self.get_node("PanelContainer/Panel/ScrollContainer/VBoxContainer")
+
+var historyItems = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,15 +20,19 @@ func _showWindow():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func _input(event):
-	if event is InputEventKey:
-		if Input.is_key_pressed(KEY_Q):
-			AddHistoryItem()
 
+	pass
 	
 #func _process(delta):
 #	pass
 
-func AddHistoryItem():
+func AddHistoryItem(name):
 	var button = Button.new()
-	button.text = "undo"
+	historyItems.append(button)
+	button.text = name
 	boxContainer.add_child(button)
+	
+func RemoveHistoryItem():
+	historyItems.back().queue_free()
+	historyItems.pop_back()
+	pass

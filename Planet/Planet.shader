@@ -10,7 +10,7 @@ uniform vec4 snow_color : hint_color;
 uniform sampler2D heightmap : hint_white;
 uniform sampler2D normalmap : hint_white;
 
-uniform float slider : hint_range(0.0, 1.0, 0.01);
+uniform float terrain_magnitude : hint_range(0.0, 1.0, 0.01);
 uniform float sand_amount : hint_range(0.0, 1.0, 0.01);
 uniform float mountain_amount : hint_range(0.0, 1.0, 0.01);
 uniform float snow_amount : hint_range(0.0, 1.0, 0.01);
@@ -18,9 +18,8 @@ uniform float snow_amount : hint_range(0.0, 1.0, 0.01);
 varying float vertexDist;
 
 void vertex() {
-	float magnitude = slider;
 	float noise = texture(heightmap, UV).r;
-	vec3 offset = NORMAL * noise * noise * magnitude;
+	vec3 offset = NORMAL * noise * noise * terrain_magnitude;
 	
 	vertexDist = noise;
 	

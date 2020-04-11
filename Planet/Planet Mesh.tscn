@@ -29,9 +29,9 @@ noise = SubResource( 2 )
 [sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 3 )
 shader_param/water_color = Color( 0.133333, 0.611765, 0.847059, 1 )
-shader_param/slider = 0.13
-shader_param/wave_speed = 0.004
-shader_param/wave_height = 0.078
+shader_param/water_magnitude = 0.04
+shader_param/wave_speed = 0.002
+shader_param/wave_height = 0.006
 shader_param/heightmap = SubResource( 3 )
 shader_param/normalmap = SubResource( 4 )
 
