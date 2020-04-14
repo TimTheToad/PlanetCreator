@@ -1,6 +1,6 @@
 extends WindowDialog
 
-onready var Planet = get_parent().get_parent().get_child(1);
+onready var Planet = get_tree().get_current_scene().get_node("Planet Mesh")
 
 export(PackedScene) var sliderScene;
 export(PackedScene) var colorTabScene;
@@ -9,8 +9,8 @@ onready var terrainTab = self.get_child(1)
 onready var waterTab = self.get_child(1)
 
 func _ready():
-	terrainTab = self.get_node("Panel/MarginContainer/TabContainer/Terrain")
-	waterTab = self.get_node("Panel/MarginContainer/TabContainer/Water")
+	terrainTab = self.get_node("P/MC/TC/Terrain")
+	waterTab = self.get_node("P/MC/TC/Water")
 	
 	self._createSlider()
 	self._createColorPickers()

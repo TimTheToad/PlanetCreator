@@ -21,7 +21,7 @@ void vertex() {
 	float noise = texture(heightmap, UV).r;
 	vec3 offset = NORMAL * noise * noise * terrain_magnitude;
 	
-	vertexDist = noise;
+	vertexDist = length(offset + 0.1);
 	
 	// Landscape
 	VERTEX += offset;
