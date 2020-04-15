@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Planet/OldPlanet/Water.shader" type="Shader" id=1]
-[ext_resource path="res://Planet/OldPlanet/Planet.gd" type="Script" id=2]
+[ext_resource path="res://Planet/OldPlanet/PlanetOld.gd" type="Script" id=2]
 [ext_resource path="res://Planet/OldPlanet/PlanetMaterial.tres" type="Material" id=3]
 
 [sub_resource type="SphereMesh" id=1]

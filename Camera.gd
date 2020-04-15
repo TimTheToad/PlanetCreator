@@ -6,7 +6,7 @@ extends Camera
 # var b = "text"
 
 
-onready var planet = preload("res://Planet/Planet Mesh.tscn")
+onready var planet = preload("res://Planet/NewPlanet/NewPlanet.tscn")
 onready var planetInstance = planet.instance()
 export(Vector3) var cameraOffset
 var cameraNewRotation
@@ -53,6 +53,7 @@ func _process(delta):
 	pass
 
 func updateLookAt():
+	
 	direction = -self.transform.origin.normalized()
 	self.look_at(cameraHolderMaster.transform.origin, Vector3(0.0, 1.0, 0.0))
 	pass
