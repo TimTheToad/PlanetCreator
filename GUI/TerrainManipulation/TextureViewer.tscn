@@ -4,10 +4,10 @@
 
 [node name="AlternateView" type="WindowDialog"]
 visible = true
-margin_left = 10.0701
-margin_top = 22.6577
-margin_right = 286.067
-margin_bottom = 298.654
+margin_left = -1.0
+margin_top = 22.0
+margin_right = 275.001
+margin_bottom = 297.995
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
@@ -28,7 +28,7 @@ __meta__ = {
 }
 
 [node name="ViewportTex" type="TextureRect" parent="VBoxContainer"]
-margin_right = 255.0
+margin_right = 256.0
 margin_bottom = 255.0
 size_flags_horizontal = 3
 size_flags_vertical = 3

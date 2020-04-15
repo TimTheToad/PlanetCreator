@@ -5,17 +5,24 @@
 [ext_resource path="res://GUI/PlanetSettings/PlanetSettingsColorPicker.tscn" type="PackedScene" id=3]
 
 [node name="PlanetSettingsPanel" type="WindowDialog"]
-margin_right = 357.0
-margin_bottom = 522.0
+visible = true
+margin_left = 3.09082
+margin_top = 27.8177
+margin_right = 360.091
+margin_bottom = 549.818
 rect_min_size = Vector2( 300, 140 )
 popup_exclusive = true
 window_title = "Planet Settings"
 resizable = true
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
 sliderScene = ExtResource( 2 )
 colorTabScene = ExtResource( 3 )
 
-[node name="Panel" type="Panel" parent="."]
+[node name="P" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = 50.0
@@ -25,7 +32,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+[node name="MC" type="MarginContainer" parent="P"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -36,11 +43,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TabContainer" type="TabContainer" parent="Panel/MarginContainer"]
+[node name="TC" type="TabContainer" parent="P/MC"]
 margin_right = 337.0
 margin_bottom = 552.0
 
-[node name="Terrain" type="Tabs" parent="Panel/MarginContainer/TabContainer"]
+[node name="Terrain" type="Tabs" parent="P/MC/TC"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -48,14 +55,14 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="WaterTabContainer" type="TabContainer" parent="Panel/MarginContainer/TabContainer/Terrain"]
+[node name="TC" type="TabContainer" parent="P/MC/TC/Terrain"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sliders" type="Tabs" parent="Panel/MarginContainer/TabContainer/Terrain/WaterTabContainer"]
+[node name="Sliders" type="Tabs" parent="P/MC/TC/Terrain/TC"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -63,14 +70,14 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/TabContainer/Terrain/WaterTabContainer/Sliders"]
+[node name="vbox" type="VBoxContainer" parent="P/MC/TC/Terrain/TC/Sliders"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Colors" type="Tabs" parent="Panel/MarginContainer/TabContainer/Terrain/WaterTabContainer"]
+[node name="Colors" type="Tabs" parent="P/MC/TC/Terrain/TC"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -81,7 +88,7 @@ margin_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TabContainer" type="TabContainer" parent="Panel/MarginContainer/TabContainer/Terrain/WaterTabContainer/Colors"]
+[node name="TC" type="TabContainer" parent="P/MC/TC/Terrain/TC/Colors"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -90,7 +97,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Water" type="Tabs" parent="Panel/MarginContainer/TabContainer"]
+[node name="Water" type="Tabs" parent="P/MC/TC"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -99,14 +106,14 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="WaterTabContainer" type="TabContainer" parent="Panel/MarginContainer/TabContainer/Water"]
+[node name="TC" type="TabContainer" parent="P/MC/TC/Water"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sliders" type="Tabs" parent="Panel/MarginContainer/TabContainer/Water/WaterTabContainer"]
+[node name="Sliders" type="Tabs" parent="P/MC/TC/Water/TC"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -114,14 +121,14 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/TabContainer/Water/WaterTabContainer/Sliders"]
+[node name="vbox" type="VBoxContainer" parent="P/MC/TC/Water/TC/Sliders"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Colors" type="Tabs" parent="Panel/MarginContainer/TabContainer/Water/WaterTabContainer"]
+[node name="Colors" type="Tabs" parent="P/MC/TC/Water/TC"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -132,7 +139,7 @@ margin_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TabContainer" type="TabContainer" parent="Panel/MarginContainer/TabContainer/Water/WaterTabContainer/Colors"]
+[node name="tc" type="TabContainer" parent="P/MC/TC/Water/TC/Colors"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3

@@ -40,6 +40,7 @@ var waterSliderAttributes = [
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_PlanetInitilise()
+	
 	pass # Replace with function body.
 
 func randomisePlanetAttribute(name, material = PLANET_MAT.TERRAIN):
@@ -140,7 +141,11 @@ func _input(event):
 func AddHistoryItem(name):
 	var oldValue  = getPlanetAttribute(name)
 	tempHistory = [name, oldValue]
-	historyPanel = self.get_parent().get_child(2).get_child(1)
+	
+	var root = get_tree().get_current_scene();
+	var optionsPanel = root.get_node("OptionPanel")
+	historyPanel = optionsPanel.getHistoryPanel()
+	
 	historyPanel.AddHistoryItem(name)
 	planetHistory.append(tempHistory)
 	updated = true
@@ -153,6 +158,10 @@ func RemoveHistoryItem():
 #		print(tempHistory)
 #		print(planetHistory)
 		_setPlanetAttribute(tempHistory[0], tempHistory[1])
-		historyPanel = self.get_parent().get_child(2).get_child(1)
+		
+		var root = get_tree().get_current_scene();
+		var optionsPanel = root.get_node("OptionPanel")
+		historyPanel = optionsPanel.getHistoryPanel()
+		
 		historyPanel.RemoveHistoryItem()
 	

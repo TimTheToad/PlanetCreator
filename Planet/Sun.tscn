@@ -10,7 +10,7 @@ height = 20.0
 albedo_color = Color( 0.792157, 0.929412, 0, 1 )
 emission_enabled = true
 emission = Color( 0.72549, 0.635294, 0.215686, 1 )
-emission_energy = 7.82
+emission_energy = 4.26
 emission_operator = 0
 emission_on_uv2 = false
 
@@ -24,3 +24,4 @@ script = ExtResource( 1 )
 sunOffset = 100
 
 [node name="DirectionalLight" type="DirectionalLight" parent="Sun"]
+light_energy = 1.65
