@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://OrbitalCamera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Planet/Planet Mesh.tscn" type="PackedScene" id=2]
 [ext_resource path="res://GUI/OptionPanel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Planet/Sun.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Sandboxes/Sphere.gd" type="Script" id=5]
+[ext_resource path="res://Planet/PlanetMaterial.tres" type="Material" id=6]
 
 [node name="Spatial" type="Spatial"]
 
@@ -28,4 +30,9 @@ __meta__ = {
 size = Vector2( 256, 256 )
 
 [node name="Camera" type="Camera" parent="Viewport"]
-transform = Transform( -0.825033, 0.337536, -0.453198, 0, 0.802002, 0.597321, 0.565083, 0.49281, -0.661678, -1.57217, 2.23403, -2.40254 )
+transform = Transform( -0.825034, 0.337536, -0.453198, 0, 0.802002, 0.597321, 0.565084, 0.49281, -0.661679, -5.38573, 7.30066, -7.44083 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+visible = false
+script = ExtResource( 5 )
+mat = ExtResource( 6 )
