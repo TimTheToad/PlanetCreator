@@ -13,6 +13,8 @@ var terrainMaterial
 var terrainTexture
 var terrainNoise
 
+export(int) var offsetFromSun
+
 var historyPanel 
 var tempHistory
 var planetHistory = []
@@ -116,7 +118,7 @@ func getWaterAttributeNames():
 func _PlanetInitilise():
 	terrainInstance = get_node("PlanetMesh")
 	waterInstance = get_node("WaterMesh")
-	
+	self.translate(Vector3(offsetFromSun, 0, 0))
 	waterMaterial = waterInstance.get_surface_material(0)
 	
 	terrainMaterial = terrainInstance.get_surface_material(0)

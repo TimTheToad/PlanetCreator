@@ -19,6 +19,7 @@ varying float vertexDist;
 
 void vertex() {
 	float noise = texture(heightmap, UV).r;
+	NORMAL = normalize(VERTEX);
 	vec3 offset = NORMAL * noise * noise * terrain_magnitude;
 	
 	vertexDist = length(offset + 0.1);
@@ -39,7 +40,7 @@ void fragment() {
 	color += snow_color * (1.0 - isSnow);
 	
 	// Mountain color
-	NORMALMAP = texture(normalmap, UV).xyz;
+	//NORMALMAP = texture(normalmap, UV).xyz;
 	ALBEDO = color.rgb;
 	METALLIC = 0.0;
 	ROUGHNESS = 0.7;

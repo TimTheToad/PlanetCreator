@@ -3,9 +3,9 @@
 [ext_resource path="res://Planet/OldPlanet/Planet.shader" type="Shader" id=1]
 
 [sub_resource type="OpenSimplexNoise" id=1]
-seed = 2
-period = 64.2
-persistence = 0.275
+seed = 1
+period = 61.2
+persistence = 0.264
 lacunarity = 2.83
 
 [sub_resource type="NoiseTexture" id=2]
