@@ -32,7 +32,7 @@ void vertex() {
 	float isWater = step(water_amount, vertexDist);
 	
 	// Landscape
-	VERTEX += offset * isWater + water_offset * (1.0 - isWater);
+//	VERTEX += offset * isWater + water_offset * (1.0 - isWater);
 }
 
 void fragment() {

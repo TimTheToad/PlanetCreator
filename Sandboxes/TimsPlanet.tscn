@@ -1,9 +1,10 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://OrbitalCamera.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Planet/Planet Mesh.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Planet/OldPlanet/Planet Mesh.tscn" type="PackedScene" id=2]
 [ext_resource path="res://GUI/OptionPanel.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Planet/Sun.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Planet/OldPlanet/Sun.tscn" type="PackedScene" id=4]
+
 
 [node name="Spatial" type="Spatial"]
 
