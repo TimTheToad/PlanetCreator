@@ -19,10 +19,6 @@ config/name="Planet"
 run/main_scene="res://Sandboxes/SolarScene.tscn"
 config/icon="res://icon.png"
 
-[display]
-
-window/stretch/aspect="expand"
-
 [input]
 
 Planet={
