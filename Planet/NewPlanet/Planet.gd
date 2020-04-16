@@ -1,14 +1,23 @@
 extends Spatial
 
-export(Vector2) var distanceFromSun
-export(float) var rotationSpeed = PI * 0.001
+var phi = 0.0
+var orbitSpeed = 0.01
+
+var minor_axis
+var major_axis
+var position
 
 func _ready():
-	self.translation = Vector3(distanceFromSun.x, 0.0, distanceFromSun.y);
+	position = Vector3(cos(phi) * major_axis, 0.0, sin(phi) * minor_axis)
+#	self.translation = Vector3(distanceFromSun.x, 0.0, distanceFromSun.y);
 
 func orbit(dt):
-	self.rotate_y(rotationSpeed * dt)
+	phi += orbitSpeed * dt
+	
+	position.x = cos(phi) * major_axis
+	position.z = sin(phi) * minor_axis
+	self.translation = position
 
 func _process(dt):
-	#	self.orbit(dt)
+	self.orbit(dt)
 	pass

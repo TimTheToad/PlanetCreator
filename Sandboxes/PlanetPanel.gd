@@ -26,26 +26,8 @@ func _ready():
 func _GoToPlanet(name):
 	print(name)
 	var planetInstance = planets.get_node(name)
-#	print(planetInstance)
-#	print(planetInstance.translation)
-#	print(planetInstance.transform.basis)
-	print("holder basis:")
-	print(cameraHolder.transform.basis)
-	print("holder Origin:")
-	print(cameraHolder.transform.origin)
-	print("camera basis:")
-	print(camera.transform.basis)
-	print("camera Origin:")
-	print(camera.transform.origin)
-	cameraHolder.transform.origin = planetInstance.transform.origin
-	print("holder basis:")
-	print(cameraHolder.transform.basis)
-	print("holder Origin:")
-	print(cameraHolder.transform.origin)
-	print("camera basis:")
-	print(camera.transform.basis)
-	print("camera Origin:")
-	print(camera.transform.origin)
+	cameraHolder.target = planetInstance
+
 
 		
 

@@ -1,13 +1,5 @@
 extends Camera
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-onready var planet = preload("res://Planet/NewPlanet/NewPlanet.tscn")
-onready var planetInstance = planet.instance()
 export(Vector3) var cameraOffset
 var cameraNewRotation
 var direction
@@ -16,6 +8,7 @@ var cameraHolderX
 var cameraHolderY
 var cameraHolderMaster
 var canMove = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -50,10 +43,8 @@ func _process(delta):
 			cameraNewRotation = Vector2(0.0, 0.0)
 			
 	updateLookAt()
-	pass
 
 func updateLookAt():
-	
 	direction = -self.transform.origin.normalized()
 	self.look_at(cameraHolderMaster.transform.origin, Vector3(0.0, 1.0, 0.0))
 	pass
@@ -71,5 +62,3 @@ func _input(event):
 			self.translation = self.translation - direction * 0.1
 	pass
 
-func MoveAroundPlanet():
-	pass
