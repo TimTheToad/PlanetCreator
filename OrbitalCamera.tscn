@@ -4,10 +4,7 @@
 [ext_resource path="res://OrbitalCamera.gd" type="Script" id=2]
 
 [node name="CameraHolderMaster" type="Spatial"]
-<<<<<<< HEAD
 script = ExtResource( 2 )
-=======
->>>>>>> d0fb55cd8db515781b9011b51038207fd9a6a164
 
 [node name="CameraHolderY" type="Spatial" parent="."]
 

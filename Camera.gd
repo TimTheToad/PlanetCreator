@@ -53,11 +53,7 @@ func _process(delta):
 	updateLookAt()
 
 func updateLookAt():
-<<<<<<< HEAD
-	direction = -self.transform.origin.normalized()
-=======
 	direction = -currentCamera.transform.origin.normalized()
->>>>>>> d0fb55cd8db515781b9011b51038207fd9a6a164
 	self.look_at(cameraHolderMaster.transform.origin, Vector3(0.0, 1.0, 0.0))
 	pass
 
