@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Planet"
-run/main_scene="res://Sandboxes/SolarScene.tscn"
+run/main_scene="res://Sandboxes/TimsPlanet.tscn"
 config/icon="res://icon.png"
 
 [input]

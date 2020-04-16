@@ -1,7 +1,8 @@
 extends Spatial
 
 var phi = 0.0
-var orbitSpeed = 0.01
+var orbitSpeed = randf()
+var axisRotateSpeed = 0.1
 
 var minor_axis
 var major_axis
@@ -18,6 +19,8 @@ func orbit(dt):
 	position.z = sin(phi) * minor_axis
 	self.translation = position
 
+
 func _process(dt):
+	self.rotate_y(PI * axisRotateSpeed * dt)
 	self.orbit(dt)
 	pass

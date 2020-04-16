@@ -48,8 +48,8 @@ func _process(delta):
 			cameraNewRotation = Vector2(0.0, 0.0)
 		elif secondCamera.is_current():
 			cameraHolderMaster.translate(Vector3(cameraNewRotation[0] * 0.1, 0.0, cameraNewRotation[1] * 0.1))
-			
 			cameraNewRotation = Vector2(0.0, 0.0)
+			
 	updateLookAt()
 
 func updateLookAt():
@@ -58,25 +58,21 @@ func updateLookAt():
 	pass
 
 func _input(event):
-	
+	currentCamera = getCurrentCamera()
 	if event is InputEventMouseMotion:
 		cameraNewRotation = event.get_relative()
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_WHEEL_UP:
-			print(zoomSpeed)
-			currentCamera.translation = currentCamera.translation + direction * zoomSpeed
+			if self.is_current():
+				self.translation = self.translation + direction * zoomSpeed
+			elif secondCamera.is_current():
+				secondCamera.translation = secondCamera.translation + direction * 0.8
 		if event.button_index == BUTTON_WHEEL_DOWN:
-			currentCamera.translation = currentCamera.translation - direction * zoomSpeed
+			if self.is_current():
+				self.translation = self.translation - direction * zoomSpeed
+			elif secondCamera.is_current():
+				secondCamera.translation = secondCamera.translation - direction * 0.8
 				
-	if event is InputEventKey:
-		if event.is_action_pressed("ui_up") and !event.echo:
-			secondCamera.make_current()
-			zoomSpeed = 1.5
-			currentCamera = secondCamera
-		if event.is_action_pressed("ui_down") and !event.echo:
-			self.make_current()
-			zoomSpeed = 0.1
-			currentCamera = self
 	pass
 	
 func getCurrentCamera():
