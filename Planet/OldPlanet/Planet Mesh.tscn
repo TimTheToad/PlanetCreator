@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Planet/Planet.gd" type="Script" id=1]
-[ext_resource path="res://Planet/PlanetMaterial.tres" type="Material" id=2]
-[ext_resource path="res://Planet/Water.shader" type="Shader" id=3]
+[ext_resource path="res://Planet/OldPlanet/Water.shader" type="Shader" id=1]
+[ext_resource path="res://Planet/OldPlanet/PlanetOld.gd" type="Script" id=2]
+[ext_resource path="res://Planet/OldPlanet/PlanetMaterial.tres" type="Material" id=3]
 
 [sub_resource type="SphereMesh" id=1]
 radius = 4.0
@@ -27,7 +27,7 @@ bump_strength = 1.0
 noise = SubResource( 2 )
 
 [sub_resource type="ShaderMaterial" id=5]
-shader = ExtResource( 3 )
+shader = ExtResource( 1 )
 shader_param/water_color = Color( 0.133333, 0.611765, 0.847059, 1 )
 shader_param/water_magnitude = 0.17
 shader_param/wave_speed = 0.013
@@ -36,11 +36,11 @@ shader_param/heightmap = SubResource( 3 )
 shader_param/normalmap = SubResource( 4 )
 
 [node name="Planet" type="Spatial"]
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="PlanetMesh" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
-material/0 = ExtResource( 2 )
+material/0 = ExtResource( 3 )
 
 [node name="WaterMesh" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )

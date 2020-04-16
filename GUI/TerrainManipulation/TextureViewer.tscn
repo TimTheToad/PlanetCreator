@@ -3,7 +3,6 @@
 [ext_resource path="res://GUI/AlternateView/AlternateViewport.gd" type="Script" id=1]
 
 [node name="AlternateView" type="WindowDialog"]
-visible = true
 margin_left = -1.0
 margin_top = 22.0
 margin_right = 275.001

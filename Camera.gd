@@ -6,6 +6,8 @@ extends Camera
 # var b = "text"
 
 
+onready var planet = preload("res://Planet/NewPlanet/NewPlanet.tscn")
+onready var planetInstance = planet.instance()
 export(Vector3) var cameraOffset
 var cameraNewRotation
 var direction

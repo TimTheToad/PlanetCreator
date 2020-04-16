@@ -15,7 +15,6 @@ onready var textureViewerInstance = textureViewerScene.instance()
 onready var boxContainer = get_child(0).get_child(0).get_child(0).get_child(1)
 onready var buttons = [
 	["History", historyInstance, PRESET_CENTER],
-	["Planet Settings", PlanetSettingsInstance, PRESET_CENTER],
 	["Alternate view", alternateViewInstance, PRESET_TOP_RIGHT],
 	["Texture viewer", textureViewerInstance, PRESET_TOP_LEFT],
 ]
@@ -26,7 +25,6 @@ func getHistoryPanel():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.call_deferred("add_child", historyInstance)
-	self.call_deferred("add_child", PlanetSettingsInstance)
 	self.call_deferred("add_child", alternateViewInstance)
 	self.call_deferred("add_child", textureViewerInstance)
 	
