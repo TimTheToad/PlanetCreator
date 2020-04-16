@@ -14,14 +14,12 @@ albedo_color = Color( 0.992157, 1, 0, 1 )
 [node name="Planets" type="Spatial" parent="."]
 
 [node name="Planet" parent="Planets" instance=ExtResource( 2 )]
-offsetFromSun = 200
+offsetFromSun = 75
 
 [node name="Planet2" parent="Planets" instance=ExtResource( 2 )]
-offsetFromSun = 100
+offsetFromSun = -50
 
 [node name="CameraHolderMaster" parent="." instance=ExtResource( 1 )]
-
-[node name="Viewport" type="Viewport" parent="."]
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
