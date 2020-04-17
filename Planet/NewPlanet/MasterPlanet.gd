@@ -7,8 +7,8 @@ func _ready():
 	
 	for i in range(PLANET_COUNT):
 		var instance = planetScene.instance()
-		instance.minor_axis = 20 + 20 * randf()
-		instance.major_axis = 20 + 20 * randf()
+		instance.minor_axis = 5 + 0 * randf()
+		instance.major_axis = 5 + 0 * randf()
 		self.add_child(instance)
 		
 	

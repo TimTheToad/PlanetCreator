@@ -3,8 +3,8 @@ extends Spatial
 var phi = 0.0
 var orbitSpeed = 0.01
 
-var minor_axis
-var major_axis
+var minor_axis = 10
+var major_axis = 10
 var position
 
 func _ready():

@@ -13,6 +13,8 @@ func _ready():
 	pass # Replace with function body.
 
 func generateNoiseTexture(period, octaves):
-	var noise = OpenSimplexNoise.new()
-	noise.period = period
-	noise.octaves = 5
+	
+	var image = Image.new()
+	image.create(1024, 512, true, Image.FORMAT_RGBA8)
+	image.fill(Color())
+	
