@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://OrbitalCamera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Planet/NewPlanet/MasterPlanet.gd" type="Script" id=2]
 [ext_resource path="res://Sandboxes/PlanetPanel.gd" type="Script" id=3]
 [ext_resource path="res://GUI/OptionPanel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Sandboxes/RadialController.tscn" type="PackedScene" id=5]
 
 [sub_resource type="SphereMesh" id=1]
 
@@ -25,22 +26,21 @@ material/0 = SubResource( 2 )
 omni_range = 600.9
 
 [node name="Control" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PlanetPanel" type="WindowDialog" parent="Control"]
 visible = true
-anchor_left = 1.0
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = 755.771
-margin_top = 315.124
-margin_right = 970.771
-margin_bottom = 547.124
+margin_left = -107.5
+margin_top = -232.0
+margin_right = 107.5
 popup_exclusive = true
 script = ExtResource( 3 )
 __meta__ = {
@@ -62,3 +62,5 @@ margin_right = 208.0
 margin_bottom = 225.0
 
 [node name="OptionPanel" parent="Control" instance=ExtResource( 4 )]
+
+[node name="RadialController" parent="Control" instance=ExtResource( 5 )]
