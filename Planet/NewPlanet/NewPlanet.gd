@@ -20,10 +20,6 @@ func _ready():
 	var color = Color(0.4, 0.4, 0.4, 1.0)
 	_fillColorLayer(viewports[LayerType.BASE], color)
 	
-	var liquidMat = getMaterial(LayerType.LIQUID)
-	liquidMat.emission_enabled = true
-	liquidMat.emission = Color(0.4, 0.4, 1.0, 1.0)
-	liquidMat.emission_energy = 3.0
 	pass # Replace with function body.
 
 func _input(event):

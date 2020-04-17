@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://OrbitalCamera.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Planet/NewPlanet/MasterPlanet.gd" type="Script" id=2]
 [ext_resource path="res://Sandboxes/PlanetPanel.gd" type="Script" id=3]
-[ext_resource path="res://Planet/NewPlanet/MasterPlanet.gd" type="Script" id=4]
+[ext_resource path="res://GUI/OptionPanel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Sandboxes/RadialController.tscn" type="PackedScene" id=5]
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.992157, 1, 0, 1 )
 emission_enabled = true
 emission = Color( 0.882353, 0.627451, 0.227451, 1 )
@@ -12,7 +14,7 @@ emission_energy = 4.15
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="SphereMesh" id=1]
+[sub_resource type="SphereMesh" id=2]
 
 [sub_resource type="Environment" id=3]
 background_mode = 1
@@ -26,37 +28,36 @@ glow_bicubic_upscale = true
 [node name="SolarScene" type="Spatial"]
 
 [node name="Planets" type="Spatial" parent="."]
-script = ExtResource( 4 )
+script = ExtResource( 2 )
 
 [node name="CameraHolderMaster" parent="." instance=ExtResource( 1 )]
 
 [node name="Viewport" type="Viewport" parent="."]
 
 [node name="Sun" type="MeshInstance" parent="."]
-material_override = SubResource( 2 )
-mesh = SubResource( 1 )
+material_override = SubResource( 1 )
+mesh = SubResource( 2 )
 material/0 = null
 
 [node name="OmniLight" type="OmniLight" parent="Sun"]
 omni_range = 600.9
 
 [node name="Control" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PlanetPanel" type="WindowDialog" parent="Control"]
 visible = true
-anchor_left = 1.0
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = 755.771
-margin_top = 315.124
-margin_right = 970.771
-margin_bottom = 547.124
+margin_left = -107.5
+margin_top = -232.0
+margin_right = 107.5
 popup_exclusive = true
 script = ExtResource( 3 )
 __meta__ = {
@@ -76,6 +77,10 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 208.0
 margin_bottom = 225.0
+
+[node name="OptionPanel" parent="Control" instance=ExtResource( 4 )]
+
+[node name="RadialController" parent="Control" instance=ExtResource( 5 )]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
