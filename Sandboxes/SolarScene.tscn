@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://OrbitalCamera.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Planet/NewPlanet/MasterPlanet.gd" type="Script" id=2]
 [ext_resource path="res://Sandboxes/PlanetPanel.gd" type="Script" id=3]
-[ext_resource path="res://Planet/NewPlanet/MasterPlanet.gd" type="Script" id=4]
+[ext_resource path="res://GUI/OptionPanel.tscn" type="PackedScene" id=4]
 
 [sub_resource type="SphereMesh" id=1]
 
@@ -12,7 +13,7 @@ albedo_color = Color( 0.992157, 1, 0, 1 )
 [node name="SolarScene" type="Spatial"]
 
 [node name="Planets" type="Spatial" parent="."]
-script = ExtResource( 4 )
+script = ExtResource( 2 )
 
 [node name="CameraHolderMaster" parent="." instance=ExtResource( 1 )]
 
@@ -61,3 +62,5 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 208.0
 margin_bottom = 225.0
+
+[node name="OptionPanel" parent="Control" instance=ExtResource( 4 )]
