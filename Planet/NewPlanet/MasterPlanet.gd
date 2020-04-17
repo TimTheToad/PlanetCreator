@@ -1,7 +1,7 @@
 extends Spatial
 
 onready var planetScene = preload("res://Planet/NewPlanet/NewPlanet.tscn")
-const PLANET_COUNT = 10
+const PLANET_COUNT = 2
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
