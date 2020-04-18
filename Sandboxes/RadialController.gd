@@ -27,7 +27,7 @@ func _ready():
 	self.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	masterControl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	buttonGroup.visible = false
-	
+
 	for item in buttons:
 		var instance = Button.new()
 		instance.text = item[0]
@@ -51,10 +51,7 @@ func _input(event):
 			PositionButtonsInRadial(event.position)
 		elif !event.is_action_pressed("Radial"):
 			radialReleased = true
-			
-			
-			
-			
+
 	if event is InputEventKey:
 		if event.is_action_pressed("ui_cancel"):
 			buttonGroup.visible = false
@@ -86,8 +83,6 @@ func _showWindow(instance, anchorPreset):
 	instance.visible = true
 	instance.set_anchors_preset(anchorPreset, true);
 	buttonGroup.visible = false
-	
-	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
