@@ -7,6 +7,7 @@ margin_left = 118.717
 margin_top = 131.986
 margin_right = 158.717
 margin_bottom = 171.986
+mouse_filter = 2
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -15,78 +16,7 @@ __meta__ = {
 [node name="ButtonGroup" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button" type="Button" parent="ButtonGroup"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 71.0
-margin_bottom = 27.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "Option1"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button2" type="Button" parent="ButtonGroup"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 71.0
-margin_bottom = 27.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "Option1"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button3" type="Button" parent="ButtonGroup"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 71.0
-margin_bottom = 27.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "Option1"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button4" type="Button" parent="ButtonGroup"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 71.0
-margin_bottom = 27.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "Option1"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button5" type="Button" parent="ButtonGroup"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 71.0
-margin_bottom = 27.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "Option1"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button6" type="Button" parent="ButtonGroup"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 71.0
-margin_bottom = 27.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "Option1"
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

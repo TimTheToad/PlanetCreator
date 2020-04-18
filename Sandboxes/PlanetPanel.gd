@@ -25,8 +25,10 @@ func _ready():
 
 func _GoToPlanet(name):
 	print(name)
+	var camera = cameraHolder.get_child(0).get_child(0).get_child(0)
 	var planetInstance = planets.get_node(name)
 	cameraHolder.target = planetInstance
+	camera.make_current()
 
 
 		
