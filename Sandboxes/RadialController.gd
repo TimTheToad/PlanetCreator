@@ -41,6 +41,7 @@ func _ready():
 	pass # Replace with function body.
 
 var radialReleased = false
+var isHovered = false
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -64,7 +65,12 @@ func _process(delta):
 	if radialReleased:
 		for button in buttonGroup.get_children():
 			if button.is_hovered():
+				isHovered = true
 				button.emit_signal("pressed")
+			else:
+				isHovered = false
+	if radialReleased and !isHovered:
+		buttonGroup.visible = false
 
 func PositionButtonsInRadial(mousePos):
 	var iterator = 0
