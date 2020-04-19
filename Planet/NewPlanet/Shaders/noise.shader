@@ -42,6 +42,7 @@ void fragment() {
 	float phi = UV.x * 3.14159 * 2.0;
 	vec3 unit = vec3(0.0, 0.0, 0.0);
 	
+	
 	unit.x = sin(phi) * sin(theta);
 	unit.y = cos(theta) * -1.0;
 	unit.z = cos(phi) * sin(theta);
