@@ -1,6 +1,5 @@
 extends Spatial
 
-
 var target
 var secondCamera
 var direction
@@ -13,7 +12,6 @@ var cameraNewRotation
 # Called when the node enters the scene tree for the first time.
 
 func _ready():
-	
 	var cameraOffset = Vector3(5, 0, 0)
 	
 	cameraHolderY = self.get_node("CameraHolderY")
@@ -85,7 +83,8 @@ func _input(event):
 	
 func updateLookAt():
 	direction = -currentCamera.transform.origin.normalized()
-	currentCamera.look_at(self.transform.origin, Vector3(0.0, 1.0, 0.0))
+	if firstCamera.is_current():
+		currentCamera.look_at(self.transform.origin, Vector3(0.0, 1.0, 0.0))
 	pass
 
 func GetDirection():
