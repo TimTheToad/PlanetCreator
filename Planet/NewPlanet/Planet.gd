@@ -14,10 +14,14 @@ onready var cameraHolder = get_parent().get_parent().get_child(1)
 var camera
 var unPos
 
+var orbitMesh
+var vertexCount = 20
+
 export(bool) var isOrbiting = true
 
 func _ready():
 	position = Vector3(cos(phi) * major_axis, 0.0, sin(phi) * minor_axis)
+	_createOribitLines(vertexCount)	
 #	nameLabel = Label.new()
 #	nameLabel.text = self.get_name()
 #	offset = Vector2(nameLabel.get_size().x/2, 0)
@@ -31,6 +35,44 @@ func orbit(dt):
 	self.translation = position
 
 
+onready var mdt = MeshDataTool.new()
+onready var sf = SurfaceTool.new()
+func updateOrbitLines():
+	_createOribitLines(vertexCount)
+	
+	pass
+
+func _createOribitLines(vertexCount):
+	sf = SurfaceTool.new()
+	sf.begin(Mesh.PRIMITIVE_LINE_LOOP)
+	
+	var angle = 0
+	var rad = ((2*PI) / vertexCount)
+	var vPos = Vector3(0, 0, 0)
+	for i in vertexCount:
+		angle += rad
+		vPos.x = cos(angle) * major_axis
+		vPos.z = sin(angle) * minor_axis
+		sf.add_vertex(vPos)
+		
+	if !orbitMesh:
+		orbitMesh = MeshInstance.new()
+		orbitMesh.mesh = sf.commit()
+		
+		var mat = SpatialMaterial.new()
+		mat.albedo_color = Color.white
+		mat.albedo_color.a = 0.1
+		mat.flags_transparent = true
+		mat.flags_unshaded = true
+		orbitMesh.material_override = mat
+		
+		var node = Node.new()
+		node.add_child(orbitMesh)
+		self.add_child(node)
+	else:
+		orbitMesh.mesh.surface_remove(0)
+		sf.commit(orbitMesh.mesh)
+	
 func _process(dt):
 	if isOrbiting:
 		self.rotate_y(PI * axisRotateSpeed * dt)
