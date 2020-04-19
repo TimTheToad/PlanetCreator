@@ -55,6 +55,13 @@ func _input(event):
 	if event is InputEventKey:
 		if event.is_action_pressed("ui_cancel"):
 			buttonGroup.visible = false
+		
+		if event.is_action_pressed("Radial") and !event.is_action_released("Radial"):
+			buttonGroup.visible = true
+			radialReleased = false
+			PositionButtonsInRadial(get_viewport().get_mouse_position())
+		elif !event.is_action_pressed("Radial"):
+			radialReleased = true
 	pass
 
 func _process(delta):
