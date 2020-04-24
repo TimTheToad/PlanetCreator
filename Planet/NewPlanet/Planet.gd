@@ -13,15 +13,14 @@ var offset
 onready var cameraHolder = get_parent().get_parent().get_child(1)
 var camera
 var unPos
-
+var shouldOrbit
 var orbitMesh
 var vertexCount = 20
 
-export(bool) var isOrbiting = true
 
 func _ready():
+	shouldOrbit = false
 	position = Vector3(cos(phi) * major_axis, 0.0, sin(phi) * minor_axis)
-	_createOribitLines(vertexCount)	
 #	nameLabel = Label.new()
 #	nameLabel.text = self.get_name()
 #	offset = Vector2(nameLabel.get_size().x/2, 0)
@@ -34,15 +33,18 @@ func orbit(dt):
 	position.z = sin(phi) * minor_axis
 	self.translation = position
 
+func shouldPlanetOrbit(state):
+	shouldOrbit = state
+	pass
 
 onready var mdt = MeshDataTool.new()
 onready var sf = SurfaceTool.new()
 func updateOrbitLines():
-	_createOribitLines(vertexCount)
+	createOribitLines(vertexCount)
 	
 	pass
 
-func _createOribitLines(vertexCount):
+func createOribitLines(vertexCount):
 	sf = SurfaceTool.new()
 	sf.begin(Mesh.PRIMITIVE_LINE_LOOP)
 	
@@ -74,9 +76,10 @@ func _createOribitLines(vertexCount):
 		sf.commit(orbitMesh.mesh)
 	
 func _process(dt):
-	if isOrbiting:
+	if shouldOrbit:
 		self.rotate_y(PI * axisRotateSpeed * dt)
 		self.orbit(dt)
+	self.rotate_y(PI * axisRotateSpeed * dt)
 #	camera = cameraHolder.getCurrentCamera() #fett ooptimerat, fixa
 #	unPos = camera.unproject_position(self.global_transform.origin)
 #	if camera.global_transform.origin.dot(self.global_transform.origin) > 0:
