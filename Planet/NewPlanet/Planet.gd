@@ -7,7 +7,7 @@ var axisRotateSpeed = 0.1
 var minor_axis = 10
 var major_axis = 10
 var position
-var nameLabel
+
 var gotCamera = false
 var offset
 onready var cameraHolder = get_parent().get_parent().get_child(1)

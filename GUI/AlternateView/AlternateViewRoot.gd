@@ -11,8 +11,10 @@ onready var planetsInScene = get_parent().get_parent().get_parent().get_child(0)
 onready var environment = get_parent().get_parent().get_parent().get_node("WorldEnvironment")
 var planetsInView = []
 var cameras = []
+var nameLabel
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	window.visible = false
 	for i in range(planetsInScene.get_child_count()):
 		var viewPortContainer = ViewportContainer.new()
@@ -29,10 +31,12 @@ func _ready():
 		world.environment = environmentDupe
 		viewPort.world = world
 		viewPortContainer.add_child(viewPort)
-		
+		nameLabel = Label.new()
+		nameLabel.text = planetsInScene.get_child(i).get_name()
 		var planet = planetsInScene.get_child(i).duplicate()
-		
+
 		planet.get_child(3).queue_free()
+		planet.add_child(nameLabel)
 		viewPort.add_child(planet)
 		
 		var camera = Camera.new()
