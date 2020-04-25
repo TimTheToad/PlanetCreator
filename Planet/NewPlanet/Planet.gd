@@ -131,13 +131,10 @@ func updateOrbitLines():
 func makeOrbitArrowVisible(isVisible):
 	xArrow.visible = isVisible
 	xArrow.get_child(0).input_ray_pickable = isVisible
-	print(xArrow.get_child(0))
-	print(xArrow.get_child(0).input_ray_pickable)
 	xArrow.get_child(0).get_child(0).disabled = !isVisible
+	
 	zArrow.visible = isVisible
 	zArrow.get_child(0).input_ray_pickable = isVisible
-	print(zArrow.get_child(0))
-	print(zArrow.get_child(0).input_ray_pickable)
 	zArrow.get_child(0).get_child(0).disabled = !isVisible
 	
 func createOribitLines(vertexCount):

@@ -7,7 +7,7 @@ var selected
 var xArr
 var zArr
 var prevSelected
-
+var camera
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Retrive camera
@@ -22,7 +22,7 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.is_pressed():
 			# Get essential data for raycast
-			var camera = cameraHolder.getCurrentCamera()
+			camera = cameraHolder.getCurrentCamera()
 			var viewport = get_viewport()
 			var mousePos = viewport.get_mouse_position()
 			
@@ -47,27 +47,32 @@ func _input(event):
 					selected = null
 					print("zArrow Hit")
 				else:
-					prevSelected = selected #saves the previously selected planet so we may "destroy" the arrows upon deselected
+					if prevSelected:
+						prevSelected.makeOrbitArrowVisible(false)
 					selected.makeOrbitArrowVisible(true)
 			elif hit.size() == 0:
 				if prevSelected:
 					prevSelected.makeOrbitArrowVisible(false)
+
 		if event.button_index == BUTTON_LEFT and !event.is_pressed():
 			if selected:
+				prevSelected = selected #saves the previously selected planet so we may "destroy" the arrows upon deselected
 				selected = null
 			if xArr:
 				xArr = null
 			if zArr:
 				zArr = null
 				print("Released planet")
-	
+
 	if xArr:
 		if event is InputEventMouseMotion:
-			var relative = event.get_relative() * 0.1
-			xArr.get_parent().major_axis += relative.x
+#			var relative = event.get_relative() * 0.1
+			var arrowPosition = camera.project_position(event.position, camera.global_transform.origin.y) - Vector3(1.0, 0.0, 0.0)
+			xArr.get_parent().major_axis = arrowPosition.x
 			xArr.get_parent().updateOrbitLines()
 	elif zArr:
 		if event is InputEventMouseMotion:
-			var relative = event.get_relative() * 0.1
-			zArr.get_parent().minor_axis += relative.y
+#			var relative = event.get_relative() * 0.1
+			var arrowPosition = camera.project_position(event.position, camera.global_transform.origin.y)  - Vector3(0.0, 0.0, 1.0)
+			zArr.get_parent().minor_axis = arrowPosition.z
 			zArr.get_parent().updateOrbitLines()
