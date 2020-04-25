@@ -4,6 +4,9 @@ var ray
 
 var cameraHolder
 var selected
+var xArr
+var zArr
+var prevSelected
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,17 +38,36 @@ func _input(event):
 			if hit.size() != 0:
 				# collider will be the node you hit
 				selected = hit.collider.get_parent()
-		
+				if selected.name == "xArrow":
+					xArr = selected
+					selected = null
+					print("xArrow Hit")
+				elif selected.name == "zArrow":
+					zArr = selected
+					selected = null
+					print("zArrow Hit")
+				else:
+					prevSelected = selected #saves the previously selected planet so we may "destroy" the arrows upon deselected
+					selected.makeOrbitArrowVisible(true)
+			elif hit.size() == 0:
+				if prevSelected:
+					prevSelected.makeOrbitArrowVisible(false)
 		if event.button_index == BUTTON_LEFT and !event.is_pressed():
 			if selected:
 				selected = null
+			if xArr:
+				xArr = null
+			if zArr:
+				zArr = null
 				print("Released planet")
 	
-	if selected:
+	if xArr:
 		if event is InputEventMouseMotion:
 			var relative = event.get_relative() * 0.1
-			
-			selected.minor_axis += relative.y
-			selected.major_axis += relative.x
-			selected.updateOrbitLines()
-			
+			xArr.get_parent().major_axis += relative.x
+			xArr.get_parent().updateOrbitLines()
+	elif zArr:
+		if event is InputEventMouseMotion:
+			var relative = event.get_relative() * 0.1
+			zArr.get_parent().minor_axis += relative.y
+			zArr.get_parent().updateOrbitLines()
