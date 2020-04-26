@@ -6,7 +6,7 @@ const PLANET_COUNT = 4
 func _ready():
 	
 	var minDist = 2
-	
+	randomize()
 	for i in range(PLANET_COUNT):
 		var instance = planetScene.instance()
 		instance.minor_axis = minDist + 10 * ((randf() -0.5) * 2)

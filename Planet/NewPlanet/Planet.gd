@@ -174,11 +174,15 @@ func createOribitLines(vertexCount):
 		orbitMesh.mesh.surface_remove(0)
 		sf.commit(orbitMesh.mesh)
 
+func rotatePlanet(relative):
+	self.rotate_y(relative[0] * 0.05)
+	pass
+
 func _process(dt):
 	if shouldOrbit:
 		self.rotate_y(PI * axisRotateSpeed * dt)
 		self.orbit(dt)
-	self.rotate_y(PI * axisRotateSpeed * dt)
+#	self.rotate_y(PI * axisRotateSpeed * dt)
 #	camera = cameraHolder.getCurrentCamera() #fett ooptimerat, fixa
 #	unPos = camera.unproject_position(self.global_transform.origin)
 #	if camera.global_transform.origin.dot(self.global_transform.origin) > 0:

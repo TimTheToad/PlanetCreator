@@ -9,9 +9,11 @@ onready var hBoxContainer = get_node("HBoxContainer")
 onready var window = self
 onready var planetsInScene = get_parent().get_parent().get_parent().get_child(0)
 onready var environment = get_parent().get_parent().get_parent().get_node("WorldEnvironment")
+var hoveredViewPortContainer
 var planetsInView = []
 var cameras = []
 var nameLabel
+var viewPorts = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -20,6 +22,8 @@ func _ready():
 		var viewPortContainer = ViewportContainer.new()
 		viewPortContainer.stretch = true
 		viewPortContainer.set_h_size_flags(3) #Expand horizontal
+		viewPortContainer.connect("mouse_entered", self, "_on_ViewPortContainer_mouse_entered", [viewPortContainer])
+		viewPortContainer.connect("mouse_exited", self, "_on_ViewPortContainer_mouse_exited", [viewPortContainer])
 		hBoxContainer.add_child(viewPortContainer)
 		
 		var viewPort = Viewport.new()
@@ -30,6 +34,7 @@ func _ready():
 		environmentDupe.ambient_light_color = Color.white
 		world.environment = environmentDupe
 		viewPort.world = world
+		viewPorts.append(viewPort)
 		viewPortContainer.add_child(viewPort)
 		nameLabel = Label.new()
 		nameLabel.text = planetsInScene.get_child(i).get_name()
@@ -53,6 +58,46 @@ func _ready():
 
 	
 	pass # Replace with function body.
+
+func _on_ViewPortContainer_mouse_entered(container):
+	hoveredViewPortContainer = container
+	pass
+	
+func _on_ViewPortContainer_mouse_exited(container):
+	hoveredViewPortContainer = null
+	planet = null
+	pass
+
+var planet
+var pressed
+var vPort
+var mousePos
+
+func _input(event):
+	
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT:
+			
+			if hoveredViewPortContainer:
+				vPort = hoveredViewPortContainer.get_child(0)
+				planet = vPort.get_child(0)
+				mousePos = event.position
+				print(planet.name)
+		if event.is_pressed():
+			pressed = true
+		else:
+			pressed = false
+	if hoveredViewPortContainer:
+		if event is InputEventMouseMotion and pressed:
+			if planet:
+				planet.rotatePlanet(event.get_relative())
+#				vPort.warp_mouse(mousePos)
+		
+	pass
+
+func getViewPorts():
+	return viewPorts
+	pass
 
 func _planetUpdateChange(changedPlanet):
 	for i in range(planetsInView):

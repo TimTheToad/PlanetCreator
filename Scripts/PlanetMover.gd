@@ -24,7 +24,6 @@ func getZValue(arrow):
 	pass
 
 func _input(event):
-	
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.is_pressed():
 			# Get essential data for raycast
