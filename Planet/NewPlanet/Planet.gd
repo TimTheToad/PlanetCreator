@@ -167,6 +167,7 @@ func createOribitLines(vertexCount):
 		orbitMesh.material_override = mat
 		
 		var node = Node.new()
+		node.name = "orbitMeshNode"
 		node.add_child(orbitMesh)
 		self.add_child(node)
 	else:
