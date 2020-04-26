@@ -37,6 +37,7 @@ func _ready():
 
 		planet.get_child(3).queue_free()
 		planet.add_child(nameLabel)
+
 		viewPort.add_child(planet)
 		
 		var camera = Camera.new()
@@ -52,6 +53,12 @@ func _ready():
 
 	
 	pass # Replace with function body.
+
+func _planetUpdateChange(changedPlanet):
+	for i in range(planetsInView):
+		if changedPlanet.name == planetsInView[i].name:
+			planetsInView[i].meshes = changedPlanet.meshes
+	pass
 
 func _process(delta):
 	var iter = 0

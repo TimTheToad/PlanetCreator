@@ -31,7 +31,6 @@ func _input(event):
 		
 		if event.scancode == KEY_Q:
 			addTexture(LayerType.BASE)
-			
 		if event.scancode == KEY_W:
 			addTexture(LayerType.LIQUID)
 

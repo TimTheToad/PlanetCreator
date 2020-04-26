@@ -1,7 +1,7 @@
 extends Spatial
 
 onready var planetScene = preload("res://Planet/NewPlanet/NewPlanet.tscn")
-const PLANET_COUNT = 3
+const PLANET_COUNT = 4
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -12,6 +12,7 @@ func _ready():
 		instance.minor_axis = minDist + 10 * ((randf() -0.5) * 2)
 		instance.major_axis = instance.minor_axis + 2 * ((randf() - 0.5) * 2)
 		instance.phi = PI * 2.0 * randf()
+#		instance.connect("planet_changed", self, "_planetUpdateChange")
 		self.add_child(instance)
 		instance.shouldPlanetOrbit(true)
 		instance.createOribitLines(instance.vertexCount)
