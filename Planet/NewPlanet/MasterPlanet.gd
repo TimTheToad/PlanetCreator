@@ -16,6 +16,8 @@ func _ready():
 		var s = 0.25 + randf()
 		instance.scale = Vector3(s,s,s)
 		self.add_child(instance)
+		instance.shouldPlanetOrbit(true)
+		instance.createOribitLines(instance.vertexCount)
 		
 	
 	pass # Replace with function body.

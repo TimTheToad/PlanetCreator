@@ -18,7 +18,6 @@ emission_on_uv2 = false
 
 [sub_resource type="Environment" id=3]
 background_mode = 1
-ambient_light_color = Color( 0.121569, 0.121569, 0.121569, 1 )
 tonemap_mode = 2
 glow_enabled = true
 glow_intensity = 0.16
@@ -42,6 +41,9 @@ script = ExtResource( 4 )
 
 [node name="OmniLight" type="OmniLight" parent="Sun"]
 omni_range = 600.9
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 3 )
 
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0
@@ -80,6 +82,3 @@ margin_right = 208.0
 margin_bottom = 225.0
 
 [node name="RadialController" parent="Control" instance=ExtResource( 5 )]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 3 )

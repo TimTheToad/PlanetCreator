@@ -26,7 +26,7 @@ __meta__ = {
 [node name="Panel" type="Panel" parent="PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 258.999
+margin_right = 259.0
 margin_bottom = 243.001
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/Panel"]
@@ -48,6 +48,6 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="PanelContainer/Panel/ScrollContainer/VBoxContainer"]
-margin_right = 251.0
+margin_right = 252.0
 margin_bottom = 14.0
 text = "History:"

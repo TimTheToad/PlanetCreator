@@ -5,14 +5,14 @@ signal my_signal
 onready var historyScene = preload("res://GUI/HistoryPanel/HistoryPanel.tscn")
 onready var historyInstance = historyScene.instance()
 
-onready var alternateViewScene =  preload("res://GUI/AlternateView/AlternateView.tscn")
+onready var alternateViewScene =  preload("res://GUI/AlternateView/AlternateViewRoot.tscn")
 onready var alternateViewInstance = alternateViewScene.instance()
 
 onready var textureViewerScene =  preload("res://GUI/TerrainManipulation/TextureViewer.tscn")
 onready var textureViewerInstance = textureViewerScene.instance()
 onready var buttons = [
 	["History", historyInstance, PRESET_CENTER],
-	["Alternate view", alternateViewInstance, PRESET_TOP_RIGHT],
+	["Alternate view", alternateViewInstance, PRESET_CENTER],
 	["Texture viewer", textureViewerInstance, PRESET_TOP_LEFT],
 ]
 var radius = 50
