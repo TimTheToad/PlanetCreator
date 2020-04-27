@@ -1,5 +1,7 @@
 extends Node
 
+onready var blueprintEditor = get_parent().get_node("Control/Blueprint Editor")
+
 var ray
 
 var cameraHolder
@@ -42,6 +44,9 @@ func _input(event):
 			if hit.size() != 0:
 				# collider will be the node you hit
 				selected = hit.collider.get_parent()
+				
+				
+				
 				if selected.name == "xArrow":
 					xArr = selected
 					selected = null
@@ -55,6 +60,9 @@ func _input(event):
 					if prevSelected:
 						prevSelected.makeOrbitArrowVisible(false)
 					selected.makeOrbitArrowVisible(true)
+					
+					blueprintEditor.showPlanetBlueprint(selected)
+					
 			elif hit.size() == 0:
 				print("missed")
 				if prevSelected:

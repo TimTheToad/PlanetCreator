@@ -7,66 +7,66 @@
 [ext_resource path="res://Assets/lavaNormal.png" type="Texture" id=6]
 [ext_resource path="res://Assets/lava.png" type="Texture" id=7]
 
-[sub_resource type="ViewportTexture" id=16]
+[sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("Textures/Base")
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=2]
 resource_local_to_scene = true
-albedo_texture = SubResource( 16 )
+albedo_texture = SubResource( 1 )
 metallic_specular = 0.48
 roughness = 0.7
 
-[sub_resource type="SphereMesh" id=4]
+[sub_resource type="SphereMesh" id=3]
 radial_segments = 32
 rings = 16
 
-[sub_resource type="OpenSimplexNoise" id=5]
+[sub_resource type="OpenSimplexNoise" id=4]
 octaves = 5
 period = 7.8
 
-[sub_resource type="NoiseTexture" id=6]
+[sub_resource type="NoiseTexture" id=5]
 width = 1024
 seamless = true
 as_normalmap = true
 bump_strength = 1.3
-noise = SubResource( 5 )
+noise = SubResource( 4 )
 
-[sub_resource type="ViewportTexture" id=7]
+[sub_resource type="ViewportTexture" id=6]
 viewport_path = NodePath("Textures/Liquid")
 
-[sub_resource type="ShaderMaterial" id=8]
+[sub_resource type="ShaderMaterial" id=7]
 resource_local_to_scene = true
 shader = ExtResource( 2 )
-shader_param/sampler = SubResource( 7 )
-shader_param/noise = SubResource( 6 )
+shader_param/sampler = SubResource( 6 )
+shader_param/noise = SubResource( 5 )
 
-[sub_resource type="ViewportTexture" id=9]
+[sub_resource type="ViewportTexture" id=8]
 viewport_path = NodePath("Textures/Lava")
 
-[sub_resource type="ShaderMaterial" id=10]
+[sub_resource type="ShaderMaterial" id=9]
 resource_local_to_scene = true
 shader = ExtResource( 5 )
 shader_param/speed = 0.002
 shader_param/glow = 2.378
-shader_param/sampler = SubResource( 7 )
-shader_param/viewport = SubResource( 9 )
+shader_param/sampler = SubResource( 6 )
+shader_param/viewport = SubResource( 8 )
 shader_param/noise = ExtResource( 7 )
 shader_param/noiseNormal = ExtResource( 6 )
 
-[sub_resource type="ViewportTexture" id=11]
+[sub_resource type="ViewportTexture" id=10]
 viewport_path = NodePath("Textures/Cloud")
 
-[sub_resource type="SpatialMaterial" id=12]
+[sub_resource type="SpatialMaterial" id=11]
 resource_local_to_scene = true
 flags_transparent = true
-albedo_texture = SubResource( 11 )
+albedo_texture = SubResource( 10 )
 
-[sub_resource type="ShaderMaterial" id=14]
+[sub_resource type="ShaderMaterial" id=12]
 shader = ExtResource( 3 )
 shader_param/period = 1.112
 shader_param/octaves = 8
 
-[sub_resource type="SphereShape" id=15]
+[sub_resource type="SphereShape" id=13]
 
 [node name="NewPlanet" type="Spatial"]
 script = ExtResource( 1 )
@@ -74,25 +74,25 @@ script = ExtResource( 1 )
 [node name="Meshes" type="Spatial" parent="."]
 
 [node name="Base" type="MeshInstance" parent="Meshes"]
-material_override = SubResource( 3 )
-mesh = SubResource( 4 )
+material_override = SubResource( 2 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="Liquid" type="MeshInstance" parent="Meshes"]
-material_override = SubResource( 8 )
-mesh = SubResource( 4 )
+material_override = SubResource( 7 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="Lava" type="MeshInstance" parent="Meshes"]
-material_override = SubResource( 10 )
-mesh = SubResource( 4 )
+material_override = SubResource( 9 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="Cloud" type="MeshInstance" parent="Meshes"]
 transform = Transform( 1.01, 0, 0, 0, 1.01, 0, 0, 0, 1.01, 0, 0, 0 )
 visible = false
-material_override = SubResource( 12 )
-mesh = SubResource( 4 )
+material_override = SubResource( 11 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="Textures" type="Node" parent="."]
@@ -129,11 +129,11 @@ disable_3d = true
 usage = 0
 
 [node name="NoiseBrush" type="ColorRect" parent="Textures/Cloud"]
-material = SubResource( 14 )
+material = SubResource( 12 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="StaticBody" type="StaticBody" parent="."]
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
-shape = SubResource( 15 )
+shape = SubResource( 13 )

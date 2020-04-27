@@ -21,15 +21,12 @@ script = ExtResource( 4 )
 [node name="Planets" type="Spatial" parent="."]
 
 [node name="NewPlanet" parent="Planets" instance=ExtResource( 2 )]
-isOrbiting = false
 
 [node name="NewPlanet2" parent="Planets" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.1955 )
-isOrbiting = false
 
 [node name="NewPlanet3" parent="Planets" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.67762 )
-isOrbiting = false
 
 [node name="CameraHolderY" parent="." instance=ExtResource( 1 )]
 
