@@ -51,5 +51,6 @@ void fragment() {
 	
     float n = noise2(unit * period, octaves);
 	COLOR.rgb = mix(color.rgb, vec3(0.0), smoothstep(-0.1, 0.0, n));
-	COLOR.a = 1.0 - smoothstep(-0.1, 0.0, n);
+	COLOR.a = (1.0 - smoothstep(-0.1, 0.0, n)) * color.a;
+	
 }

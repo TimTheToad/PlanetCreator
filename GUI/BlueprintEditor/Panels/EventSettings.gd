@@ -63,17 +63,17 @@ func createSlider(name, value, maxVal, minVal, step):
 	return slider
 
 func _updateColorFill(color):
-	self.layerEvent.update = true
+	self.layerEvent.setUpdated(true)
 	self.layerEvent.color = color
 
 func _updatePeriod(period):
-	self.layerEvent.update = true
+	self.layerEvent.setUpdated(true)
 	self.layerEvent.period = period
 
 func _updateOctave(octave):
-	self.layerEvent.update = true
+	self.layerEvent.setUpdated(true)
 	self.layerEvent.octave = octave
 
 func _updateColorNoise(color):
-	self.layerEvent.update = true
+	self.layerEvent.setUpdated(true)
 	self.layerEvent.color = color

@@ -16,14 +16,6 @@ func getClouds():
 func getLayers():
 	return layers
 
-func hasUpdate():
-	var shouldUpdate = false
-	for layer in layers:
-		if layer.hasUpdate():
-			shouldUpdate = true
-	
-	return shouldUpdate
-	
 func apply(planet):
 	applyLayers(planet)
 
@@ -34,7 +26,8 @@ func applyLayer(index, planet):
 
 func applyLayers(planet):
 	for i in range(layers.size()):
-		layers[i].applyLayer(planet, i)
+		if layers[i].getUpdated():
+			planet.updateLayer(layers[i])
 
 func addLayer(name, index, planet):
 	var layer = PlanetLayer.new(name, index, planet)

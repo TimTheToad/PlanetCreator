@@ -3,14 +3,20 @@ class_name PlanetLayer extends Reference
 var planetClass = load("res://Planet/NewPlanet/NewPlanet.gd")
 
 class LayerEvent extends Reference:
-	var update = true
+	var update = false
+	var layer
 	var type
+	
+	func setUpdated(updated):
+		update = true
+		layer.setUpdated(updated)
 
 class FillEvent extends LayerEvent:
 	var color
 	
-	func _init(type, color):
+	func _init(type, layer, color):
 		self.type = type
+		self.layer = layer
 		self.color = color
 
 class NoiseEvent extends LayerEvent:
@@ -18,8 +24,9 @@ class NoiseEvent extends LayerEvent:
 	var octave
 	var color
 	
-	func _init(type, period, octave, color):
+	func _init(type, layer,  period, octave, color):
 		self.type = type
+		self.layer = layer
 		self.period = period
 		self.octave = octave
 		self.color = color
@@ -27,20 +34,21 @@ class NoiseEvent extends LayerEvent:
 var events = []
 var name
 var layerIndex
+var update = false
 
 func _init(name, index, planet):
 	self.name = name
 	self.layerIndex = index
 	pass
 
-func hasUpdate():
-	var shouldUpdate = false
-	for event in events:
-		if event.update:
-			shouldUpdate = true
-			event.update = false
-			
-	return shouldUpdate
+func getUpdated():
+	return update
+
+func setUpdated(updated):
+	update = true
+
+func _process(dt):
+	update = false
 
 func removeEvent(event):
 	var index = events.find(event)
@@ -51,38 +59,16 @@ func getEvents():
 	return events	
 
 func addFill(color):
-	var e = FillEvent.new(planetClass.EventType.FILL, color)
+	var e = FillEvent.new(planetClass.EventType.FILL, self, color)
 	events.append(e)
-#	events.append(
-#		 [
-#			planetClass.EventType.FILL,
-#			color
-#		])
 		
 	return events.back()
 	pass
 	
 func addNoise(period, octave, color):
-	var e = NoiseEvent.new(planetClass.EventType.NOISE, period, octave, color)
+	var e = NoiseEvent.new(planetClass.EventType.NOISE, self, period, octave, color)
 	events.append(e)
 	
-#	events.append(
-#		 [
-#			planetClass.EventType.NOISE,
-#			period,
-#			octave,
-#			color
-#		])
 	return events.back()
 	pass
 
-func applyLayer(planet, type):
-	planet.queueClear(self.layerIndex)
-	
-	for e in events:
-		match e.type:
-			planetClass.EventType.FILL:
-				planet.queueFill(self.layerIndex, e.color)
-			planetClass.EventType.NOISE:
-				planet.queueNoise(self.layerIndex, e.period, e.octave, e.color)
-	pass

@@ -26,7 +26,7 @@ func showPlanetBlueprint(planet):
 	self.visible = true
 	if container.get_child_count() > 0:
 		for c in container.get_children():
-			self.remove_child(c)
+			c.visible = false
 			c.queue_free()
 			
 	for l in currentBlueprint.getLayers():
@@ -67,8 +67,6 @@ func createPanelSelectionSignal(instance):
 		instance.connect("selected", self, "_selection")
 
 func _eventSelection(eventPanel):
-
-
 	selectedEvent = eventPanel
 	
 	eventSettings.updateSettings(eventPanel.layerEvent)

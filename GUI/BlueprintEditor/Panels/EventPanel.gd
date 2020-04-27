@@ -1,7 +1,6 @@
 extends PanelContainer
 
 onready var label = get_node("HBoxContainer/Label")
-onready var colorRect = get_node("HBoxContainer/ColorRect")
 
 var layerEvent
 

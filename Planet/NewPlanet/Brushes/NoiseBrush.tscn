@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Planet/NewPlanet/Shaders/Noise.shader" type="Shader" id=1]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/period = 3.237
+shader_param/octaves = 5
+shader_param/color = Color( 0.0823529, 0.337255, 0.0588235, 1 )
+
+[node name="NoiseBrush" type="ColorRect"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.50732
+margin_right = 1.50732
+__meta__ = {
+"_edit_use_anchors_": false
+}
