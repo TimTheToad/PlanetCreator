@@ -1,14 +1,27 @@
 extends "Planet.gd"
 
+
 onready var viewports = get_node("Textures").get_children()
 
 var meshes = []
 
+var blueprint
+
+enum EventType {
+	FILL,
+	NOISE,
+	CLEAR
+}
+
 enum LayerType {
 	BASE,
 	LIQUID,
+	LAVA,
 	CLOUD
 }
+
+var eventQueue = []
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,39 +30,65 @@ func _ready():
 	_hideChildren(viewports[LayerType.BASE])
 	_hideChildren(viewports[LayerType.LIQUID])
 	
-	var color = Color(0.4, 0.4, 0.4, 1.0)
-	_fillColorLayer(viewports[LayerType.BASE], color)
+	blueprint = Blueprint.new()
+	blueprint.addLayer("Base", LayerType.BASE, self)
+	blueprint.addLayer("Liquid", LayerType.LIQUID,  self)
+	blueprint.addLayer("Lava", LayerType.LAVA, self)
 	
+#	PlanetLayer.new()
+#	var color = Color(0.4, 0.4, 0.4, 1.0)
+#	_fillColorLayer(viewports[LayerType.BASE], color)
+	
+#	pl0.addFill(Color.green)
+#	pl0.addNoise(1.0, 4, Color.green)
+#	pl0.addNoise(1.5, 4, Color.lawngreen)
+#
+#	pl1.addNoise(0.4, 8, Color.aqua)
+#	pl2.addNoise(0.7, 5, Color.red)
 	pass # Replace with function body.
 
-func _input(event):
+func showClouds(show):
+	if show:
+		meshes[LayerType.CLOUD].visible = true
+	else:
+		meshes[LayerType.CLOUD].visible = false
+
+func applyBlueprint():
+	self.blueprint.apply(self)
+
+func queueClear(layerIndex):
+	eventQueue.append([EventType.CLEAR, layerIndex])
+
+func queueFill(layerIndex, color):
+	eventQueue.append([EventType.FILL, layerIndex, color])
+
+func queueNoise(layerIndex, period, octaves, color):
+	eventQueue.append([EventType.NOISE, layerIndex, period, octaves, color])
 	
-	if event is InputEventKey and event.is_pressed():
-		if event.scancode == KEY_1:
-			_hideChildren(viewports[LayerType.BASE])
-			_fillColorLayer(viewports[LayerType.BASE])
-		
-		if event.scancode == KEY_Q:
-			addTexture(LayerType.BASE)
-			
-		if event.scancode == KEY_W:
-			addTexture(LayerType.LIQUID)
+func _process(dt):
+	
+	if blueprint:
+		if blueprint.hasUpdate():
+			blueprint.apply(self)
+	
+	if eventQueue.size() > 0:
+		var e = eventQueue.front()
+	
+		if e:
+			match e[0]:
+				EventType.CLEAR:
+					_clearLayer(e[1])
+				EventType.FILL:
+					_fillColorLayer(e[1], e[2])
+					pass
+				EventType.NOISE:
+					_renderNoiseLayer(e[1], e[2], e[3], e[4])
+	
+			eventQueue.pop_front()
+		pass
 
 func getMaterial(type):
 	return meshes[type].material_override
-
-func addTexture(type):
-	var color = Color(1.0, 1.0, 1.0, 1.0)
-	_hideChildren(viewports[type])
-	
-	if type == LayerType.BASE:
-		color = Color(0.2,  0.5 + randf() * 0.3, 0.2, 0.5 + randf() * 0.5)
-		_renderNoiseLayer(viewports[LayerType.BASE], 1.0 + randf() * 1.5, 5, color)
-	elif type == LayerType.LIQUID:
-		color = Color(0.1, 0.1, 0.5, 1.0)
-		_renderNoiseLayer(viewports[LayerType.LIQUID], 0.5 + randf() * 1.5, 5, color)
-		
-	pass
 
 func _hideChildren(parent):
 	var children = parent.get_children()
@@ -57,9 +96,15 @@ func _hideChildren(parent):
 	if children:
 		for child in children:
 			child.visible = false
-		
 
-func _fillColorLayer(viewport, color = null):
+func _clearLayer(layerIndex):
+	var viewport = viewports[layerIndex]
+	viewport.render_target_clear_mode = Viewport.CLEAR_MODE_ONLY_NEXT_FRAME
+	viewport.render_target_update_mode = Viewport.UPDATE_ONCE
+
+func _fillColorLayer(layerIndex, color = null):
+	var viewport = viewports[layerIndex]
+	_hideChildren(viewport)
 	var cRect = viewport.get_node("FillColor")
 	cRect.visible = true
 	
@@ -69,17 +114,17 @@ func _fillColorLayer(viewport, color = null):
 	viewport.render_target_update_mode = Viewport.UPDATE_ONCE
 	
 	
-func _renderNoiseLayer(viewport, period, octaves, color):
+func _renderNoiseLayer(layerIndex, period, octaves, color):
+	var viewport = viewports[layerIndex]
+	_hideChildren(viewport)
 	var cRect = viewport.get_node("NoiseBrush")
 	cRect.visible = true
 	var mat = cRect.material
 	
-	mat.set_shader_param("period", 0.5 + randf() * 1.5)
-	mat.set_shader_param("octaves", 5)
+	mat.set_shader_param("period", period)
+	mat.set_shader_param("octaves", octaves)
 	mat.set_shader_param("color", color)
 	
 	viewport.render_target_update_mode = Viewport.UPDATE_ONCE
 	pass
-	
-	
 	

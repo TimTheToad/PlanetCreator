@@ -10,7 +10,7 @@ var position
 var nameLabel
 var gotCamera = false
 var offset
-onready var cameraHolder = get_parent().get_parent().get_child(1)
+var cameraHolder
 var camera
 var unPos
 
@@ -19,7 +19,11 @@ var vertexCount = 20
 
 export(bool) var isOrbiting = true
 
+
 func _ready():
+	_randomizeName()
+	cameraHolder = get_tree().current_scene.get_node("CameraHolderMaster")
+	
 	position = Vector3(cos(phi) * major_axis, 0.0, sin(phi) * minor_axis)
 	_createOribitLines(vertexCount)	
 #	nameLabel = Label.new()
@@ -27,6 +31,11 @@ func _ready():
 #	offset = Vector2(nameLabel.get_size().x/2, 0)
 #	self.add_child(nameLabel)
 #	self.translation = Vector3(distanceFromSun.x, 0.0, distanceFromSun.y);
+
+func _randomizeName():
+	var planetName = "X-"
+	planetName += String(randi() % 1000)
+	self.name = planetName
 
 func orbit(dt):
 	phi += orbitSpeed * dt
@@ -77,12 +86,13 @@ func _process(dt):
 	if isOrbiting:
 		self.rotate_y(PI * axisRotateSpeed * dt)
 		self.orbit(dt)
-#	camera = cameraHolder.getCurrentCamera() #fett ooptimerat, fixa
-#	unPos = camera.unproject_position(self.global_transform.origin)
-#	if camera.global_transform.origin.dot(self.global_transform.origin) > 0:
-#		nameLabel.visible = false
-#	else:
-#		nameLabel.visible = true
-#
-#	nameLabel.set_position(unPos - offset)
+#	if cameraHolder:
+	#   camera = cameraHolder.getCurrentCamera() #fett ooptimerat, fixa
+	#	unPos = camera.unproject_position(self.global_transform.origin)
+	#	if camera.global_transform.origin.dot(self.global_transform.origin) > 0:
+	#		nameLabel.visible = false
+	#	else:
+	#		nameLabel.visible = true
+	#
+	#	nameLabel.set_position(unPos - offset)
 	pass

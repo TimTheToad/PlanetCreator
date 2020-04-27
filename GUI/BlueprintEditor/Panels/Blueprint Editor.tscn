@@ -1,0 +1,133 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://GUI/BlueprintEditor/Panels/Blueprint Editor.gd" type="Script" id=1]
+[ext_resource path="res://GUI/BlueprintEditor/Panels/EventSettings.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0705882, 0.0705882, 0.0784314, 1 )
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+
+[node name="Blueprint Editor" type="WindowDialog"]
+margin_right = 355.0
+margin_bottom = 262.0
+window_title = "Blueprint Editor"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.857361
+margin_right = 0.857361
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/VBoxContainer"]
+margin_right = 335.0
+margin_bottom = 44.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer2"]
+margin_right = 335.0
+margin_bottom = 66.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer"]
+margin_right = 165.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer"]
+margin_right = 165.0
+margin_bottom = 14.0
+text = "Planet Name"
+
+[node name="ShowClouds" type="CheckBox" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 165.0
+margin_bottom = 42.0
+text = "Show Clouds"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer"]
+margin_right = 12.0
+margin_bottom = 20.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer"]
+margin_left = 169.0
+margin_right = 335.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AddFill" type="Button" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer2"]
+margin_right = 166.0
+margin_bottom = 20.0
+text = "Add Fill"
+
+[node name="AddNoise" type="Button" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer2"]
+margin_top = 24.0
+margin_right = 166.0
+margin_bottom = 44.0
+text = "Add Noise"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer"]
+margin_top = 48.0
+margin_right = 335.0
+margin_bottom = 242.0
+size_flags_vertical = 3
+scroll_vertical_enabled = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/ScrollContainer"]
+margin_bottom = 194.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EventSettings" type="Panel" parent="."]
+anchor_left = 1.0
+anchor_top = 0.000590532
+anchor_right = 1.36968
+anchor_bottom = 0.922596
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EventSettings"]
+anchor_right = 1.0
+anchor_bottom = 0.992
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="EventSettings/VBoxContainer"]
+margin_right = 121.0
+margin_bottom = 14.0
+text = "Cascading List"
+align = 1
+valign = 1
+[connection signal="toggled" from="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer/ShowClouds" to="." method="_on_ShowClouds_toggled"]
+[connection signal="pressed" from="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer2/AddFill" to="." method="_on_AddFill_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer2/AddNoise" to="." method="_on_AddNoise_pressed"]

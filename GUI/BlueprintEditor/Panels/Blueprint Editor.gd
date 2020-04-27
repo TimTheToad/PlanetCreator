@@ -1,0 +1,121 @@
+extends WindowDialog
+
+onready var LayerPanel = preload("res://GUI/BlueprintEditor/LayerPanel.tscn")
+onready var container = get_node("Panel/VBoxContainer/ScrollContainer/HBoxContainer")
+onready var planetNameLabel = get_node("Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer/Label")
+onready var eventSettings = get_node("EventSettings")
+
+var currentPlanet
+var currentBlueprint
+
+var selectedLayers = []
+var selectedEvent = null
+
+func showPlanetBlueprint(planet):
+	selectedLayers.clear()
+	selectedEvent = null
+	eventSettings.visible = false
+	currentPlanet = planet
+	
+	planetNameLabel.set_text(currentPlanet.name)
+	currentBlueprint = currentPlanet.blueprint
+	
+	var showCloudsButton = get_node("Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer/ShowClouds")
+	showCloudsButton.pressed = currentBlueprint.getClouds()
+	
+	self.visible = true
+	if container.get_child_count() > 0:
+		for c in container.get_children():
+			self.remove_child(c)
+			c.queue_free()
+			
+	for l in currentBlueprint.getLayers():
+		var p = LayerPanel.instance()
+	
+		container.add_child(p)
+		createPanelSelectionSignal(p)
+		
+		# Add events and set name to new layer
+		p.setLabel(l.name)
+		p.setLayer(l)
+		
+		for event in l.getEvents():
+			var eventPanel = p.addPanel(event)
+			createEventSelectionSignal(eventPanel)
+		
+		# Set up event panels signals
+
+func _input(event):
+	
+	if event is InputEventKey and event.is_pressed():
+		if event.scancode == KEY_DELETE and selectedEvent != null:
+			for layer in currentBlueprint.getLayers():
+				layer.removeEvent(selectedEvent.layerEvent)
+				selectedEvent.visible = false
+				selectedEvent.queue_free()
+			
+			eventSettings.visible = false
+			currentPlanet.applyBlueprint()
+			
+
+func createEventSelectionSignal(instance):
+		instance.add_user_signal("eventSelected", ["param", TYPE_OBJECT])
+		instance.connect("eventSelected", self, "_eventSelection")
+		
+func createPanelSelectionSignal(instance):
+		instance.add_user_signal("selected", ["param", TYPE_OBJECT])
+		instance.connect("selected", self, "_selection")
+
+func _eventSelection(eventPanel):
+
+
+	selectedEvent = eventPanel
+	
+	eventSettings.updateSettings(eventPanel.layerEvent)
+	eventSettings.visible = true
+
+
+func _selection(layerPanel):
+	if !Input.is_key_pressed(KEY_SHIFT):
+		while !selectedLayers.empty():
+			var layer = selectedLayers.back()
+			if layer != null:
+				layer.selected(false)
+			selectedLayers.pop_back()
+	
+	if selectedLayers.find(layerPanel) == -1:
+		layerPanel.selected(true)
+		selectedLayers.append(layerPanel)
+	
+func _on_AddFill_pressed():
+	for layerPanel in selectedLayers:
+		var event = layerPanel.getLayer().addFill(Color.red)
+	
+		var eventPanel = layerPanel.addPanel(event)
+		createEventSelectionSignal(eventPanel)
+		
+		currentPlanet.applyBlueprint()
+		
+		eventSettings.updateSettings(eventPanel.layerEvent)
+		eventSettings.visible = true
+	
+	pass # Replace with function body.
+
+func _on_AddNoise_pressed():
+	for layerPanel in selectedLayers:
+		var event = layerPanel.getLayer().addNoise(1.5, 5, Color.green)
+		
+		var eventPanel = layerPanel.addPanel(event)
+		createEventSelectionSignal(eventPanel)
+		
+		eventSettings.updateSettings(eventPanel.layerEvent)
+		eventSettings.visible = true
+		
+		currentPlanet.applyBlueprint()
+	pass # Replace with function body.
+
+func _on_ShowClouds_toggled(button_pressed):
+	currentBlueprint.setClouds(button_pressed)
+	currentPlanet.applyBlueprint()
+	
+	pass # Replace with function body.

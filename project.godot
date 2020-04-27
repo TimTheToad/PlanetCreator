@@ -8,15 +8,26 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Reference",
+"class": "Blueprint",
+"language": "GDScript",
+"path": "res://Planet/NewPlanet/ScriptManagment/Blueprint.gd"
+}, {
+"base": "Reference",
+"class": "PlanetLayer",
+"language": "GDScript",
+"path": "res://Planet/NewPlanet/ScriptManagment/PlanetLayer.gd"
+} ]
 _global_script_class_icons={
-
+"Blueprint": "",
+"PlanetLayer": ""
 }
 
 [application]
 
 config/name="Planet"
-run/main_scene="res://Sandboxes/SolarScene.tscn"
+run/main_scene="res://Sandboxes/AdriansPlanet.tscn"
 config/icon="res://icon.png"
 
 [input]
@@ -35,6 +46,16 @@ Radial={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":3,"pressed":false,"doubleclick":false,"script":null)
 , Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":9,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+ui_copy={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":67,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_paste={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":86,"unicode":0,"echo":false,"script":null)
  ]
 }
 

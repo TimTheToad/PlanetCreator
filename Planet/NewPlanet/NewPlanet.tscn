@@ -1,8 +1,12 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Planet/NewPlanet/NewPlanet.gd" type="Script" id=1]
+[ext_resource path="res://Planet/NewPlanet/Shaders/Liquid.shader" type="Shader" id=2]
 [ext_resource path="res://Planet/NewPlanet/Shaders/Cloud.shader" type="Shader" id=3]
-[ext_resource path="res://Planet/NewPlanet/Shaders/Base.shader" type="Shader" id=4]
+[ext_resource path="res://Planet/NewPlanet/Shaders/Noise.shader" type="Shader" id=4]
+[ext_resource path="res://Planet/NewPlanet/Shaders/Lava.shader" type="Shader" id=5]
+[ext_resource path="res://Assets/lavaNormal.png" type="Texture" id=6]
+[ext_resource path="res://Assets/lava.png" type="Texture" id=7]
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("Textures/Base")
@@ -17,42 +21,65 @@ roughness = 0.7
 radial_segments = 32
 rings = 16
 
-[sub_resource type="ViewportTexture" id=4]
-viewport_path = NodePath("Textures/Liquid")
+[sub_resource type="OpenSimplexNoise" id=4]
+octaves = 5
+period = 7.8
 
-[sub_resource type="SpatialMaterial" id=5]
-resource_local_to_scene = true
-flags_transparent = true
-albedo_texture = SubResource( 4 )
-metallic_specular = 1.0
-roughness = 0.3
+[sub_resource type="NoiseTexture" id=5]
+width = 1024
+seamless = true
+as_normalmap = true
+bump_strength = 1.3
+noise = SubResource( 4 )
 
 [sub_resource type="ViewportTexture" id=6]
+viewport_path = NodePath("Textures/Liquid")
+
+[sub_resource type="ShaderMaterial" id=7]
+resource_local_to_scene = true
+shader = ExtResource( 2 )
+shader_param/sampler = SubResource( 6 )
+shader_param/noise = SubResource( 5 )
+
+[sub_resource type="ViewportTexture" id=8]
+viewport_path = NodePath("Textures/Lava")
+
+[sub_resource type="ShaderMaterial" id=9]
+resource_local_to_scene = true
+shader = ExtResource( 5 )
+shader_param/speed = 0.002
+shader_param/glow = 2.378
+shader_param/sampler = SubResource( 6 )
+shader_param/viewport = SubResource( 8 )
+shader_param/noise = ExtResource( 7 )
+shader_param/noiseNormal = ExtResource( 6 )
+
+[sub_resource type="ViewportTexture" id=10]
 viewport_path = NodePath("Textures/Cloud")
 
-[sub_resource type="SpatialMaterial" id=7]
+[sub_resource type="SpatialMaterial" id=11]
 resource_local_to_scene = true
 flags_transparent = true
-albedo_texture = SubResource( 6 )
+albedo_texture = SubResource( 10 )
 
-[sub_resource type="ShaderMaterial" id=8]
+[sub_resource type="ShaderMaterial" id=12]
 shader = ExtResource( 4 )
 shader_param/period = 3.237
 shader_param/octaves = 5
 shader_param/color = Color( 0.0823529, 0.337255, 0.0588235, 1 )
 
-[sub_resource type="ShaderMaterial" id=9]
+[sub_resource type="ShaderMaterial" id=13]
 shader = ExtResource( 4 )
 shader_param/period = 0.928
 shader_param/octaves = 8
 shader_param/color = null
 
-[sub_resource type="ShaderMaterial" id=10]
+[sub_resource type="ShaderMaterial" id=14]
 shader = ExtResource( 3 )
 shader_param/period = 1.112
 shader_param/octaves = 8
 
-[sub_resource type="SphereShape" id=11]
+[sub_resource type="SphereShape" id=15]
 
 [node name="NewPlanet" type="Spatial"]
 script = ExtResource( 1 )
@@ -65,14 +92,19 @@ mesh = SubResource( 3 )
 material/0 = null
 
 [node name="Liquid" type="MeshInstance" parent="Meshes"]
-material_override = SubResource( 5 )
+material_override = SubResource( 7 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="Lava" type="MeshInstance" parent="Meshes"]
+material_override = SubResource( 9 )
 mesh = SubResource( 3 )
 material/0 = null
 
 [node name="Cloud" type="MeshInstance" parent="Meshes"]
 transform = Transform( 1.01, 0, 0, 0, 1.01, 0, 0, 0, 1.01, 0, 0, 0 )
 visible = false
-material_override = SubResource( 7 )
+material_override = SubResource( 11 )
 mesh = SubResource( 3 )
 material/0 = null
 
@@ -89,7 +121,7 @@ render_target_update_mode = 0
 
 [node name="NoiseBrush" type="ColorRect" parent="Textures/Base"]
 visible = false
-material = SubResource( 8 )
+material = SubResource( 12 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -112,7 +144,7 @@ render_target_update_mode = 0
 
 [node name="NoiseBrush" type="ColorRect" parent="Textures/Liquid"]
 visible = false
-material = SubResource( 9 )
+material = SubResource( 13 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -123,6 +155,29 @@ anchor_bottom = 1.0
 margin_right = 40.0
 margin_bottom = 40.0
 
+[node name="Lava" type="Viewport" parent="Textures"]
+size = Vector2( 1024, 512 )
+transparent_bg = true
+hdr = false
+disable_3d = true
+usage = 0
+render_target_clear_mode = 1
+render_target_update_mode = 0
+
+[node name="NoiseBrush" type="ColorRect" parent="Textures/Lava"]
+visible = false
+material = SubResource( 12 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="FillColor" type="ColorRect" parent="Textures/Lava"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 40.0
+margin_bottom = 40.0
+color = Color( 0.203922, 0.384314, 0.207843, 1 )
+
 [node name="Cloud" type="Viewport" parent="Textures"]
 size = Vector2( 1024, 512 )
 transparent_bg = true
@@ -131,11 +186,11 @@ disable_3d = true
 usage = 0
 
 [node name="NoiseBrush" type="ColorRect" parent="Textures/Cloud"]
-material = SubResource( 10 )
+material = SubResource( 14 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="StaticBody" type="StaticBody" parent="."]
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
-shape = SubResource( 11 )
+shape = SubResource( 15 )
