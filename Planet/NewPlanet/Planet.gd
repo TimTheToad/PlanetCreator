@@ -27,53 +27,45 @@ func _ready():
 	_randomizeName()
 	cameraHolder = get_tree().current_scene.get_node("CameraHolderMaster")
 	shouldOrbit = false
-	var arrowMat = SpatialMaterial.new()
-	var collisionShape
-	arrowMat.albedo_color = Color.red
-	xArrow = MeshInstance.new()
+	
+	createArrows()
+	
+	self.position = Vector3(cos(phi) * major_axis, 0.0, sin(phi) * minor_axis)
+
+func createArrows():
+	xArrow = createArrow(Color.red)
+	zArrow = createArrow(Color.blue)
+	
 	xArrow.name = "xArrow"
+	zArrow.name = "zArrow"
+	
+	self.add_child(xArrow)
+	self.add_child(zArrow)
+	
+func createArrow(color, scale = 0.2):
+	var arrowMat = SpatialMaterial.new()
+	arrowMat.albedo_color = color
+	arrowMat.flags_unshaded = true
+	
+	var collisionShape = CollisionShape.new()
+	collisionShape.shape = SphereShape.new()
+	collisionShape.disabled = true
+	
+	var arrow = MeshInstance.new()
+	arrow.mesh = SphereMesh.new()
+	arrow.material_override = arrowMat
+	
+	arrow.set_scale(Vector3(scale, scale, scale))
+	arrow.set_as_toplevel(true)
+	arrow.visible = false
+	
 	var boundingArea = StaticBody.new()
 	boundingArea.input_ray_pickable = false
-	collisionShape = CollisionShape.new()
-	collisionShape.shape = SphereShape.new()
-	collisionShape.disabled = true
 	boundingArea.add_child(collisionShape)
-	xArrow.add_child(boundingArea)
-	xArrow.mesh = SphereMesh.new()
-	xArrow.material_override = arrowMat
-	xArrow.name = "xArrow"
-	xArrow.mesh.radius = 0.2
-	xArrow.mesh.height = 0.4
-	xArrow.set_as_toplevel(true)
-	self.add_child(xArrow)
-	xArrow.visible = false
 
-	arrowMat = SpatialMaterial.new()
-	arrowMat.albedo_color = Color.blue
-	zArrow = MeshInstance.new()
-	zArrow.name = "xArrow"
-	boundingArea = StaticBody.new()
-	boundingArea.input_ray_pickable = false
-	collisionShape = CollisionShape.new()
-	collisionShape.shape = SphereShape.new()
-	collisionShape.disabled = true
-	boundingArea.add_child(collisionShape)
-	zArrow.add_child(boundingArea)
-	zArrow.mesh = SphereMesh.new()
-	zArrow.material_override = arrowMat
-	zArrow.name = "zArrow"
-	zArrow.mesh.radius = 0.2
-	zArrow.mesh.height = 0.4
-	zArrow.set_as_toplevel(true)
-	self.add_child(zArrow)
-	zArrow.visible = false
+	arrow.add_child(boundingArea)
 	
-	position = Vector3(cos(phi) * major_axis, 0.0, sin(phi) * minor_axis)
-#	nameLabel = Label.new()
-#	nameLabel.text = self.get_name()
-#	offset = Vector2(nameLabel.get_size().x/2, 0)
-#	self.add_child(nameLabel)
-#	self.translation = Vector3(distanceFromSun.x, 0.0, distanceFromSun.y);
+	return arrow
 
 func _randomizeName():
 	var planetName = "X-"
