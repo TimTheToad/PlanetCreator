@@ -39,8 +39,13 @@ func createArrows():
 	xArrow.name = "xArrow"
 	zArrow.name = "zArrow"
 	
-	self.add_child(xArrow)
-	self.add_child(zArrow)
+	# Set to parent arrows to ignore planet scale inheritance
+	var node = Node.new()
+	node.name = "Orbit Arrows"
+	node.add_child(xArrow)
+	node.add_child(zArrow)
+	
+	self.add_child(node)
 	
 func createArrow(color, scale = 0.2):
 	var arrowMat = SpatialMaterial.new()
@@ -148,9 +153,9 @@ func createOribitLines(vertexCount):
 		vPos.x = cos(angle) * major_axis
 		vPos.z = sin(angle) * minor_axis
 		if i == 0:
-			xArrow.global_transform.origin = Vector3(vPos.x + 1, 0, vPos.z)
+			xArrow.translation = Vector3(vPos.x + 1, 0, vPos.z)
 		elif i == vertexCount/4:
-			zArrow.global_transform.origin  = Vector3(vPos.x, 0, vPos.z + 1)
+			zArrow.translation  = Vector3(vPos.x, 0, vPos.z + 1)
 		sf.add_vertex(vPos)
 		angle += rad
 	
