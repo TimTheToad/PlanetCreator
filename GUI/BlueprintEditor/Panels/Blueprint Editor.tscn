@@ -9,8 +9,10 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 
 [node name="Blueprint Editor" type="WindowDialog"]
+visible = true
 margin_right = 355.0
-margin_bottom = 262.0
+margin_bottom = 301.0
+rect_min_size = Vector2( 300, 250 )
 window_title = "Blueprint Editor"
 script = ExtResource( 1 )
 __meta__ = {
@@ -39,37 +41,39 @@ __meta__ = {
 
 [node name="MarginContainer2" type="MarginContainer" parent="Panel/VBoxContainer"]
 margin_right = 335.0
-margin_bottom = 44.0
+margin_bottom = 72.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer2"]
 margin_right = 335.0
-margin_bottom = 66.0
+margin_bottom = 72.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer"]
 margin_right = 165.0
-margin_bottom = 44.0
+margin_bottom = 72.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer"]
+[node name="Label" type="TextEdit" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer"]
 margin_right = 165.0
-margin_bottom = 14.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
 text = "Planet Name"
 
 [node name="ShowClouds" type="CheckBox" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer"]
-margin_top = 18.0
+margin_top = 24.0
 margin_right = 165.0
-margin_bottom = 42.0
+margin_bottom = 48.0
 text = "Show Clouds"
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer"]
-margin_right = 12.0
-margin_bottom = 20.0
+margin_top = 52.0
+margin_right = 165.0
+margin_bottom = 72.0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer"]
 margin_left = 169.0
 margin_right = 335.0
-margin_bottom = 44.0
+margin_bottom = 72.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -85,14 +89,14 @@ margin_bottom = 44.0
 text = "Add Noise"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer"]
-margin_top = 48.0
+margin_top = 76.0
 margin_right = 335.0
-margin_bottom = 242.0
+margin_bottom = 281.0
 size_flags_vertical = 3
 scroll_vertical_enabled = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/ScrollContainer"]
-margin_bottom = 194.0
+margin_bottom = 205.0
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
