@@ -56,7 +56,8 @@ func _input(event):
 						prevSelected.makeOrbitArrowVisible(false)
 					selected.makeOrbitArrowVisible(true)
 					
-					blueprintEditor.showPlanetBlueprint(selected)
+					if camera.name != "TopViewCamera":
+						blueprintEditor.showPlanetBlueprint(selected)
 					
 			elif hit.size() == 0:
 				if prevSelected:
