@@ -4,8 +4,8 @@ var PlanetLayer = preload("res://Planet/NewPlanet/ScriptManagment/PlanetLayer.gd
 
 
 var layers = []
-
 var showClouds = false
+var title = "Untitled"
 
 func setClouds(show):
 	showClouds = show
@@ -29,6 +29,7 @@ func applyLayers(planet):
 		if layers[i].getUpdated():
 			planet.updateLayer(layers[i])
 
-func addLayer(name, index, planet):
-	var layer = PlanetLayer.new(name, index, planet)
+func addLayer(name, index):
+	var layer = PlanetLayer.new(name, index)
 	layers.append(layer)
+	return layer

@@ -2,8 +2,9 @@ extends WindowDialog
 
 onready var LayerPanel = preload("res://GUI/BlueprintEditor/LayerPanel.tscn")
 onready var container = get_node("Panel/VBoxContainer/ScrollContainer/HBoxContainer")
-onready var planetNameLabel = get_node("Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer/Label")
+onready var blueprintNameLabel = get_node("Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer/Label")
 onready var eventSettings = get_node("EventSettings")
+onready var blueprintLibraryPanel = get_node("BlueprintLibrary")
 
 var currentPlanet
 var currentBlueprint
@@ -12,13 +13,14 @@ var selectedLayers = []
 var selectedEvent = null
 
 func showPlanetBlueprint(planet):
+	
 	selectedLayers.clear()
 	selectedEvent = null
 	eventSettings.visible = false
 	currentPlanet = planet
 	
-	planetNameLabel.set_text(currentPlanet.name)
 	currentBlueprint = currentPlanet.blueprint
+	blueprintNameLabel.set_text(currentBlueprint.title)
 	
 	var showCloudsButton = get_node("Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer/ShowClouds")
 	showCloudsButton.pressed = currentBlueprint.getClouds()
@@ -31,7 +33,6 @@ func showPlanetBlueprint(planet):
 			
 	for l in currentBlueprint.getLayers():
 		var p = LayerPanel.instance()
-	
 		container.add_child(p)
 		createPanelSelectionSignal(p)
 		
@@ -44,6 +45,8 @@ func showPlanetBlueprint(planet):
 			createEventSelectionSignal(eventPanel)
 		
 		# Set up event panels signals
+		
+	blueprintLibraryPanel.loadBlueprints()
 
 func _input(event):
 	
@@ -116,4 +119,18 @@ func _on_ShowClouds_toggled(button_pressed):
 	currentBlueprint.setClouds(button_pressed)
 	currentPlanet.applyBlueprint()
 	
+	pass # Replace with function body.
+
+
+func _on_Save_pressed():
+	BlueprintLibrary.saveBlueprint(currentBlueprint, blueprintNameLabel.text)
+	blueprintLibraryPanel.loadBlueprints()
+	pass # Replace with function body.
+
+
+func _on_Load_pressed():
+	self.currentBlueprint = blueprintLibraryPanel.getSelectedBlueprint()
+	self.currentPlanet.blueprint = self.currentBlueprint
+	currentPlanet.applyBlueprint(self.currentBlueprint)
+	showPlanetBlueprint(self.currentPlanet)
 	pass # Replace with function body.

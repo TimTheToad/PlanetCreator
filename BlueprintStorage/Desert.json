@@ -1,0 +1,1 @@
+{"Blueprint":{"Name":"Desert","Layers":{"Base":{"0":{"type":0,"color":"ff818130"},"1":{"type":1,"period":1.5,"octave":5,"color":"ff5d6a21"},"2":{"type":1,"period":3.2,"octave":5,"color":"ff4c5022"},"3":{"type":1,"period":4.1,"octave":1,"color":"ff77ba40"}},"Liquid":{"0":{"type":1,"period":0.4,"octave":5,"color":"ff305d7b"}},"Lava":{}}}}
