@@ -6,7 +6,9 @@ var direction
 var firstCamera
 var currentCamera
 var cameraHolderX
+
 var zoomSpeed = 0.1
+
 var cameraHolderY
 var cameraNewRotation
 # Called when the node enters the scene tree for the first time.
@@ -73,9 +75,11 @@ func _input(event):
 		cameraNewRotation = event.get_relative()
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_WHEEL_UP:
-			currentCamera.translation = currentCamera.translation + direction * zoomSpeed
+			if (currentCamera == firstCamera or secondCamera.translation.y > 2.0):
+				currentCamera.translation = currentCamera.translation + direction * zoomSpeed
 		if event.button_index == BUTTON_WHEEL_DOWN:
-			currentCamera.translation = currentCamera.translation - direction * zoomSpeed
+			if (currentCamera == firstCamera or secondCamera.translation.y < 40.0):
+				currentCamera.translation = currentCamera.translation - direction * zoomSpeed
 
 				
 			
