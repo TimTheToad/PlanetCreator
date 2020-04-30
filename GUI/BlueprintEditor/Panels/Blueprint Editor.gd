@@ -124,7 +124,7 @@ func _on_ShowClouds_toggled(button_pressed):
 
 func _on_Save_pressed():
 	BlueprintLibrary.saveBlueprint(currentBlueprint, blueprintNameLabel.text)
-	
+	blueprintLibraryPanel.loadBlueprints()
 	pass # Replace with function body.
 
 
