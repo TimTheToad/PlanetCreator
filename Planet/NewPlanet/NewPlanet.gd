@@ -31,9 +31,9 @@ func _ready():
 	meshes = self.get_node("Meshes").get_children()
 	
 	blueprint = Blueprint.new()
-	blueprint.addLayer("Base", LayerType.BASE, self)
-	blueprint.addLayer("Liquid", LayerType.LIQUID,  self)
-	blueprint.addLayer("Lava", LayerType.LAVA, self)
+	blueprint.addLayer("Base", LayerType.BASE)
+	blueprint.addLayer("Liquid", LayerType.LIQUID)
+	blueprint.addLayer("Lava", LayerType.LAVA)
 	
 	pass # Replace with function body.
 
@@ -43,8 +43,11 @@ func showClouds(show):
 	else:
 		meshes[LayerType.CLOUD].visible = false
 
-func applyBlueprint():
-	for layer in self.blueprint.getLayers():
+func applyBlueprint(blueprint = null):
+	if blueprint == null:
+		blueprint = self.blueprint
+		
+	for layer in blueprint.getLayers():
 		
 		var viewport = viewports[layer.layerIndex]
 		# Remove older brushes

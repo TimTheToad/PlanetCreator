@@ -1,6 +1,6 @@
 extends Panel
 
-onready var vbox = get_node("VBoxContainer")
+onready var vbox = get_node("ScrollContainer/VBoxContainer")
 
 var layerEvent
 	
@@ -16,8 +16,8 @@ func updateSettings(event):
 			pass
 	
 func clearSettings():
-	while vbox.get_child_count() > 1:
-		var child = vbox.get_child(1)
+	while vbox.get_child_count() > 0:
+		var child = vbox.get_child(0)
 		vbox.remove_child(child)
 		child.visible = false
 		child.queue_free()

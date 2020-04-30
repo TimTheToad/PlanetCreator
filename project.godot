@@ -30,6 +30,10 @@ config/name="Planet"
 run/main_scene="res://Sandboxes/SolarScene.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+BlueprintLibrary="*res://Singletons/BlueprintLibrary.gd"
+
 [input]
 
 Planet={
