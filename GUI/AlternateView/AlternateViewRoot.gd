@@ -23,7 +23,7 @@ func _ready():
 		viewPortContainer.stretch = true
 		viewPortContainer.set_h_size_flags(3) #Expand horizontal
 		viewPortContainer.connect("mouse_entered", self, "_on_ViewPortContainer_mouse_entered", [viewPortContainer])
-		viewPortContainer.connect("mouse_exited", self, "_on_ViewPortContainer_mouse_exited", [viewPortContainer])
+		viewPortContainer.connect("mouse_exited", self, "_on_ViewPortContainer_mouse_exited")
 		hBoxContainer.add_child(viewPortContainer)
 		
 		var viewPort = Viewport.new()
@@ -36,6 +36,7 @@ func _ready():
 		viewPort.world = world
 		viewPorts.append(viewPort)
 		viewPortContainer.add_child(viewPort)
+		
 		nameLabel = Label.new()
 		nameLabel.text = planetsInScene.get_child(i).get_name()
 		var planet = planetsInScene.get_child(i).duplicate()
@@ -63,7 +64,7 @@ func _on_ViewPortContainer_mouse_entered(container):
 	hoveredViewPortContainer = container
 	pass
 	
-func _on_ViewPortContainer_mouse_exited(container):
+func _on_ViewPortContainer_mouse_exited():
 	hoveredViewPortContainer = null
 	planet = null
 	pass
