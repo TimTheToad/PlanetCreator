@@ -66,10 +66,17 @@ func _input(event):
 			secondCamera.make_current()
 			zoomSpeed = 0.9
 			currentCamera = secondCamera
+			
+			# Temp solution
+			get_tree().current_scene.get_node("Control/Blueprint Editor").visible = false
+			
 		if event.is_action_pressed("ui_down") and !event.echo:
 			firstCamera.make_current()
 			zoomSpeed = 0.1
 			currentCamera = firstCamera
+			
+			# Temp solution
+			get_tree().current_scene.get_node("Control/Blueprint Editor").visible = true
 			
 	if event is InputEventMouseMotion:
 		cameraNewRotation = event.get_relative()

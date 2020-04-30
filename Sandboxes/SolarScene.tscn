@@ -62,10 +62,10 @@ __meta__ = {
 }
 
 [node name="Blueprint Editor" parent="Control" instance=ExtResource( 6 )]
-margin_left = 51.8032
-margin_top = 92.8141
-margin_right = 406.803
-margin_bottom = 354.814
+margin_left = 319.171
+margin_top = 52.8142
+margin_right = 674.171
+margin_bottom = 314.814
 resizable = true
 
 [node name="PlanetPanel" type="WindowDialog" parent="Control"]

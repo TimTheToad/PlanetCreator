@@ -36,7 +36,7 @@ var name
 var layerIndex
 var update = false
 
-func _init(name, index, planet):
+func _init(name, index):
 	self.name = name
 	self.layerIndex = index
 	pass
