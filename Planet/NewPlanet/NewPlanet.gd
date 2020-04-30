@@ -1,54 +1,117 @@
 extends "Planet.gd"
 
+
 onready var viewports = get_node("Textures").get_children()
 
+# Brushes
+onready var noiseBrush = preload("res://Planet/NewPlanet/Brushes/NoiseBrush.tscn")
+
 var meshes = []
+
+var blueprint
+
+enum EventType {
+	FILL,
+	NOISE,
+	CLEAR
+}
 
 enum LayerType {
 	BASE,
 	LIQUID,
+	LAVA,
 	CLOUD
 }
+
+var eventQueue = []
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	meshes = self.get_node("Meshes").get_children()
 	
-	_hideChildren(viewports[LayerType.BASE])
-	_hideChildren(viewports[LayerType.LIQUID])
-	
-	var color = Color(0.4, 0.4, 0.4, 1.0)
-	_fillColorLayer(viewports[LayerType.BASE], color)
+	blueprint = Blueprint.new()
+	blueprint.addLayer("Base", LayerType.BASE, self)
+	blueprint.addLayer("Liquid", LayerType.LIQUID,  self)
+	blueprint.addLayer("Lava", LayerType.LAVA, self)
 	
 	pass # Replace with function body.
 
-func _input(event):
-	
-	if event is InputEventKey and event.is_pressed():
-		if event.scancode == KEY_1:
-			_hideChildren(viewports[LayerType.BASE])
-			_fillColorLayer(viewports[LayerType.BASE])
+func showClouds(show):
+	if show:
+		meshes[LayerType.CLOUD].visible = true
+	else:
+		meshes[LayerType.CLOUD].visible = false
+
+func applyBlueprint():
+	for layer in self.blueprint.getLayers():
 		
-		if event.scancode == KEY_Q:
-			addTexture(LayerType.BASE)
-		if event.scancode == KEY_W:
-			addTexture(LayerType.LIQUID)
+		var viewport = viewports[layer.layerIndex]
+		# Remove older brushes
+		for child in viewport.get_children():
+			child.visible = false
+			child.queue_free()
+		
+		# Add new brushes
+		for event in layer.getEvents():
+			match event.type:
+				EventType.FILL:
+					_createFillBrush(viewport, event)
+				EventType.NOISE:
+					_createNoiseBrush(viewport, event)
+		
+		viewport.render_target_update_mode = Viewport.UPDATE_ONCE
+		
+func updateLayer(layer):
+	var viewport = viewports[layer.layerIndex]
+	print(self.name)
+	var brushes = viewport.get_children()
+	var events = layer.getEvents()
+	for i in range(events.size()):
+		var event = events[i]
+		match event.type:
+			EventType.FILL:
+				var brush = viewport.get_child(i)
+				brush.color = event.color
+				brush.anchor_right = 1.0
+				brush.anchor_bottom = 1.0
+			EventType.NOISE:
+				var brush = viewport.get_child(i)
+				var mat = brush.material
+				
+				mat.set_shader_param("period", event.period)
+				mat.set_shader_param("octaves", event.octave)
+				mat.set_shader_param("color", event.color)
+	
+	viewport.render_target_update_mode = Viewport.UPDATE_ONCE
+
+func _createFillBrush(viewport, event):
+	var brush = ColorRect.new()
+	brush.color = event.color
+	brush.anchor_right = 1.0
+	brush.anchor_bottom = 1.0
+	
+	viewport.add_child(brush)
+	
+func _createNoiseBrush(viewport, event):
+	var brush = noiseBrush.instance()
+	var mat = brush.material.duplicate()
+	
+	mat.set_shader_param("period", event.period)
+	mat.set_shader_param("octaves", event.octave)
+	mat.set_shader_param("color", event.color)
+	
+	brush.material = mat
+	
+	viewport.add_child(brush)
+	
+func _process(dt):
+	if blueprint:
+		blueprint.apply(self)
+
 
 func getMaterial(type):
 	return meshes[type].material_override
-
-func addTexture(type):
-	var color = Color(1.0, 1.0, 1.0, 1.0)
-	_hideChildren(viewports[type])
-	
-	if type == LayerType.BASE:
-		color = Color(0.2,  0.5 + randf() * 0.3, 0.2, 0.5 + randf() * 0.5)
-		_renderNoiseLayer(viewports[LayerType.BASE], 1.0 + randf() * 1.5, 5, color)
-	elif type == LayerType.LIQUID:
-		color = Color(0.1, 0.1, 0.5, 1.0)
-		_renderNoiseLayer(viewports[LayerType.LIQUID], 0.5 + randf() * 1.5, 5, color)
-		
-	pass
 
 func _hideChildren(parent):
 	var children = parent.get_children()
@@ -56,29 +119,3 @@ func _hideChildren(parent):
 	if children:
 		for child in children:
 			child.visible = false
-		
-
-func _fillColorLayer(viewport, color = null):
-	var cRect = viewport.get_node("FillColor")
-	cRect.visible = true
-	
-	if color:
-		cRect.color = color
-		
-	viewport.render_target_update_mode = Viewport.UPDATE_ONCE
-	
-	
-func _renderNoiseLayer(viewport, period, octaves, color):
-	var cRect = viewport.get_node("NoiseBrush")
-	cRect.visible = true
-	var mat = cRect.material
-	
-	mat.set_shader_param("period", 0.5 + randf() * 1.5)
-	mat.set_shader_param("octaves", 5)
-	mat.set_shader_param("color", color)
-	
-	viewport.render_target_update_mode = Viewport.UPDATE_ONCE
-	pass
-	
-	
-	

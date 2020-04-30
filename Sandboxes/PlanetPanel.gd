@@ -13,8 +13,8 @@ var camera
 var nrOfPlanets
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
-	cameraHolder = get_parent().get_parent().get_node("OrbitalCamera")
+	self.visible = true
+	cameraHolder = get_parent().get_parent().get_node("CameraHolderMaster")
 	if cameraHolder:
 		camera = cameraHolder.get_child(0).get_child(0).get_child(0)
 		
@@ -30,7 +30,7 @@ func _ready():
 
 func _GoToPlanet(name):
 	print(name)
-	var camera = cameraHolder.get_child(0).get_child(0).get_child(0)
+	var camera = cameraHolder.firstCamera
 	var planetInstance = planets.get_node(name)
 	cameraHolder.target = planetInstance
 	camera.make_current()

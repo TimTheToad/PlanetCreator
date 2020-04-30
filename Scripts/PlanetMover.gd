@@ -1,5 +1,7 @@
 extends Node
 
+onready var blueprintEditor = get_parent().get_node("Control/Blueprint Editor")
+
 var ray
 
 var cameraHolder
@@ -8,6 +10,7 @@ var xArr
 var zArr
 var prevSelected
 var camera
+var rayOrigin
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Retrive camera
@@ -18,11 +21,11 @@ func _ready():
 	pass # Replace with function body.
 
 func getZValue(arrow):
-	return camera.transform.origin.distance_to(arrow)
+	print(camera.global_transform.origin.distance_to(arrow))
+	return camera.global_transform.origin.distance_to(arrow)
 	pass
 
 func _input(event):
-	
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.is_pressed():
 			# Get essential data for raycast
@@ -30,7 +33,7 @@ func _input(event):
 			var mousePos = viewport.get_mouse_position()
 			camera = cameraHolder.getCurrentCamera()
 			# Project ray
-			var rayOrigin = camera.project_ray_origin(mousePos)
+			rayOrigin = camera.project_ray_origin(mousePos)
 			var rayDir = camera.project_ray_normal(mousePos)
 			var rayDist = 1000
 
@@ -41,21 +44,22 @@ func _input(event):
 			if hit.size() != 0:
 				# collider will be the node you hit
 				selected = hit.collider.get_parent()
+				
 				if selected.name == "xArrow":
 					xArr = selected
 					selected = null
-					print("xArrow Hit")
 				elif selected.name == "zArrow":
 					zArr = selected
 					selected = null
-					print("zArrow Hit")
 				else:
-					print("Planet Hit")
 					if prevSelected:
 						prevSelected.makeOrbitArrowVisible(false)
 					selected.makeOrbitArrowVisible(true)
+					
+					if camera.name != "TopViewCamera":
+						blueprintEditor.showPlanetBlueprint(selected)
+					
 			elif hit.size() == 0:
-				print("missed")
 				if prevSelected:
 					prevSelected.makeOrbitArrowVisible(false)
 
@@ -71,13 +75,24 @@ func _input(event):
 
 	if xArr:
 		if event is InputEventMouseMotion:
+#			var relative = event.get_relative() * 0.1
 			var distanceToObject = getZValue(xArr.global_transform.origin)
-			var arrowPosition = camera.project_position(event.position, distanceToObject) - Vector3(1.0, 0.0, 0.0)
-			xArr.get_parent().major_axis = arrowPosition.x
-			xArr.get_parent().updateOrbitLines()
+#			print(distanceToObject)
+			var arrowPosition = camera.project_position(event.position, camera.global_transform.origin.y)
+#			var arrowPosition = camera.project_position(event.position, distanceToObject) - Vector3(1.0, 0.0, 0.0)
+			
+			var planet = xArr.get_parent().get_parent()
+			planet.major_axis = arrowPosition.x - 1.0
+			planet.updateOrbitLines()
+			
 	elif zArr:
 		if event is InputEventMouseMotion:
+#			var relative = event.get_relative() * 0.1
 			var distanceToObject = getZValue(zArr.global_transform.origin)
-			var arrowPosition = camera.project_position(event.position, distanceToObject)  - Vector3(0.0, 0.0, 1.0)
-			zArr.get_parent().minor_axis = arrowPosition.z
-			zArr.get_parent().updateOrbitLines()
+#			print(distanceToObject)
+			var arrowPosition = camera.project_position(event.position, camera.global_transform.origin.y)
+#			var arrowPosition = camera.project_position(event.position, distanceToObject)  - Vector3(0.0, 0.0, 1.0)
+			
+			var planet = zArr.get_parent().get_parent()
+			planet.minor_axis = arrowPosition.z - 1.0
+			planet.updateOrbitLines()

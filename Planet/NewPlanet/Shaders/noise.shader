@@ -36,6 +36,7 @@ float noise2(vec3 p, int octaves) {
 
 uniform float period = 5.0;
 uniform int octaves = 1;
+uniform vec4 color : hint_color;
 
 void fragment() {
 	float theta = UV.y * 3.14159;
@@ -49,6 +50,7 @@ void fragment() {
 	unit = normalize(unit);
 	
     float n = noise2(unit * period, octaves);
-	COLOR.rgb = mix(vec3(1.0), vec3(0.7), smoothstep(-0.1, 0.0, n));
-	COLOR.a = 1.0 - smoothstep(-0.1, 0.0, n);
+	COLOR.rgb = mix(color.rgb, vec3(0.0), smoothstep(-0.1, 0.0, n));
+	COLOR.a = (1.0 - smoothstep(-0.1, 0.0, n)) * color.a;
+	
 }

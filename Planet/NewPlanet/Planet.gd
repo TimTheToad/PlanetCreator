@@ -14,7 +14,7 @@ var zArrow
 
 var gotCamera = false
 var offset
-onready var cameraHolder = get_parent().get_parent().get_child(1)
+var cameraHolder
 var camera
 var unPos
 var shouldOrbit
@@ -22,55 +22,60 @@ var orbitMesh
 var vertexCount = 20
 
 
+
 func _ready():
+	_randomizeName()
+	cameraHolder = get_tree().current_scene.get_node("CameraHolderMaster")
 	shouldOrbit = false
-	var arrowMat = SpatialMaterial.new()
-	var collisionShape
-	arrowMat.albedo_color = Color.red
-	xArrow = MeshInstance.new()
+	
+	createArrows()
+	
+	self.position = Vector3(cos(phi) * major_axis, 0.0, sin(phi) * minor_axis)
+
+func createArrows():
+	xArrow = createArrow(Color.red)
+	zArrow = createArrow(Color.blue)
+	
 	xArrow.name = "xArrow"
+	zArrow.name = "zArrow"
+	
+	# Set to parent arrows to ignore planet scale inheritance
+	var node = Node.new()
+	node.name = "Orbit Arrows"
+	node.add_child(xArrow)
+	node.add_child(zArrow)
+	
+	self.add_child(node)
+	
+func createArrow(color, scale = 0.2):
+	var arrowMat = SpatialMaterial.new()
+	arrowMat.albedo_color = color
+	arrowMat.flags_unshaded = true
+	
+	var collisionShape = CollisionShape.new()
+	collisionShape.shape = SphereShape.new()
+	collisionShape.disabled = true
+	
+	var arrow = MeshInstance.new()
+	arrow.mesh = SphereMesh.new()
+	arrow.material_override = arrowMat
+	
+	arrow.set_scale(Vector3(scale, scale, scale))
+	arrow.set_as_toplevel(true)
+	arrow.visible = false
+	
 	var boundingArea = StaticBody.new()
 	boundingArea.input_ray_pickable = false
-	collisionShape = CollisionShape.new()
-	collisionShape.shape = SphereShape.new()
-	collisionShape.disabled = true
 	boundingArea.add_child(collisionShape)
-	xArrow.add_child(boundingArea)
-	xArrow.mesh = SphereMesh.new()
-	xArrow.material_override = arrowMat
-	xArrow.name = "xArrow"
-	xArrow.mesh.radius = 0.2
-	xArrow.mesh.height = 0.4
-	xArrow.set_as_toplevel(true)
-	self.add_child(xArrow)
-	xArrow.visible = false
 
-	arrowMat = SpatialMaterial.new()
-	arrowMat.albedo_color = Color.blue
-	zArrow = MeshInstance.new()
-	zArrow.name = "xArrow"
-	boundingArea = StaticBody.new()
-	boundingArea.input_ray_pickable = false
-	collisionShape = CollisionShape.new()
-	collisionShape.shape = SphereShape.new()
-	collisionShape.disabled = true
-	boundingArea.add_child(collisionShape)
-	zArrow.add_child(boundingArea)
-	zArrow.mesh = SphereMesh.new()
-	zArrow.material_override = arrowMat
-	zArrow.name = "zArrow"
-	zArrow.mesh.radius = 0.2
-	zArrow.mesh.height = 0.4
-	zArrow.set_as_toplevel(true)
-	self.add_child(zArrow)
-	zArrow.visible = false
+	arrow.add_child(boundingArea)
 	
-	position = Vector3(cos(phi) * major_axis, 0.0, sin(phi) * minor_axis)
-#	nameLabel = Label.new()
-#	nameLabel.text = self.get_name()
-#	offset = Vector2(nameLabel.get_size().x/2, 0)
-#	self.add_child(nameLabel)
-#	self.translation = Vector3(distanceFromSun.x, 0.0, distanceFromSun.y);
+	return arrow
+
+func _randomizeName():
+	var planetName = "X-"
+	planetName += String(randi() % 1000)
+	self.name = planetName
 
 func orbit(dt):
 	phi += orbitSpeed * dt
@@ -148,9 +153,9 @@ func createOribitLines(vertexCount):
 		vPos.x = cos(angle) * major_axis
 		vPos.z = sin(angle) * minor_axis
 		if i == 0:
-			xArrow.global_transform.origin = Vector3(vPos.x + 1, 0, vPos.z)
+			xArrow.translation = Vector3(vPos.x + 1, 0, vPos.z)
 		elif i == vertexCount/4:
-			zArrow.global_transform.origin  = Vector3(vPos.x, 0, vPos.z + 1)
+			zArrow.translation  = Vector3(vPos.x, 0, vPos.z + 1)
 		sf.add_vertex(vPos)
 		angle += rad
 	
@@ -167,17 +172,31 @@ func createOribitLines(vertexCount):
 		orbitMesh.material_override = mat
 		
 		var node = Node.new()
+		node.name = "orbitMeshNode"
 		node.add_child(orbitMesh)
 		self.add_child(node)
 	else:
 		orbitMesh.mesh.surface_remove(0)
 		sf.commit(orbitMesh.mesh)
 
+func rotatePlanet(relative):
+	self.rotate_y(relative[0] * 0.05)
+	pass
+
 func _process(dt):
 	if shouldOrbit:
 		self.rotate_y(PI * axisRotateSpeed * dt)
 		self.orbit(dt)
-	self.rotate_y(PI * axisRotateSpeed * dt)
+#	if cameraHolder:
+	#   camera = cameraHolder.getCurrentCamera() #fett ooptimerat, fixa
+	#	unPos = camera.unproject_position(self.global_transform.origin)
+	#	if camera.global_transform.origin.dot(self.global_transform.origin) > 0:
+	#		nameLabel.visible = false
+	#	else:
+	#		nameLabel.visible = true
+	#
+	#	nameLabel.set_position(unPos - offset)
+#	self.rotate_y(PI * axisRotateSpeed * dt)
 #	camera = cameraHolder.getCurrentCamera() #fett ooptimerat, fixa
 #	unPos = camera.unproject_position(self.global_transform.origin)
 #	if camera.global_transform.origin.dot(self.global_transform.origin) > 0:

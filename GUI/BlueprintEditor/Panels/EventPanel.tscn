@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://GUI/BlueprintEditor/Panels/EventPanel.gd" type="Script" id=1]
+
+[node name="EventPanel" type="PanelContainer"]
+margin_right = 110.0
+margin_bottom = 28.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 103.0
+margin_bottom = 21.0
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_right = 96.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Fill"
+align = 1
+[connection signal="gui_input" from="." to="." method="_on_EventPanel_gui_input"]
