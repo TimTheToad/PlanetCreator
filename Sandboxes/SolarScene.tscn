@@ -126,4 +126,27 @@ texture = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+<<<<<<< HEAD
+=======
+
+[node name="TopViewButton" type="Button" parent="Control"]
+margin_left = 95.0
+margin_top = 10.0
+margin_right = 12.0
+margin_bottom = 20.0
+text = "Top VIew"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OrbitalViewButton" type="Button" parent="Control"]
+margin_left = 190.0
+margin_top = 10.0
+margin_right = 12.0
+margin_bottom = 20.0
+text = "Orbital View"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+>>>>>>> 971a8eb3eabd729ebcc778aadcfa0f9260e6f10a
 [connection signal="pressed" from="Control/Button" to="Control/Panel" method="_on_Button_pressed"]
