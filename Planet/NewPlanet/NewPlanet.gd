@@ -44,37 +44,25 @@ func showClouds(show):
 		meshes[LayerType.CLOUD].visible = false
 
 func applyBlueprint(blueprint = null):
-	if blueprint == null:
-		blueprint = self.blueprint
-	
-	
-	for layer in blueprint.getLayers():
+	if blueprint != null:
+		for layer in blueprint.getLayers():
+			var viewport = viewports[layer.layerIndex]
+			# Remove older brushes
+			for child in viewport.get_children():
+				child.visible = false
+				child.queue_free()
+			
+			# Add new brushes
+			for event in layer.getEvents():
+				match event.type:
+					EventType.FILL:
+						_createFillBrush(viewport, event)
+					EventType.NOISE:
+						_createNoiseBrush(viewport, event)
+			viewport.render_target_update_mode = Viewport.UPDATE_ONCE
+		for moon in blueprint.moons:
+			addMoon(moon)
 		
-		var viewport = viewports[layer.layerIndex]
-		# Remove older brushes
-		for child in viewport.get_children():
-			child.visible = false
-			child.queue_free()
-		
-		# Add new brushes
-		for event in layer.getEvents():
-			match event.type:
-				EventType.FILL:
-					_createFillBrush(viewport, event)
-				EventType.NOISE:
-					_createNoiseBrush(viewport, event)
-		
-		viewport.render_target_update_mode = Viewport.UPDATE_ONCE
-	
-	for moon in blueprint.moons:
-		addMoon(moon)
-	pass
-	
-func addMoon(moon):
-	self.add_child(moon)
-#	self.add_child(moonInstance)
-	pass
-	
 func updateLayer(layer):
 	var viewport = viewports[layer.layerIndex]
 	print(self.name)
@@ -97,6 +85,9 @@ func updateLayer(layer):
 				mat.set_shader_param("color", event.color)
 	
 	viewport.render_target_update_mode = Viewport.UPDATE_ONCE
+
+func addMoon(moon):
+	self.add_child(moon)
 
 func _createFillBrush(viewport, event):
 	var brush = ColorRect.new()
