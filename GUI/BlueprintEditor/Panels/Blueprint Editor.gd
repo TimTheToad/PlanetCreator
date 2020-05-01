@@ -77,16 +77,21 @@ func _eventSelection(eventPanel):
 
 
 func _selection(layerPanel):
-	if !Input.is_key_pressed(KEY_SHIFT):
-		while !selectedLayers.empty():
-			var layer = selectedLayers.back()
-			if layer != null:
-				layer.selected(false)
-			selectedLayers.pop_back()
-	
 	if selectedLayers.find(layerPanel) == -1:
 		layerPanel.selected(true)
+		
+		if !Input.is_key_pressed(KEY_SHIFT):
+			while !selectedLayers.empty():
+				var layer = selectedLayers.back()
+				if layer != null:
+					layer.selected(false)
+				selectedLayers.pop_back()
+		
 		selectedLayers.append(layerPanel)
+	else:
+		layerPanel.selected(false)
+		selectedLayers.erase(layerPanel)
+	print(selectedLayers)
 	
 func _on_AddFill_pressed():
 	# Blink red if no layer selected

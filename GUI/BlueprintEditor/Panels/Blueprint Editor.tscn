@@ -29,7 +29,6 @@ corner_radius_top_left = 5
 corner_radius_bottom_left = 5
 
 [node name="Blueprint Editor" type="WindowDialog"]
-visible = true
 margin_right = 355.0
 margin_bottom = 301.0
 rect_min_size = Vector2( 300, 250 )
