@@ -57,6 +57,10 @@ environment = SubResource( 4 )
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 1.50745
+margin_top = -1.50735
+margin_right = 1.50745
+margin_bottom = -1.50732
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -110,6 +114,7 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="Control"]
+visible = false
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 240.0
@@ -126,15 +131,13 @@ texture = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-<<<<<<< HEAD
-=======
 
 [node name="TopViewButton" type="Button" parent="Control"]
 margin_left = 95.0
 margin_top = 10.0
 margin_right = 12.0
 margin_bottom = 20.0
-text = "Top VIew"
+text = "Top View"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -148,5 +151,6 @@ text = "Orbital View"
 __meta__ = {
 "_edit_use_anchors_": false
 }
->>>>>>> 971a8eb3eabd729ebcc778aadcfa0f9260e6f10a
 [connection signal="pressed" from="Control/Button" to="Control/Panel" method="_on_Button_pressed"]
+[connection signal="pressed" from="Control/TopViewButton" to="CameraHolderMaster" method="_on_TopViewButton_pressed"]
+[connection signal="pressed" from="Control/OrbitalViewButton" to="CameraHolderMaster" method="_on_OrbitalViewButton_pressed"]
