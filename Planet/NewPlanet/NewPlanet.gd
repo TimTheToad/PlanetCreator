@@ -44,26 +44,23 @@ func showClouds(show):
 		meshes[LayerType.CLOUD].visible = false
 
 func applyBlueprint(blueprint = null):
-	if blueprint == null:
-		blueprint = self.blueprint
-		
-	for layer in blueprint.getLayers():
-		
-		var viewport = viewports[layer.layerIndex]
-		# Remove older brushes
-		for child in viewport.get_children():
-			child.visible = false
-			child.queue_free()
-		
-		# Add new brushes
-		for event in layer.getEvents():
-			match event.type:
-				EventType.FILL:
-					_createFillBrush(viewport, event)
-				EventType.NOISE:
-					_createNoiseBrush(viewport, event)
-		
-		viewport.render_target_update_mode = Viewport.UPDATE_ONCE
+	if blueprint != null:
+		for layer in blueprint.getLayers():
+			var viewport = viewports[layer.layerIndex]
+			# Remove older brushes
+			for child in viewport.get_children():
+				child.visible = false
+				child.queue_free()
+			
+			# Add new brushes
+			for event in layer.getEvents():
+				match event.type:
+					EventType.FILL:
+						_createFillBrush(viewport, event)
+					EventType.NOISE:
+						_createNoiseBrush(viewport, event)
+			
+			viewport.render_target_update_mode = Viewport.UPDATE_ONCE
 		
 func updateLayer(layer):
 	var viewport = viewports[layer.layerIndex]

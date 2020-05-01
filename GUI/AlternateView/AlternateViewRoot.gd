@@ -52,10 +52,10 @@ func _ready():
 		camera.look_at(planet.translation, Vector3(0.0, 1.0, 0.0))
 		viewPort.add_child(camera)
 		cameras.append(camera)
-#		var omniLight = OmniLight.new()
+		var omniLight = OmniLight.new()
 		planetsInView.append(viewPort.get_child(0))
-#		viewPort.add_child(omniLight)
-#		omniLight.translate(Vector3(2.0, 1.0, 0.0))
+		viewPort.add_child(omniLight)
+		omniLight.translate(Vector3(2.0, 1.0, 0.0))
 
 	
 	pass # Replace with function body.
