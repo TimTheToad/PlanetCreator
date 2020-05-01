@@ -165,6 +165,6 @@ func _on_Load_pressed():
 
 
 func _on_AddMoon_pressed():
-	self.currentBlueprint.createMoon(self.currentPlanet)
+	self.currentBlueprint.addMoon(self.currentPlanet)
 	currentPlanet.applyBlueprint(self.currentBlueprint)
 	pass # Replace with function body.

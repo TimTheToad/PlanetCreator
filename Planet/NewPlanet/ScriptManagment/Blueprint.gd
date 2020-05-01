@@ -17,7 +17,7 @@ func getClouds():
 func getLayers():
 	return layers
 
-func createMoon(planet):
+func addMoon(planet):
 	var moon = Moon.new(planet)
 	moons.append(moon)
 	pass
