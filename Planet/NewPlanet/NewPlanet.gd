@@ -6,6 +6,7 @@ onready var viewports = get_node("Textures").get_children()
 # Brushes
 onready var noiseBrush = preload("res://Planet/NewPlanet/Brushes/NoiseBrush.tscn")
 
+
 var meshes = []
 
 var blueprint
@@ -34,7 +35,6 @@ func _ready():
 	blueprint.addLayer("Base", LayerType.BASE)
 	blueprint.addLayer("Liquid", LayerType.LIQUID)
 	blueprint.addLayer("Lava", LayerType.LAVA)
-	
 	pass # Replace with function body.
 
 func showClouds(show):
@@ -59,8 +59,9 @@ func applyBlueprint(blueprint = null):
 						_createFillBrush(viewport, event)
 					EventType.NOISE:
 						_createNoiseBrush(viewport, event)
-			
 			viewport.render_target_update_mode = Viewport.UPDATE_ONCE
+		for moon in blueprint.moons:
+			addMoon(moon)
 		
 func updateLayer(layer):
 	var viewport = viewports[layer.layerIndex]
@@ -84,6 +85,9 @@ func updateLayer(layer):
 				mat.set_shader_param("color", event.color)
 	
 	viewport.render_target_update_mode = Viewport.UPDATE_ONCE
+
+func addMoon(moon):
+	self.add_child(moon)
 
 func _createFillBrush(viewport, event):
 	var brush = ColorRect.new()

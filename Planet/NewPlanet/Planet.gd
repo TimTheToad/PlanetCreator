@@ -139,6 +139,7 @@ func createOribitLines(vertexCount):
 	
 	if !orbitMesh:
 		orbitMesh = MeshInstance.new()
+		orbitMesh.name = "OrbitMesh"
 		orbitMesh.mesh = sf.commit()
 		
 		var mat = SpatialMaterial.new()
@@ -149,7 +150,7 @@ func createOribitLines(vertexCount):
 		orbitMesh.material_override = mat
 		
 		var node = Node.new()
-		node.name = "orbitMeshNode"
+		node.name = "OrbitMeshNode"
 		node.add_child(orbitMesh)
 		self.add_child(node)
 	else:

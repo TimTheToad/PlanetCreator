@@ -40,7 +40,7 @@ func _ready():
 		nameLabel.text = planetsInScene.get_child(i).get_name()
 		var planet = planetsInScene.get_child(i).duplicate()
 
-		planet.get_node("orbitMeshNode").queue_free()
+		planet.get_node("OrbitMeshNode").queue_free()
 		planet.add_child(nameLabel)
 
 		viewPort.add_child(planet)

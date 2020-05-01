@@ -109,6 +109,12 @@ margin_right = 109.0
 margin_bottom = 44.0
 text = "Add Noise"
 
+[node name="AddMoon" type="Button" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer2"]
+margin_top = 48.0
+margin_right = 109.0
+margin_bottom = 68.0
+text = "Add Moon"
+
 [node name="VBoxContainer3" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer"]
 margin_left = 226.0
 margin_right = 335.0
@@ -250,5 +256,6 @@ __meta__ = {
 [connection signal="toggled" from="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer/ShowClouds" to="." method="_on_ShowClouds_toggled"]
 [connection signal="pressed" from="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer2/AddFill" to="." method="_on_AddFill_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer2/AddNoise" to="." method="_on_AddNoise_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer2/AddMoon" to="." method="_on_AddMoon_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer3/Save" to="." method="_on_Save_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer3/Load" to="." method="_on_Load_pressed"]

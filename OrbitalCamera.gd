@@ -106,3 +106,15 @@ func getCurrentCamera():
 	elif secondCamera.is_current():
 		return secondCamera
 	pass
+
+
+func _on_TopViewButton_pressed():
+	secondCamera.make_current()
+	updateLookAt()
+	pass # Replace with function body.
+
+
+func _on_OrbitalViewButton_pressed():
+	firstCamera.make_current()
+	updateLookAt()
+	pass # Replace with function body.
