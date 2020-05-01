@@ -29,7 +29,6 @@ func _ready():
 		var viewPort = Viewport.new()
 		viewPort.own_world = true
 		var world = World.new()
-		print(environment)
 		var environmentDupe = environment.environment.duplicate()
 		environmentDupe.ambient_light_color = Color.white
 		world.environment = environmentDupe
@@ -41,7 +40,7 @@ func _ready():
 		nameLabel.text = planetsInScene.get_child(i).get_name()
 		var planet = planetsInScene.get_child(i).duplicate()
 
-		planet.get_node("orbitMeshNode").queue_free()
+		planet.get_node("OrbitMeshNode").queue_free()
 		planet.add_child(nameLabel)
 
 		viewPort.add_child(planet)
@@ -52,10 +51,10 @@ func _ready():
 		camera.look_at(planet.translation, Vector3(0.0, 1.0, 0.0))
 		viewPort.add_child(camera)
 		cameras.append(camera)
-#		var omniLight = OmniLight.new()
+		var omniLight = OmniLight.new()
 		planetsInView.append(viewPort.get_child(0))
-#		viewPort.add_child(omniLight)
-#		omniLight.translate(Vector3(2.0, 1.0, 0.0))
+		viewPort.add_child(omniLight)
+		omniLight.translate(Vector3(2.0, 1.0, 0.0))
 
 	
 	pass # Replace with function body.

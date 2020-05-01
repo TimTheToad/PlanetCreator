@@ -21,7 +21,6 @@ func _ready():
 	pass # Replace with function body.
 
 func getZValue(arrow):
-	print(camera.global_transform.origin.distance_to(arrow))
 	return camera.global_transform.origin.distance_to(arrow)
 	pass
 

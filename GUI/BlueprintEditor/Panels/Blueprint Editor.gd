@@ -3,6 +3,7 @@ extends WindowDialog
 onready var LayerPanel = preload("res://GUI/BlueprintEditor/LayerPanel.tscn")
 onready var container = get_node("Panel/VBoxContainer/ScrollContainer/HBoxContainer")
 onready var blueprintNameLabel = get_node("Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer/Label")
+onready var moonScene = preload("res://Planet/NewPlanet/Moon/Moon.tscn")
 onready var eventSettings = get_node("EventSettings")
 onready var blueprintLibraryPanel = get_node("BlueprintLibrary")
 
@@ -133,4 +134,10 @@ func _on_Load_pressed():
 	self.currentPlanet.blueprint = self.currentBlueprint
 	currentPlanet.applyBlueprint(self.currentBlueprint)
 	showPlanetBlueprint(self.currentPlanet)
+	pass # Replace with function body.
+
+
+func _on_AddMoon_pressed():
+	self.currentBlueprint.createMoon(self.currentPlanet)
+	currentPlanet.applyBlueprint(self.currentBlueprint)
 	pass # Replace with function body.

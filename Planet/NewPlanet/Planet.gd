@@ -94,45 +94,6 @@ func updateOrbitLines():
 	
 	pass
 
-#func createOrbitArrows():
-#	var arrowMat = SpatialMaterial.new()
-#	var collisionShape
-#	arrowMat.albedo_color = Color.red
-#	xArrow = MeshInstance.new()
-#	xArrow.name = "xArrow"
-#	var boundingArea = StaticBody.new()
-#	boundingArea.input_ray_pickable = true
-#	collisionShape = CollisionShape.new()
-#	collisionShape.shape = SphereShape.new()
-#	boundingArea.add_child(collisionShape)
-#	xArrow.add_child(boundingArea)
-#	xArrow.mesh = SphereMesh.new()
-#	xArrow.material_override = arrowMat
-#	xArrow.name = "xArrow"
-#	xArrow.mesh.radius = 0.2
-#	xArrow.mesh.height = 0.4
-#	xArrow.set_as_toplevel(true)
-#	self.add_child(xArrow)
-#	xArrow.visible = false
-#
-#	arrowMat = SpatialMaterial.new()
-#	arrowMat.albedo_color = Color.blue
-#	zArrow = MeshInstance.new()
-#	zArrow.name = "xArrow"
-#	boundingArea = StaticBody.new()
-#	boundingArea.input_ray_pickable = true
-#	collisionShape = CollisionShape.new()
-#	collisionShape.shape = SphereShape.new()
-#	boundingArea.add_child(collisionShape)
-#	zArrow.add_child(boundingArea)
-#	zArrow.mesh = SphereMesh.new()
-#	zArrow.material_override = arrowMat
-#	zArrow.name = "zArrow"
-#	zArrow.mesh.radius = 0.2
-#	zArrow.mesh.height = 0.4
-#	zArrow.set_as_toplevel(true)
-#	self.add_child(zArrow)
-
 func makeOrbitArrowVisible(isVisible):
 	xArrow.visible = isVisible
 	xArrow.get_child(0).input_ray_pickable = isVisible
@@ -162,6 +123,7 @@ func createOribitLines(vertexCount):
 	
 	if !orbitMesh:
 		orbitMesh = MeshInstance.new()
+		orbitMesh.name = "OrbitMesh"
 		orbitMesh.mesh = sf.commit()
 		
 		var mat = SpatialMaterial.new()
@@ -172,7 +134,7 @@ func createOribitLines(vertexCount):
 		orbitMesh.material_override = mat
 		
 		var node = Node.new()
-		node.name = "orbitMeshNode"
+		node.name = "OrbitMeshNode"
 		node.add_child(orbitMesh)
 		self.add_child(node)
 	else:

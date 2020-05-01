@@ -5,7 +5,7 @@ extends WindowDialog
 # var a = 2
 # var b = "text"
 
-onready var planets = get_parent().get_parent().get_child(0)
+onready var planets = get_parent().get_parent().get_parent().get_child(0)
 onready var planetContainer = get_node("PanelContainer/VBoxContainer")
 var cameraHolder
 var camera
@@ -13,8 +13,8 @@ var camera
 var nrOfPlanets
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	self.visible = true
-	cameraHolder = get_parent().get_parent().get_node("CameraHolderMaster")
+	self.visible = false
+	cameraHolder = get_parent().get_parent().get_parent().get_node("CameraHolderMaster")
 	if cameraHolder:
 		camera = cameraHolder.get_child(0).get_child(0).get_child(0)
 		
@@ -25,15 +25,15 @@ func _ready():
 			button.connect("pressed", self, "_GoToPlanet", [button.text])
 			planetContainer.add_child(button)
 			
-		self.visible = true
 	pass # Replace with function body.
 
 func _GoToPlanet(name):
 	print(name)
-	var camera = cameraHolder.firstCamera
 	var planetInstance = planets.get_node(name)
+	cameraHolder.firstCamera.make_current()
+	cameraHolder.global_transform.origin = planetInstance.global_transform.origin
 	cameraHolder.target = planetInstance
-	camera.make_current()
+	cameraHolder.updateLookAt()
 
 
 		

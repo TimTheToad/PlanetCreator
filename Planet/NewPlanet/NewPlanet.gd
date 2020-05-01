@@ -6,6 +6,7 @@ onready var viewports = get_node("Textures").get_children()
 # Brushes
 onready var noiseBrush = preload("res://Planet/NewPlanet/Brushes/NoiseBrush.tscn")
 
+
 var meshes = []
 
 var blueprint
@@ -34,7 +35,6 @@ func _ready():
 	blueprint.addLayer("Base", LayerType.BASE)
 	blueprint.addLayer("Liquid", LayerType.LIQUID)
 	blueprint.addLayer("Lava", LayerType.LAVA)
-	
 	pass # Replace with function body.
 
 func showClouds(show):
@@ -46,7 +46,8 @@ func showClouds(show):
 func applyBlueprint(blueprint = null):
 	if blueprint == null:
 		blueprint = self.blueprint
-		
+	
+	
 	for layer in blueprint.getLayers():
 		
 		var viewport = viewports[layer.layerIndex]
@@ -64,7 +65,16 @@ func applyBlueprint(blueprint = null):
 					_createNoiseBrush(viewport, event)
 		
 		viewport.render_target_update_mode = Viewport.UPDATE_ONCE
-		
+	
+	for moon in blueprint.moons:
+		addMoon(moon)
+	pass
+	
+func addMoon(moon):
+	self.add_child(moon)
+#	self.add_child(moonInstance)
+	pass
+	
 func updateLayer(layer):
 	var viewport = viewports[layer.layerIndex]
 	print(self.name)
