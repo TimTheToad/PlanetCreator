@@ -29,7 +29,6 @@ func _ready():
 		var viewPort = Viewport.new()
 		viewPort.own_world = true
 		var world = World.new()
-		print(environment)
 		var environmentDupe = environment.environment.duplicate()
 		environmentDupe.ambient_light_color = Color.white
 		world.environment = environmentDupe

@@ -47,6 +47,25 @@ func createArrows():
 	
 	self.add_child(node)
 	
+	# Set position
+	var pos = Vector2(0.0, 0.0)
+	pos.x = cos(0) * major_axis
+	pos.y = sin(0) * minor_axis
+	
+	if major_axis > 0:
+		pos.x += 1.0
+	else:
+		pos.x -= 1.0
+	xArrow.translation = Vector3(pos.x, 0, pos.y)
+	
+	pos.x = cos(PI * 0.5) * major_axis
+	pos.y = sin(PI * 0.5) * minor_axis
+	if minor_axis > 0:
+		pos.y += 1.0
+	else:
+		pos.y -= 1.0
+	zArrow.translation = Vector3(pos.x, 0, pos.y)
+	
 func createArrow(color, scale = 0.2):
 	var arrowMat = SpatialMaterial.new()
 	arrowMat.albedo_color = color
@@ -94,45 +113,6 @@ func updateOrbitLines():
 	
 	pass
 
-#func createOrbitArrows():
-#	var arrowMat = SpatialMaterial.new()
-#	var collisionShape
-#	arrowMat.albedo_color = Color.red
-#	xArrow = MeshInstance.new()
-#	xArrow.name = "xArrow"
-#	var boundingArea = StaticBody.new()
-#	boundingArea.input_ray_pickable = true
-#	collisionShape = CollisionShape.new()
-#	collisionShape.shape = SphereShape.new()
-#	boundingArea.add_child(collisionShape)
-#	xArrow.add_child(boundingArea)
-#	xArrow.mesh = SphereMesh.new()
-#	xArrow.material_override = arrowMat
-#	xArrow.name = "xArrow"
-#	xArrow.mesh.radius = 0.2
-#	xArrow.mesh.height = 0.4
-#	xArrow.set_as_toplevel(true)
-#	self.add_child(xArrow)
-#	xArrow.visible = false
-#
-#	arrowMat = SpatialMaterial.new()
-#	arrowMat.albedo_color = Color.blue
-#	zArrow = MeshInstance.new()
-#	zArrow.name = "xArrow"
-#	boundingArea = StaticBody.new()
-#	boundingArea.input_ray_pickable = true
-#	collisionShape = CollisionShape.new()
-#	collisionShape.shape = SphereShape.new()
-#	boundingArea.add_child(collisionShape)
-#	zArrow.add_child(boundingArea)
-#	zArrow.mesh = SphereMesh.new()
-#	zArrow.material_override = arrowMat
-#	zArrow.name = "zArrow"
-#	zArrow.mesh.radius = 0.2
-#	zArrow.mesh.height = 0.4
-#	zArrow.set_as_toplevel(true)
-#	self.add_child(zArrow)
-
 func makeOrbitArrowVisible(isVisible):
 	xArrow.visible = isVisible
 	xArrow.get_child(0).input_ray_pickable = isVisible
@@ -152,10 +132,7 @@ func createOribitLines(vertexCount):
 	for i in vertexCount:
 		vPos.x = cos(angle) * major_axis
 		vPos.z = sin(angle) * minor_axis
-		if i == 0:
-			xArrow.translation = Vector3(vPos.x + 1, 0, vPos.z)
-		elif i == vertexCount/4:
-			zArrow.translation  = Vector3(vPos.x, 0, vPos.z + 1)
+
 		sf.add_vertex(vPos)
 		angle += rad
 	
@@ -187,22 +164,4 @@ func _process(dt):
 	if shouldOrbit:
 		self.rotate_y(PI * axisRotateSpeed * dt)
 		self.orbit(dt)
-#	if cameraHolder:
-	#   camera = cameraHolder.getCurrentCamera() #fett ooptimerat, fixa
-	#	unPos = camera.unproject_position(self.global_transform.origin)
-	#	if camera.global_transform.origin.dot(self.global_transform.origin) > 0:
-	#		nameLabel.visible = false
-	#	else:
-	#		nameLabel.visible = true
-	#
-	#	nameLabel.set_position(unPos - offset)
-#	self.rotate_y(PI * axisRotateSpeed * dt)
-#	camera = cameraHolder.getCurrentCamera() #fett ooptimerat, fixa
-#	unPos = camera.unproject_position(self.global_transform.origin)
-#	if camera.global_transform.origin.dot(self.global_transform.origin) > 0:
-#		nameLabel.visible = false
-#	else:
-#		nameLabel.visible = true
-#
-#	nameLabel.set_position(unPos - offset)
 	pass
