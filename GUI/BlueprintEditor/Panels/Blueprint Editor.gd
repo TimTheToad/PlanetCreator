@@ -91,7 +91,6 @@ func _selection(layerPanel):
 	else:
 		layerPanel.selected(false)
 		selectedLayers.erase(layerPanel)
-	print(selectedLayers)
 	
 func _on_AddFill_pressed():
 	# Blink red if no layer selected
