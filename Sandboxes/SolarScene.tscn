@@ -6,9 +6,9 @@
 [ext_resource path="res://Scripts/PlanetMover.gd" type="Script" id=4]
 [ext_resource path="res://Sandboxes/RadialController.tscn" type="PackedScene" id=5]
 [ext_resource path="res://GUI/BlueprintEditor/Panels/Blueprint Editor.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Sandboxes/ControlsPanel.gd" type="Script" id=7]
-[ext_resource path="res://Assets/TestPanel.png" type="Texture" id=8]
+[ext_resource path="res://Sandboxes/HelpButton.gd" type="Script" id=7]
 [ext_resource path="res://Assets/hdr.png" type="Texture" id=9]
+[ext_resource path="res://Sandboxes/PatternsButton.gd" type="Script" id=10]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.992157, 1, 0, 1 )
@@ -68,7 +68,7 @@ __meta__ = {
 [node name="Blueprint Editor" parent="Control" instance=ExtResource( 6 )]
 margin_left = 319.171
 margin_top = 52.8142
-margin_right = 674.171
+margin_right = 709.171
 margin_bottom = 314.814
 resizable = true
 
@@ -103,31 +103,28 @@ margin_bottom = 225.0
 
 [node name="RadialController" parent="Control" instance=ExtResource( 5 )]
 
-[node name="Button" type="Button" parent="Control"]
+[node name="PatternsButton" type="Button" parent="Control"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 13.9853
+margin_top = -26.0294
+margin_right = 78.9853
+margin_bottom = -6.02942
+toggle_mode = true
+text = "Patterns"
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HelpButton" type="Button" parent="Control"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 75.0
 margin_bottom = 30.0
-text = "Controls"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Panel" type="Panel" parent="Control"]
-visible = false
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 240.0
-margin_bottom = 510.0
+toggle_mode = true
+text = "Help"
 script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect" type="TextureRect" parent="Control/Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -151,6 +148,7 @@ text = "Orbital View"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="Control/Button" to="Control/Panel" method="_on_Button_pressed"]
+[connection signal="toggled" from="Control/PatternsButton" to="Control/PatternsButton" method="_on_PatternsButton_toggled"]
+[connection signal="toggled" from="Control/HelpButton" to="Control/HelpButton" method="_on_HelpButton_toggled"]
 [connection signal="pressed" from="Control/TopViewButton" to="CameraHolderMaster" method="_on_TopViewButton_pressed"]
 [connection signal="pressed" from="Control/OrbitalViewButton" to="CameraHolderMaster" method="_on_OrbitalViewButton_pressed"]

@@ -14,6 +14,7 @@ var planetsInView = []
 var cameras = []
 var nameLabel
 var viewPorts = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -32,6 +33,9 @@ func _ready():
 		var environmentDupe = environment.environment.duplicate()
 		environmentDupe.ambient_light_color = Color.white
 		world.environment = environmentDupe
+		
+		
+		
 		viewPort.world = world
 		viewPorts.append(viewPort)
 		viewPortContainer.add_child(viewPort)

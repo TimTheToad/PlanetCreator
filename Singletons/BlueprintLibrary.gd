@@ -64,6 +64,7 @@ func loadBlueprint(fileName):
 	return blueprint
 
 func saveBlueprint(blueprint, fileName):
+	blueprint.title = fileName
 	blueprints.append(blueprint)
 	
 	var jsonBlueprint = {}

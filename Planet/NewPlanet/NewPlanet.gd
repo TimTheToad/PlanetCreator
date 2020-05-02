@@ -37,31 +37,34 @@ func _ready():
 	blueprint.addLayer("Lava", LayerType.LAVA)
 	pass # Replace with function body.
 
+func setCloudColor(color):
+	meshes[LayerType.CLOUD].material_override.albedo_color = color
+	
 func showClouds(show):
 	if show:
 		meshes[LayerType.CLOUD].visible = true
 	else:
 		meshes[LayerType.CLOUD].visible = false
 
-func applyBlueprint(blueprint = null):
-	if blueprint != null:
-		for layer in blueprint.getLayers():
-			var viewport = viewports[layer.layerIndex]
-			# Remove older brushes
-			for child in viewport.get_children():
-				child.visible = false
-				child.queue_free()
-			
-			# Add new brushes
-			for event in layer.getEvents():
-				match event.type:
-					EventType.FILL:
-						_createFillBrush(viewport, event)
-					EventType.NOISE:
-						_createNoiseBrush(viewport, event)
-			viewport.render_target_update_mode = Viewport.UPDATE_ONCE
-		for moon in blueprint.moons:
-			addMoon(moon)
+func applyBlueprint():
+	for layer in self.blueprint.getLayers():
+		var viewport = viewports[layer.layerIndex]
+		# Remove older brushes
+		for child in viewport.get_children():
+			child.visible = false
+			child.queue_free()
+		
+		# Add new brushes
+		for event in layer.getEvents():
+			match event.type:
+				EventType.FILL:
+					_createFillBrush(viewport, event)
+				EventType.NOISE:
+					_createNoiseBrush(viewport, event)
+		viewport.render_target_update_mode = Viewport.UPDATE_ONCE
+	
+	for moon in self.blueprint.moons:
+		addMoon(moon)
 		
 func updateLayer(layer):
 	var viewport = viewports[layer.layerIndex]

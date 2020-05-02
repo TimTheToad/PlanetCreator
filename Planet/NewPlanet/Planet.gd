@@ -21,8 +21,6 @@ var shouldOrbit
 var orbitMesh
 var vertexCount = 20
 
-
-
 func _ready():
 	_randomizeName()
 	cameraHolder = get_tree().current_scene.get_node("CameraHolderMaster")
