@@ -8,7 +8,7 @@
 [ext_resource path="res://GUI/BlueprintEditor/Panels/Blueprint Editor.tscn" type="PackedScene" id=6]
 [ext_resource path="res://GUI/HUDButtons/HelpButton.gd" type="Script" id=7]
 [ext_resource path="res://HelperEntities/Scripts/PlanetMover.gd" type="Script" id=8]
-[ext_resource path="res://Assets/hdr.png" type="Texture" id=9]
+[ext_resource path="res://Assets/spaceHDR.png" type="Texture" id=9]
 [ext_resource path="res://GUI/HUDButtons/PatternsButton.gd" type="Script" id=10]
 
 [sub_resource type="PanoramaSky" id=1]
@@ -17,7 +17,6 @@ panorama = ExtResource( 9 )
 [sub_resource type="Environment" id=2]
 background_mode = 2
 background_sky = SubResource( 1 )
-ambient_light_energy = 16.0
 tonemap_mode = 2
 glow_enabled = true
 glow_intensity = 0.16
