@@ -14,7 +14,7 @@ var nrOfPlanets
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.visible = false
-	cameraHolder = get_parent().get_parent().get_parent().get_node("CameraHolderMaster")
+	cameraHolder = get_parent().get_parent().get_parent().get_node("OrbitalCamera")
 	if cameraHolder:
 		camera = cameraHolder.get_child(0).get_child(0).get_child(0)
 		

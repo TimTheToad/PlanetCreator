@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Spatial",
 "class": "Moon",
 "language": "GDScript",
-"path": "res://MoonClass.gd"
+"path": "res://Planet/NewPlanet/ScriptManagment/MoonClass.gd"
 }, {
 "base": "Reference",
 "class": "PlanetLayer",
@@ -34,7 +34,6 @@ _global_script_class_icons={
 
 config/name="Planet"
 run/main_scene="res://Sandboxes/SolarScene.tscn"
-config/icon="res://icon.png"
 
 [autoload]
 
@@ -68,3 +67,7 @@ ui_paste={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":86,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"

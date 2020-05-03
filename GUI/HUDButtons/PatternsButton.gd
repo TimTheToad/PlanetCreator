@@ -2,7 +2,7 @@ extends Button
 
 var panel
 var richText
-var filePath = "res://KursText/help.txt"
+var filePath = "res://HelperEntities/KursText/patternsText.txt"
 
 func _ready():
 	panel = Panel.new()
@@ -16,8 +16,8 @@ func _ready():
 	richText.margin_right = -margin
 	richText.margin_bottom = -margin
 	
-	panel.rect_size = Vector2(300, 200)
-	panel.rect_position = Vector2(0, self.rect_size.y)
+	panel.rect_size = Vector2(400, 350)
+	panel.rect_position = Vector2(0, -350)
 	
 	panel.add_child(richText)
 	self.add_child(panel)
@@ -48,7 +48,8 @@ func loadFile(name):
 	var content = file.get_as_text()
 	file.close()
 	return content
-
-func _on_HelpButton_toggled(button_pressed):
+	
+func _on_PatternsButton_toggled(button_pressed):
 	panel.visible = button_pressed
+	
 	pass # Replace with function body.
