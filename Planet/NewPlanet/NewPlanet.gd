@@ -2,7 +2,7 @@ extends "Planet.gd"
 
 
 onready var viewports = get_node("Textures").get_children()
-
+onready var highlight = get_node("Highlight")
 # Brushes
 onready var noiseBrush = preload("res://Planet/NewPlanet/Brushes/NoiseBrush.tscn")
 var ringInstance
@@ -41,6 +41,10 @@ func _ready():
 	blueprint.addLayer("Liquid", LayerType.LIQUID)
 	blueprint.addLayer("Lava", LayerType.LAVA)
 	pass # Replace with function body.
+
+func highlight(toggle):
+	highlight.visible = toggle
+	highlight.emitting = toggle
 
 func setCloudColor(color):
 	meshes[LayerType.CLOUD].material_override.albedo_color = color
