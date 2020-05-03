@@ -40,6 +40,9 @@ func _ready():
 		var environmentDupe = environment.environment.duplicate()
 		environmentDupe.ambient_light_color = Color.white
 		world.environment = environmentDupe
+		
+		
+		
 		viewPort.world = world
 		viewPorts.append(viewPortContainer)
 		viewPortContainer.add_child(viewPort)

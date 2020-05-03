@@ -23,7 +23,6 @@ func _ready():
 	
 	firstCamera.translate(cameraOffset)
 	currentCamera = getCurrentCamera()
-	
 	updateLookAt()
 	
 	pass

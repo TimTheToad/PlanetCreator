@@ -159,12 +159,12 @@ func _on_Load_pressed():
 	if selectedBlueprint != null:
 		self.currentBlueprint = selectedBlueprint
 		self.currentPlanet.blueprint = self.currentBlueprint
-		currentPlanet.applyBlueprint(self.currentBlueprint)
+		currentPlanet.applyBlueprint()
 		showPlanetBlueprint(self.currentPlanet)
 	pass # Replace with function body.
 
 
 func _on_AddMoon_pressed():
 	self.currentBlueprint.addMoon(self.currentPlanet)
-	currentPlanet.applyBlueprint(self.currentBlueprint)
+	currentPlanet.applyBlueprint()
 	pass # Replace with function body.

@@ -21,8 +21,6 @@ var shouldOrbit
 var orbitMesh
 var vertexCount = 20
 
-
-
 func _ready():
 	
 	cameraHolder = get_tree().current_scene.get_node("CameraHolderMaster")
@@ -46,6 +44,25 @@ func createArrows():
 	node.add_child(zArrow)
 	
 	self.add_child(node)
+	
+	# Set position
+	var pos = Vector2(0.0, 0.0)
+	pos.x = cos(0) * major_axis
+	pos.y = sin(0) * minor_axis
+	
+	if major_axis > 0:
+		pos.x += 1.0
+	else:
+		pos.x -= 1.0
+	xArrow.translation = Vector3(pos.x, 0, pos.y)
+	
+	pos.x = cos(PI * 0.5) * major_axis
+	pos.y = sin(PI * 0.5) * minor_axis
+	if minor_axis > 0:
+		pos.y += 1.0
+	else:
+		pos.y -= 1.0
+	zArrow.translation = Vector3(pos.x, 0, pos.y)
 	
 func createArrow(color, scale = 0.2):
 	var arrowMat = SpatialMaterial.new()
@@ -115,10 +132,7 @@ func createOribitLines(vertexCount):
 	for i in vertexCount:
 		vPos.x = cos(angle) * major_axis
 		vPos.z = sin(angle) * minor_axis
-		if i == 0:
-			xArrow.translation = Vector3(vPos.x + 1, 0, vPos.z)
-		elif i == vertexCount/4:
-			zArrow.translation  = Vector3(vPos.x, 0, vPos.z + 1)
+
 		sf.add_vertex(vPos)
 		angle += rad
 	
@@ -151,22 +165,4 @@ func _process(dt):
 	if shouldOrbit:
 		self.rotate_y(PI * axisRotateSpeed * dt)
 		self.orbit(dt)
-#	if cameraHolder:
-	#   camera = cameraHolder.getCurrentCamera() #fett ooptimerat, fixa
-	#	unPos = camera.unproject_position(self.global_transform.origin)
-	#	if camera.global_transform.origin.dot(self.global_transform.origin) > 0:
-	#		nameLabel.visible = false
-	#	else:
-	#		nameLabel.visible = true
-	#
-	#	nameLabel.set_position(unPos - offset)
-#	self.rotate_y(PI * axisRotateSpeed * dt)
-#	camera = cameraHolder.getCurrentCamera() #fett ooptimerat, fixa
-#	unPos = camera.unproject_position(self.global_transform.origin)
-#	if camera.global_transform.origin.dot(self.global_transform.origin) > 0:
-#		nameLabel.visible = false
-#	else:
-#		nameLabel.visible = true
-#
-#	nameLabel.set_position(unPos - offset)
 	pass

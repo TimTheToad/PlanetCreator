@@ -81,17 +81,47 @@ func _input(event):
 #			var arrowPosition = camera.project_position(event.position, distanceToObject) - Vector3(1.0, 0.0, 0.0)
 			
 			var planet = xArr.get_parent().get_parent()
-			planet.major_axis = arrowPosition.x - 1.0
+			var offset = 0.0
+			
+			if planet.major_axis > 0.0:
+				offset = -1.0
+				if planet.major_axis < 1.0:
+					offset = -planet.major_axis
+			
+			if planet.major_axis < 0.0:
+				offset = 1.0
+				if planet.major_axis > -1.0:
+					offset = -planet.major_axis
+			
+			planet.major_axis = arrowPosition.x + offset
+			
+			arrowPosition.z = 0.0
+			xArr.translation = arrowPosition
+
 			planet.updateOrbitLines()
 			
 	elif zArr:
 		if event is InputEventMouseMotion:
-#			var relative = event.get_relative() * 0.1
 			var distanceToObject = getZValue(zArr.global_transform.origin)
-#			print(distanceToObject)
 			var arrowPosition = camera.project_position(event.position, camera.global_transform.origin.y)
-#			var arrowPosition = camera.project_position(event.position, distanceToObject)  - Vector3(0.0, 0.0, 1.0)
 			
 			var planet = zArr.get_parent().get_parent()
-			planet.minor_axis = arrowPosition.z - 1.0
+			var offset = 0.0
+			
+			if planet.minor_axis > 0.0:
+				offset = -1.0
+				if planet.minor_axis < 1.0:
+					offset = -planet.minor_axis
+			
+			if planet.minor_axis < 0.0:
+				offset = 1.0
+				if planet.minor_axis > -1.0:
+					offset = -planet.minor_axis
+			
+			planet.minor_axis = arrowPosition.z + offset
+			
+			arrowPosition.x = 0.0
+			zArr.translation = arrowPosition
+			
 			planet.updateOrbitLines()
+
