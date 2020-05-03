@@ -5,7 +5,6 @@ onready var viewports = get_node("Textures").get_children()
 
 # Brushes
 onready var noiseBrush = preload("res://Planet/NewPlanet/Brushes/NoiseBrush.tscn")
-onready var ringScene = preload("res://PlanetRings.tscn")
 var ringInstance
 var meshes = []
 

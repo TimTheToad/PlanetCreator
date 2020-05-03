@@ -14,7 +14,7 @@ var rayOrigin
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Retrive camera
-	cameraHolder = get_tree().current_scene.get_node("CameraHolderMaster")
+	cameraHolder = get_tree().current_scene.get_node("OrbitalCamera")
 
 	if !cameraHolder:
 		print("Failed to retrive cameraHolder for \"PlanetMover.gd\" on node: ", self.name)

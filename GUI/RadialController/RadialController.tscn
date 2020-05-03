@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Sandboxes/RadialController.gd" type="Script" id=1]
+[ext_resource path="res://GUI/RadialController/RadialController.gd" type="Script" id=1]
 
 [node name="RadialController" type="Control"]
 margin_left = 118.717

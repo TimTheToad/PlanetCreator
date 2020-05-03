@@ -1,9 +1,10 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://HelperEntities/PointIndication.tscn" type="PackedScene" id=1]
-[ext_resource path="res://OrbitalCamera.gd" type="Script" id=2]
+[ext_resource path="res://HelperEntities/OrbitalCamera.gd" type="Script" id=2]
 
-[node name="CameraHolderMaster" type="Spatial"]
+
+[node name="OrbitalCamera" type="Spatial"]
 script = ExtResource( 2 )
 
 [node name="PointIndication" parent="." instance=ExtResource( 1 )]

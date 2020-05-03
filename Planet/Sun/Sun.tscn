@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.992157, 1, 0, 1 )
+emission_enabled = true
+emission = Color( 0.882353, 0.627451, 0.227451, 1 )
+emission_energy = 4.15
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="SphereMesh" id=2]
+
+[node name="Sun" type="MeshInstance"]
+material_override = SubResource( 1 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="OmniLight" type="OmniLight" parent="."]
+omni_range = 600.9
