@@ -2,7 +2,7 @@ extends WindowDialog
 
 onready var LayerPanel = preload("res://GUI/BlueprintEditor/LayerPanel.tscn")
 onready var container = get_node("Panel/VBoxContainer/ScrollContainer/HBoxContainer")
-onready var blueprintNameLabel = get_node("Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer/Label")
+onready var blueprintNameLabel = get_node("Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/Label")
 onready var moonScene = preload("res://Planet/NewPlanet/Moon/Moon.tscn")
 onready var eventSettings = get_node("EventSettings")
 onready var blueprintLibraryPanel = get_node("BlueprintLibrary")
@@ -23,7 +23,7 @@ func showPlanetBlueprint(planet):
 	currentBlueprint = currentPlanet.blueprint
 	blueprintNameLabel.set_text(currentBlueprint.title)
 	
-	var showCloudsButton = get_node("Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer/ShowClouds")
+	var showCloudsButton = get_node("Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/ShowClouds")
 	showCloudsButton.pressed = currentBlueprint.getClouds()
 	
 	self.visible = true
