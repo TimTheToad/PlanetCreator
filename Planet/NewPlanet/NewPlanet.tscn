@@ -64,7 +64,7 @@ albedo_texture = SubResource( 10 )
 
 [sub_resource type="ShaderMaterial" id=12]
 shader = ExtResource( 3 )
-shader_param/period = 1.112
+shader_param/period = 2.529
 shader_param/octaves = 8
 
 [sub_resource type="SphereShape" id=13]

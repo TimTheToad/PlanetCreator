@@ -1,7 +1,7 @@
 extends ColorRect
 
 onready var eventPanel = preload("res://GUI/BlueprintEditor/Panels/EventPanel.tscn")
-onready var container = get_node("VBoxContainer")
+onready var container = get_node("ScrollContainer/VBoxContainer")
 onready var label = get_node("Base/Label")
 
 var mLayer

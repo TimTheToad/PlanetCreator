@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://SortPanelScene.gd" type="Script" id=1]
+
+[node name="Panel" type="Panel"]
+show_behind_parent = true
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -129.0
+margin_top = -27.0
+margin_right = 230.0
+margin_bottom = 37.0
+rect_min_size = Vector2( 258, 64 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -174.5
+margin_top = -31.0
+margin_right = 166.5
+margin_bottom = -6.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+margin_right = 87.0
+margin_bottom = 25.0
+text = "Sort By Size"
+
+[node name="Button2" type="Button" parent="HBoxContainer"]
+margin_left = 91.0
+margin_right = 190.0
+margin_bottom = 25.0
+text = "Sort By Name"
+
+[node name="Button3" type="Button" parent="HBoxContainer"]
+margin_left = 194.0
+margin_right = 341.0
+margin_bottom = 25.0
+text = "Sort By Last Modified"

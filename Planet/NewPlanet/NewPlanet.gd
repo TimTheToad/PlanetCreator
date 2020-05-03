@@ -5,7 +5,8 @@ onready var viewports = get_node("Textures").get_children()
 
 # Brushes
 onready var noiseBrush = preload("res://Planet/NewPlanet/Brushes/NoiseBrush.tscn")
-
+onready var ringScene = preload("res://PlanetRings.tscn")
+var ringInstance
 var meshes = []
 
 var blueprint
@@ -13,7 +14,8 @@ var blueprint
 enum EventType {
 	FILL,
 	NOISE,
-	CLEAR
+	CLEAR,
+	ADDMOON
 }
 
 enum LayerType {
@@ -30,25 +32,28 @@ var eventQueue = []
 func _ready():
 	meshes = self.get_node("Meshes").get_children()
 	
+#	if (randi() % 3) == 0:
+#		ringInstance = ringScene.instance()
+#		print(ringInstance)
+#		self.add_child(ringInstance)
+	
 	blueprint = Blueprint.new()
 	blueprint.addLayer("Base", LayerType.BASE)
 	blueprint.addLayer("Liquid", LayerType.LIQUID)
 	blueprint.addLayer("Lava", LayerType.LAVA)
-	
 	pass # Replace with function body.
 
+func setCloudColor(color):
+	meshes[LayerType.CLOUD].material_override.albedo_color = color
+	
 func showClouds(show):
 	if show:
 		meshes[LayerType.CLOUD].visible = true
 	else:
 		meshes[LayerType.CLOUD].visible = false
 
-func applyBlueprint(blueprint = null):
-	if blueprint == null:
-		blueprint = self.blueprint
-		
-	for layer in blueprint.getLayers():
-		
+func applyBlueprint():
+	for layer in self.blueprint.getLayers():
 		var viewport = viewports[layer.layerIndex]
 		# Remove older brushes
 		for child in viewport.get_children():
@@ -62,8 +67,10 @@ func applyBlueprint(blueprint = null):
 					_createFillBrush(viewport, event)
 				EventType.NOISE:
 					_createNoiseBrush(viewport, event)
-		
 		viewport.render_target_update_mode = Viewport.UPDATE_ONCE
+	
+	for moon in self.blueprint.moons:
+		addMoon(moon)
 		
 func updateLayer(layer):
 	var viewport = viewports[layer.layerIndex]
@@ -88,6 +95,9 @@ func updateLayer(layer):
 	
 	viewport.render_target_update_mode = Viewport.UPDATE_ONCE
 
+func addMoon(moon):
+	self.add_child(moon)
+
 func _createFillBrush(viewport, event):
 	var brush = ColorRect.new()
 	brush.color = event.color
@@ -107,7 +117,8 @@ func _createNoiseBrush(viewport, event):
 	brush.material = mat
 	
 	viewport.add_child(brush)
-	
+
+
 func _process(dt):
 	if blueprint:
 		blueprint.apply(self)

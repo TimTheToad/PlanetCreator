@@ -1,0 +1,24 @@
+[b][u]Planet Creator:[/u][/b]
+
+[b][u]Target Audience:[/u][/b]
+
+  * Utvecklare av spel(Artist)
+
+  * Spelkonsument
+
+[b][u]From Book:[/u][/b]
+
+  * Deferred Choices(Instant visual gratification)
+
+  * Spacial memory( customizable options panel)
+
+  * Changes midstream(multiple tabs open)
+
+  * Safe Explorations(history panel & ctrl+z)
+
+  * Incremental Construction(history Panel)
+
+  * Habituation(hot-keys)
+
+  * Thumbnail Grid(Alternate view)
+  

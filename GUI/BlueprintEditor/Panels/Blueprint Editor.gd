@@ -3,6 +3,7 @@ extends WindowDialog
 onready var LayerPanel = preload("res://GUI/BlueprintEditor/LayerPanel.tscn")
 onready var container = get_node("Panel/VBoxContainer/ScrollContainer/HBoxContainer")
 onready var blueprintNameLabel = get_node("Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer/Label")
+onready var moonScene = preload("res://Planet/NewPlanet/Moon/Moon.tscn")
 onready var eventSettings = get_node("EventSettings")
 onready var blueprintLibraryPanel = get_node("BlueprintLibrary")
 
@@ -77,60 +78,93 @@ func _eventSelection(eventPanel):
 
 
 func _selection(layerPanel):
-	if !Input.is_key_pressed(KEY_SHIFT):
-		while !selectedLayers.empty():
-			var layer = selectedLayers.back()
-			if layer != null:
-				layer.selected(false)
-			selectedLayers.pop_back()
-	
 	if selectedLayers.find(layerPanel) == -1:
 		layerPanel.selected(true)
+		
+		if !Input.is_key_pressed(KEY_SHIFT):
+			while !selectedLayers.empty():
+				var layer = selectedLayers.back()
+				if layer != null:
+					layer.selected(false)
+				selectedLayers.pop_back()
+		
 		selectedLayers.append(layerPanel)
+	else:
+		layerPanel.selected(false)
+		selectedLayers.erase(layerPanel)
 	
 func _on_AddFill_pressed():
-	for layerPanel in selectedLayers:
-		var event = layerPanel.getLayer().addFill(Color.red)
-	
-		var eventPanel = layerPanel.addPanel(event)
-		createEventSelectionSignal(eventPanel)
+	# Blink red if no layer selected
+	if selectedLayers.size() == 0:
+		var tween = self.get_node("Panel/VBoxContainer/ScrollContainer/Tween")
+		tween.remove_all()
+		tween.interpolate_property(container.get_parent(), "modulate",
+				Color.white, Color.red, 0.3,
+				Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+		tween.interpolate_property(container.get_parent(), "modulate",
+				Color.red, Color.white, 0.3,
+				Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+		tween.start()
+	else:
+		for layerPanel in selectedLayers:
+			var event = layerPanel.getLayer().addFill(Color.red)
 		
-		currentPlanet.applyBlueprint()
-		
-		eventSettings.updateSettings(eventPanel.layerEvent)
-		eventSettings.visible = true
+			var eventPanel = layerPanel.addPanel(event)
+			createEventSelectionSignal(eventPanel)
+			
+			currentPlanet.applyBlueprint()
+			
+			eventSettings.updateSettings(eventPanel.layerEvent)
+			eventSettings.visible = true
 	
 	pass # Replace with function body.
 
 func _on_AddNoise_pressed():
-	for layerPanel in selectedLayers:
-		var event = layerPanel.getLayer().addNoise(1.5, 5, Color.green)
-		
-		var eventPanel = layerPanel.addPanel(event)
-		createEventSelectionSignal(eventPanel)
-		
-		eventSettings.updateSettings(eventPanel.layerEvent)
-		eventSettings.visible = true
-		
-		currentPlanet.applyBlueprint()
+	# Blink red if no layer selected
+	if selectedLayers.size() == 0:
+		var tween = self.get_node("Panel/VBoxContainer/ScrollContainer/Tween")
+		tween.remove_all()
+		tween.interpolate_property(container.get_parent(), "modulate",
+				Color.white, Color.red, 0.3,
+				Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+		tween.interpolate_property(container.get_parent(), "modulate",
+				Color.red, Color.white, 0.3,
+				Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+		tween.start()
+	else:
+		for layerPanel in selectedLayers:
+			var event = layerPanel.getLayer().addNoise(1.5, 5, Color.green)
+			
+			var eventPanel = layerPanel.addPanel(event)
+			createEventSelectionSignal(eventPanel)
+			
+			eventSettings.updateSettings(eventPanel.layerEvent)
+			eventSettings.visible = true
+			
+			currentPlanet.applyBlueprint()
 	pass # Replace with function body.
 
 func _on_ShowClouds_toggled(button_pressed):
 	currentBlueprint.setClouds(button_pressed)
 	currentPlanet.applyBlueprint()
-	
 	pass # Replace with function body.
-
 
 func _on_Save_pressed():
 	BlueprintLibrary.saveBlueprint(currentBlueprint, blueprintNameLabel.text)
 	blueprintLibraryPanel.loadBlueprints()
 	pass # Replace with function body.
 
-
 func _on_Load_pressed():
-	self.currentBlueprint = blueprintLibraryPanel.getSelectedBlueprint()
-	self.currentPlanet.blueprint = self.currentBlueprint
-	currentPlanet.applyBlueprint(self.currentBlueprint)
-	showPlanetBlueprint(self.currentPlanet)
+	var selectedBlueprint = blueprintLibraryPanel.getSelectedBlueprint()
+	if selectedBlueprint != null:
+		self.currentBlueprint = selectedBlueprint
+		self.currentPlanet.blueprint = self.currentBlueprint
+		currentPlanet.applyBlueprint()
+		showPlanetBlueprint(self.currentPlanet)
+	pass # Replace with function body.
+
+
+func _on_AddMoon_pressed():
+	self.currentBlueprint.addMoon(self.currentPlanet)
+	currentPlanet.applyBlueprint()
 	pass # Replace with function body.

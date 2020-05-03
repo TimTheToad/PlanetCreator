@@ -8,12 +8,12 @@ onready var historyInstance = historyScene.instance()
 onready var alternateViewScene =  preload("res://GUI/AlternateView/AlternateViewRoot.tscn")
 onready var alternateViewInstance = alternateViewScene.instance()
 
-onready var textureViewerScene =  preload("res://GUI/TerrainManipulation/TextureViewer.tscn")
-onready var textureViewerInstance = textureViewerScene.instance()
+onready var planetPanelScene =  preload("res://GUI/PlanetPanel/PlanetPanel.tscn")
+onready var planetPanelInstance = planetPanelScene.instance()
 onready var buttons = [
 	["History", historyInstance, PRESET_CENTER],
 	["Alternate view", alternateViewInstance, PRESET_CENTER],
-	["Texture viewer", textureViewerInstance, PRESET_TOP_LEFT],
+	["Planet panel", planetPanelInstance, PRESET_CENTER],
 ]
 var radius = 50
 var points
@@ -23,7 +23,7 @@ onready var masterControl = self.get_parent()
 func _ready():
 	self.call_deferred("add_child", historyInstance)
 	self.call_deferred("add_child", alternateViewInstance)
-	self.call_deferred("add_child", textureViewerInstance)
+	self.call_deferred("add_child", planetPanelInstance)
 	self.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	masterControl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	buttonGroup.visible = false

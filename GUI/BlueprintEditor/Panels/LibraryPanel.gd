@@ -1,6 +1,7 @@
 extends Panel
 
 onready var container = get_node("ScrollContainer/VBoxContainer")
+onready var scrollContainer = get_node("ScrollContainer")
 
 func getSelectedBlueprint():
 	var index = 0
@@ -8,7 +9,18 @@ func getSelectedBlueprint():
 		if child.pressed:
 			return BlueprintLibrary.blueprints[index]
 		index += 1
-			
+	
+	# only happens when no blueprint is selected
+	
+	var tween = self.get_node("Tween")
+	tween.remove_all()
+	tween.interpolate_property(scrollContainer, "modulate",
+			Color.white, Color.red, 0.3,
+			Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+	tween.interpolate_property(scrollContainer, "modulate",
+			Color.red, Color.white, 0.3,
+			Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+	tween.start()
 
 func loadBlueprints():
 	for child in container.get_children():

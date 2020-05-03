@@ -5,7 +5,9 @@ var PlanetLayer = preload("res://Planet/NewPlanet/ScriptManagment/PlanetLayer.gd
 
 var layers = []
 var showClouds = false
+var cloudColor = Color.white
 var title = "Untitled"
+var moons = []
 
 func setClouds(show):
 	showClouds = show
@@ -15,6 +17,14 @@ func getClouds():
 	
 func getLayers():
 	return layers
+
+func addMoon(planet):
+	var moon = Moon.new(planet)
+	moons.append(moon)
+	pass
+
+func getMoons():
+	return moons
 
 func apply(planet):
 	applyLayers(planet)

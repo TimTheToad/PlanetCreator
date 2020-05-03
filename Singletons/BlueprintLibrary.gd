@@ -64,12 +64,17 @@ func loadBlueprint(fileName):
 	return blueprint
 
 func saveBlueprint(blueprint, fileName):
+	blueprint.title = fileName
 	blueprints.append(blueprint)
 	
 	var jsonBlueprint = {}
 	jsonBlueprint = {"Blueprint" : { "Name" : fileName, "Layers" : {}}}
 	
 	var layers = blueprint.getLayers()
+	
+	#Add moons
+	#	for moon in blueprint.getMoons():
+	
 	# Add layers
 	for layer in layers:
 		
@@ -91,7 +96,8 @@ func saveBlueprint(blueprint, fileName):
 			
 			jsonBlueprint["Blueprint"]["Layers"][layer.name][index] = eventElement
 			index += 1
-	
+
+		
 	var file = File.new()
 	file.open(dirPath + fileName + ".json", File.WRITE)
 	file.store_string(JSON.print(jsonBlueprint))
