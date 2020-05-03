@@ -3,7 +3,7 @@
 [ext_resource path="res://Planet/NewPlanet/NewPlanet.gd" type="Script" id=1]
 [ext_resource path="res://Planet/NewPlanet/Shaders/Liquid.shader" type="Shader" id=2]
 [ext_resource path="res://Planet/NewPlanet/Shaders/Cloud.shader" type="Shader" id=3]
-[ext_resource path="res://Assets/ring.png" type="Texture" id=4]
+[ext_resource path="res://Assets/ring2.png" type="Texture" id=4]
 [ext_resource path="res://Planet/NewPlanet/Shaders/Lava.shader" type="Shader" id=5]
 [ext_resource path="res://Assets/lavaNormal.png" type="Texture" id=6]
 [ext_resource path="res://Assets/lava.png" type="Texture" id=7]
@@ -20,7 +20,7 @@ albedo_texture = ExtResource( 4 )
 [sub_resource type="ParticlesMaterial" id=17]
 gravity = Vector3( 0, 0, 0 )
 scale = 3.0
-color = Color( 0.666667, 0.619608, 0.4, 1 )
+color = Color( 1, 1, 1, 0.643137 )
 
 [sub_resource type="QuadMesh" id=18]
 
@@ -90,6 +90,7 @@ shader_param/octaves = 8
 script = ExtResource( 1 )
 
 [node name="Highlight" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0247383, -0.0198383, 0.0331364 )
 visible = false
 material_override = SubResource( 16 )
 emitting = false
