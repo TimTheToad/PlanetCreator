@@ -28,6 +28,7 @@ func _ready():
 		var viewPortContainer = ViewportContainer.new()
 		viewPortContainer.stretch = true
 		viewPortContainer.set_h_size_flags(3) #Expand horizontal
+		viewPortContainer.set_v_size_flags(3)
 		viewPortContainer.rect_min_size = Vector2(128,128)
 		viewPortContainer.connect("mouse_entered", self, "_on_ViewPortContainer_mouse_entered", [viewPortContainer])
 		viewPortContainer.connect("mouse_exited", self, "_on_ViewPortContainer_mouse_exited")
@@ -50,7 +51,7 @@ func _ready():
 		nameLabel = Label.new()
 		nameLabel.text = planetsInScene.get_child(i).get_name()
 		var planet = planetsInScene.get_child(i).duplicate()
-		planet.name = "planet"
+		planet.name = nameLabel.text
 		nameDic[nameLabel.text] = planet
 		sizeDic[planet.scale[0]] = planet
 		planet.get_node("OrbitMeshNode").queue_free()
@@ -177,6 +178,27 @@ func swap(a,b, arr):
 	var temp = arr[a]
 	arr[a] = arr[b]
 	arr[b] = temp
+	pass
+
+func searchPlanet(text):
+	var names = []
+	for name in nameDic:
+		names.append(name)
+
+	var nonMatchingNames = []
+	for name in names:
+		if !name.matchn(text + "*"):
+			 nonMatchingNames.append(name)
+
+	for viewP in viewPorts:
+		if nonMatchingNames.has(viewP.get_child(0).get_child(0).name):
+			viewP.visible = false
+#			viewP.set_h_size_flags(3) #Expand horizontal
+#			viewP.set_v_size_flags(3)
+		else:
+			viewP.visible = true
+#			viewP.set_h_size_flags(0) #Expand horizontal
+#			viewP.set_v_size_flags(0)
 	pass
 
 func sortBySize():
