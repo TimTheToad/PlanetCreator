@@ -5,8 +5,8 @@ onready var viewports = get_node("Textures").get_children()
 
 # Brushes
 onready var noiseBrush = preload("res://Planet/NewPlanet/Brushes/NoiseBrush.tscn")
-
-
+onready var ringScene = preload("res://PlanetRings.tscn")
+var ringInstance
 var meshes = []
 
 var blueprint
@@ -14,7 +14,8 @@ var blueprint
 enum EventType {
 	FILL,
 	NOISE,
-	CLEAR
+	CLEAR,
+	ADDMOON
 }
 
 enum LayerType {
@@ -30,6 +31,11 @@ var eventQueue = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	meshes = self.get_node("Meshes").get_children()
+	
+#	if (randi() % 3) == 0:
+#		ringInstance = ringScene.instance()
+#		print(ringInstance)
+#		self.add_child(ringInstance)
 	
 	blueprint = Blueprint.new()
 	blueprint.addLayer("Base", LayerType.BASE)
@@ -108,7 +114,8 @@ func _createNoiseBrush(viewport, event):
 	brush.material = mat
 	
 	viewport.add_child(brush)
-	
+
+
 func _process(dt):
 	if blueprint:
 		blueprint.apply(self)

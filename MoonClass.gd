@@ -16,6 +16,7 @@ func _ready():
 	pass # Replace with function body.
 
 
+
 func _init(planet):
 
 	self.name = String(planet.name) + String("-M-") + String(randi() % 20)

@@ -24,7 +24,7 @@ var vertexCount = 20
 
 
 func _ready():
-	_randomizeName()
+	
 	cameraHolder = get_tree().current_scene.get_node("CameraHolderMaster")
 	shouldOrbit = false
 	
@@ -72,7 +72,9 @@ func createArrow(color, scale = 0.2):
 	
 	return arrow
 
-func _randomizeName():
+
+
+func randomizeName():
 	var planetName = "X-"
 	planetName += String(randi() % 1000)
 	self.name = planetName

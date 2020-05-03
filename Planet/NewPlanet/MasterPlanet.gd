@@ -1,7 +1,10 @@
 extends Spatial
 
 onready var planetScene = preload("res://Planet/NewPlanet/NewPlanet.tscn")
-const PLANET_COUNT = 3
+onready var alternateView = preload("res://GUI/AlternateView/AlternateViewRoot.tscn")
+onready var alternateInstance = alternateView.instance()
+const PLANET_COUNT = 5
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -15,13 +18,13 @@ func _ready():
 		instance.phi = PI * 2.0 * randf()
 		var s = 0.25 + randf()
 		instance.scale = Vector3(s,s,s)
+		instance.randomizeName()
 		self.add_child(instance)
 		instance.shouldPlanetOrbit(true)
 		instance.createOribitLines(instance.vertexCount)
-		
-	
-	pass # Replace with function body.
 
+	alternateInstance.connect("sorted", self, "updateAlternateView")
+	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(dt):
