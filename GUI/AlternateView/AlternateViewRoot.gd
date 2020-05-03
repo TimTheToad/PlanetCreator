@@ -215,7 +215,7 @@ func sortBySize():
 	for i in range(sizes.size()):
 		minId = i
 		for j in range(i+1, sizes.size()):
-			if sizes[minId]> sizes[j]:
+			if sizes[minId] < sizes[j]:
 				minId = j
 
 
