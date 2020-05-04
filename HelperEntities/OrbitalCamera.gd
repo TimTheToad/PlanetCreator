@@ -9,6 +9,7 @@ var cameraHolderX
 
 var zoomSpeed = 0.1
 
+# for the free moving camera (w,a,s,d)
 var thirdCamera
 var moveSpeed = 1.5
 var freecamHolder
@@ -52,10 +53,13 @@ func _process(delta):
 			movement -= thirdCamera.global_transform.basis.x
 		else:
 			movement += Vector3(0,0,0)
-		
+		# normalized so if both forward and left is pressed it won't double the speed
 		movement = movement.normalized()
-		
-		self.translation += movement * moveSpeed * delta
+		var speed = moveSpeed
+		if Input.is_action_pressed("speed_boost"):
+			speed = moveSpeed * 2
+			
+		self.translation += movement * speed * delta
 	
 	if Input.is_mouse_button_pressed(BUTTON_RIGHT):
 		if firstCamera.is_current():
