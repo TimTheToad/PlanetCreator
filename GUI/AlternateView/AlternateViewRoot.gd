@@ -9,10 +9,14 @@ onready var hBoxContainer = get_node("ScrollContainer/HBoxContainer")
 onready var window = self
 onready var planetsInScene = get_parent().get_parent().get_parent().get_child(0)
 onready var environment = get_parent().get_parent().get_parent().get_node("WorldEnvironment")
+onready var rayScript = load("res://GUI/AlternateView/ViewportRayCast.gd")
+var namePanel
 var hoveredViewPortContainer
 var planetsInView = []
 var cameras = []
 var nameLabel
+var sizeLabel
+var viewPortContainers = []
 var viewPorts = []
 
 
@@ -24,6 +28,7 @@ func _ready():
 #	hBoxContainer.set_as_toplevel(true)
 #	hBoxContainer.set_h_size_flags(3)
 	window.visible = false
+	namePanel = get_node("NamePanel")
 	for i in range(planetsInScene.get_child_count()):
 		var viewPortContainer = ViewportContainer.new()
 		viewPortContainer.stretch = true
@@ -37,6 +42,8 @@ func _ready():
 		var viewPort = Viewport.new()
 		viewPort.own_world = true
 		viewPort.render_target_update_mode = Viewport.UPDATE_WHEN_VISIBLE
+		viewPort.set_script(rayScript)
+		viewPorts.append(viewPort)
 		var world = World.new()
 		var environmentDupe = environment.environment.duplicate()
 		environmentDupe.ambient_light_color = Color.white
@@ -45,23 +52,27 @@ func _ready():
 		
 		
 		viewPort.world = world
-		viewPorts.append(viewPortContainer)
+		viewPortContainers.append(viewPortContainer)
 		viewPortContainer.add_child(viewPort)
 		
 		nameLabel = Label.new()
-		nameLabel.text = planetsInScene.get_child(i).get_name()
+		nameLabel.text = "Name: " + planetsInScene.get_child(i).get_name()
+		nameLabel.name = "nameLabel"
 		var planet = planetsInScene.get_child(i).duplicate()
-		planet.name = nameLabel.text
-		nameDic[nameLabel.text] = planet
+		planet.name = planetsInScene.get_child(i).get_name()
+		nameDic[planet.name] = planet
 		sizeDic[planet.scale[0]] = planet
 		planet.get_node("OrbitMeshNode").queue_free()
+		sizeLabel = Label.new()
+		sizeLabel.text = "Radius: " + String(stepify(planet.scale[0] * 100, 0.01)) + "Km"
 		planet.add_child(nameLabel)
-
+		planet.add_child(sizeLabel)
+		sizeLabel.set_anchors_and_margins_preset(Control.PRESET_BOTTOM_LEFT)
 		viewPort.add_child(planet)
 		
 		var camera = Camera.new()
 		camera.name = "camera"
-		camera.set_orthogonal(3.0, 0.05, 15.0)
+		camera.set_orthogonal(3.0, 0.05, 50.0)
 		camera.translate(Vector3(5.0, 0.0, 0.0))
 		camera.look_at(planet.translation, Vector3(0.0, 1.0, 0.0))
 		viewPort.add_child(camera)
@@ -79,8 +90,8 @@ func _on_ViewPortContainer_mouse_entered(container):
 	pass
 	
 func _on_ViewPortContainer_mouse_exited():
-	hoveredViewPortContainer = null
-	planet = null
+#	hoveredViewPortContainer = null
+#	planet = null
 	pass
 
 var planet
@@ -97,7 +108,8 @@ func _input(event):
 				vPort = hoveredViewPortContainer.get_child(0)
 				planet = vPort.get_child(0)
 				mousePos = event.position
-				print(planet.name)
+#				print(planet.name)
+				namePanel.visible = true
 		if event.is_pressed():
 			pressed = true
 		else:
@@ -111,7 +123,7 @@ func _input(event):
 	pass
 
 func getViewPorts():
-	return viewPorts
+	return viewPortContainers
 	pass
 
 func _planetUpdateChange(changedPlanet):
@@ -129,7 +141,13 @@ func updateView():
 func _process(delta):
 
 	pass
-	
+
+func _updatePlanetName(planet):
+	print(planet)
+	planet = planet
+	planet = planet
+	pass
+
 var planets = []
 func sortByName():
 	tweenIt(2.0, Color.white, Color.black)
@@ -141,25 +159,29 @@ func sortByName():
 		names.append(name)
 		planetIndexArr.append(planetIndex)
 		planetIndex += 1
-		
 	for i in range(names.size()):
 		minId = i
 		for j in range(i+1, names.size()):
 			var maxIt = names[j].length()
-			if names[minId][2].to_ascii()[0] > names[j][2].to_ascii()[0]:
+			if names[minId][0].to_ascii()[0] > names[j][0].to_ascii()[0]:
 				minId = j
-			elif names[minId][2].to_ascii()[0] == names[j][2].to_ascii()[0]:
-				if names[minId][3].to_ascii()[0] > names[j][3].to_ascii()[0]:
+			elif names[minId][0].to_ascii()[0] == names[j][0].to_ascii()[0]:
+				if names[minId][1].to_ascii()[0] > names[j][1].to_ascii()[0]:
 					minId = j
-
+				elif names[minId][1].to_ascii()[0] == names[j][1].to_ascii()[0]:
+					if names[minId][2].to_ascii()[0] > names[j][2].to_ascii()[0]:
+						minId = j
+					elif names[minId][2].to_ascii()[0] == names[j][2].to_ascii()[0]:
+						if names[minId][3].to_ascii()[0] > names[j][3].to_ascii()[0]:
+							minId = j
 		swap(i, minId, names)
 		swap(i, minId, planetIndexArr)
 		
 	var size = hBoxContainer.get_child_count()
 	for i in range(names.size()):
-		hBoxContainer.remove_child(viewPorts[i])
+		hBoxContainer.remove_child(viewPortContainers[i])
 	for i in range(names.size()):
-		hBoxContainer.add_child(viewPorts[planetIndexArr[i]])
+		hBoxContainer.add_child(viewPortContainers[planetIndexArr[i]])
 	pass
 
 func tweenIt(time, color1, color2):
@@ -190,7 +212,7 @@ func searchPlanet(text):
 		if !name.matchn(text + "*"):
 			 nonMatchingNames.append(name)
 
-	for viewP in viewPorts:
+	for viewP in viewPortContainers:
 		if nonMatchingNames.has(viewP.get_child(0).get_child(0).name):
 			viewP.visible = false
 #			viewP.set_h_size_flags(3) #Expand horizontal
@@ -224,9 +246,9 @@ func sortBySize():
 		
 	var size = hBoxContainer.get_child_count()
 	for i in range(sizes.size()):
-		hBoxContainer.remove_child(viewPorts[i])
+		hBoxContainer.remove_child(viewPortContainers[i])
 	for i in range(sizes.size()):
-		hBoxContainer.add_child(viewPorts[planetIndexArr[i]])
+		hBoxContainer.add_child(viewPortContainers[planetIndexArr[i]])
 	pass
 
 func getPlanetsInScene():
@@ -234,3 +256,15 @@ func getPlanetsInScene():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+
+func _on_LineEdit_text_entered(new_text):
+	namePanel.visible = false
+	for vp in viewPorts:
+		var plan = vp.get_child(0)
+		if plan.name == planet.name:
+			planet.name = new_text
+			plan.get_node("nameLabel").text = "Name: " + new_text
+	hoveredViewPortContainer = null
+	planet = null
+	pass # Replace with function body.
