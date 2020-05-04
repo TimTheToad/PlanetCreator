@@ -44,8 +44,15 @@ margin_right = 190.0
 margin_bottom = 25.0
 text = "Sort By Name"
 
-[node name="Button3" type="Button" parent="HBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer"]
 margin_left = 194.0
-margin_right = 341.0
+margin_top = 5.0
+margin_right = 240.0
+margin_bottom = 19.0
+text = "Search:"
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer"]
+margin_left = 244.0
+margin_right = 344.0
 margin_bottom = 25.0
-text = "Sort By Last Modified"
+rect_min_size = Vector2( 100, 0 )

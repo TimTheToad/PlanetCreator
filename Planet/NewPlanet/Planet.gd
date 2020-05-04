@@ -113,6 +113,10 @@ func updateOrbitLines():
 	
 	pass
 
+func toggleOrbitGlow(toggle):
+	orbitMesh.material_override.emission = toggle
+
+
 func makeOrbitArrowVisible(isVisible):
 	xArrow.visible = isVisible
 	xArrow.get_child(0).input_ray_pickable = isVisible
@@ -136,7 +140,6 @@ func createOribitLines(vertexCount):
 		sf.add_vertex(vPos)
 		angle += rad
 	
-	
 	if !orbitMesh:
 		orbitMesh = MeshInstance.new()
 		orbitMesh.name = "OrbitMesh"
@@ -147,6 +150,7 @@ func createOribitLines(vertexCount):
 		mat.albedo_color.a = 0.1
 		mat.flags_transparent = true
 		mat.flags_unshaded = true
+		
 		orbitMesh.material_override = mat
 		
 		var node = Node.new()
