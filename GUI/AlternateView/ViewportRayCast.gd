@@ -1,5 +1,5 @@
 extends Node
-signal updateName(selected)
+signal selectPlanet(selected)
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -14,7 +14,7 @@ var alternateViewRoot
 func _ready():
 	
 	alternateViewRoot = get_parent().get_parent().get_parent().get_parent()
-	self.connect("updateName", alternateViewRoot, "_updatePlanetName")
+	self.connect("selectPlanet", alternateViewRoot, "_selectPlanetName")
 	get_parent().connect("gui_input", self, "_handleGuiEvent")
 	pass # Replace with function body.
 
@@ -44,7 +44,7 @@ func _handleGuiEvent(event):
 				# collider will be the node you hit
 				selected = hit.collider.get_parent()
 				print(selected)
-				emit_signal("updateName", selected)
+				emit_signal("selectPlanet", selected)
 #				print(selected)
 
 	pass

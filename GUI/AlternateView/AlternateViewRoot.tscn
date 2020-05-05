@@ -91,4 +91,5 @@ margin_left = 78.0
 margin_right = 163.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 85, 24 )
+caret_blink = true
 [connection signal="text_entered" from="NamePanel/HBoxContainer/LineEdit" to="." method="_on_LineEdit_text_entered"]

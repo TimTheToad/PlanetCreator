@@ -18,7 +18,7 @@ var nameLabel
 var sizeLabel
 var viewPortContainers = []
 var viewPorts = []
-
+onready var nameEdit = get_node("NamePanel/HBoxContainer/LineEdit")
 
 var nameDic = {}
 var sizeDic = {}
@@ -40,7 +40,6 @@ func _ready():
 		hBoxContainer.add_child(viewPortContainer)
 		
 		var viewPort = Viewport.new()
-		viewPort.own_world = true
 		viewPort.render_target_update_mode = Viewport.UPDATE_WHEN_VISIBLE
 		viewPort.set_script(rayScript)
 		viewPorts.append(viewPort)
@@ -94,7 +93,7 @@ func _on_ViewPortContainer_mouse_exited():
 #	planet = null
 	pass
 
-var planet
+var selectedPlanet
 var pressed
 var vPort
 var mousePos
@@ -106,18 +105,17 @@ func _input(event):
 			
 			if hoveredViewPortContainer:
 				vPort = hoveredViewPortContainer.get_child(0)
-				planet = vPort.get_child(0)
 				mousePos = event.position
 #				print(planet.name)
-				namePanel.visible = true
+
 		if event.is_pressed():
 			pressed = true
 		else:
 			pressed = false
 	if hoveredViewPortContainer:
 		if event is InputEventMouseMotion and pressed:
-			if planet:
-				planet.rotatePlanet(event.get_relative())
+			if selectedPlanet:
+				selectedPlanet.rotatePlanet(event.get_relative())
 #				vPort.warp_mouse(mousePos)
 		
 	pass
@@ -142,10 +140,10 @@ func _process(delta):
 
 	pass
 
-func _updatePlanetName(planet):
+func _selectPlanetName(planet):
 	print(planet)
-	planet = planet
-	planet = planet
+	selectedPlanet = planet
+	namePanel.visible = true
 	pass
 
 var planets = []
@@ -159,6 +157,7 @@ func sortByName():
 		names.append(name)
 		planetIndexArr.append(planetIndex)
 		planetIndex += 1
+		print(names)
 	for i in range(names.size()):
 		minId = i
 		for j in range(i+1, names.size()):
@@ -176,7 +175,7 @@ func sortByName():
 							minId = j
 		swap(i, minId, names)
 		swap(i, minId, planetIndexArr)
-		
+	print(names)
 	var size = hBoxContainer.get_child_count()
 	for i in range(names.size()):
 		hBoxContainer.remove_child(viewPortContainers[i])
@@ -260,11 +259,17 @@ func getPlanetsInScene():
 
 func _on_LineEdit_text_entered(new_text):
 	namePanel.visible = false
+	var tempNameDic = {}
 	for vp in viewPorts:
-		var plan = vp.get_child(0)
-		if plan.name == planet.name:
-			planet.name = new_text
-			plan.get_node("nameLabel").text = "Name: " + new_text
-	hoveredViewPortContainer = null
-	planet = null
+		var planet = vp.get_child(0)
+		
+		if planet.name == selectedPlanet.name:
+			nameDic.erase(selectedPlanet.name)
+			selectedPlanet.name = new_text
+			tempNameDic[selectedPlanet.name] = selectedPlanet
+			planet.get_node("nameLabel").text = "Name: " + new_text
+		tempNameDic[planet.name ] = planet
+	nameDic = tempNameDic
+	nameEdit.clear()
+	selectedPlanet = null
 	pass # Replace with function body.
