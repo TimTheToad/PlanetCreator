@@ -10,6 +10,8 @@ onready var window = self
 onready var planetsInScene = get_parent().get_parent().get_parent().get_child(0)
 onready var environment = get_parent().get_parent().get_parent().get_node("WorldEnvironment")
 onready var rayScript = load("res://GUI/AlternateView/ViewportRayCast.gd")
+
+
 var namePanel
 var hoveredViewPortContainer
 var planetsInView = []
@@ -25,11 +27,11 @@ var sizeDic = {}
 var camDic = {}
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	hBoxContainer.set_as_toplevel(true)
-#	hBoxContainer.set_h_size_flags(3)
 	window.visible = false
 	namePanel = get_node("NamePanel")
 	for i in range(planetsInScene.get_child_count()):
+		var vBoxContainer = VBoxContainer.new()
+		hBoxContainer.add_child(vBoxContainer)
 		var viewPortContainer = ViewportContainer.new()
 		viewPortContainer.stretch = true
 		viewPortContainer.set_h_size_flags(3) #Expand horizontal
@@ -37,7 +39,7 @@ func _ready():
 		viewPortContainer.rect_min_size = Vector2(128,128)
 		viewPortContainer.connect("mouse_entered", self, "_on_ViewPortContainer_mouse_entered", [viewPortContainer])
 		viewPortContainer.connect("mouse_exited", self, "_on_ViewPortContainer_mouse_exited")
-		hBoxContainer.add_child(viewPortContainer)
+		vBoxContainer.add_child(viewPortContainer)
 		
 		var viewPort = Viewport.new()
 		viewPort.render_target_update_mode = Viewport.UPDATE_WHEN_VISIBLE
@@ -64,8 +66,8 @@ func _ready():
 		planet.get_node("OrbitMeshNode").queue_free()
 		sizeLabel = Label.new()
 		sizeLabel.text = "Radius: " + String(stepify(planet.scale[0] * 100, 0.01)) + "Km"
-		planet.add_child(nameLabel)
-		planet.add_child(sizeLabel)
+		vBoxContainer.add_child(nameLabel)
+		vBoxContainer.add_child(sizeLabel)
 		sizeLabel.set_anchors_and_margins_preset(Control.PRESET_BOTTOM_LEFT)
 		viewPort.add_child(planet)
 		
@@ -278,7 +280,6 @@ func _on_LineEdit_text_entered(new_text):
 		tempNameDic[planet.name ] = planet
 	nameDic = tempNameDic
 	nameEdit.clear()
-	
 
 	selectedPlanet = null
 	pass # Replace with function body.

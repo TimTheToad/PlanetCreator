@@ -1,6 +1,6 @@
 extends WindowDialog
 
-
+signal planetPanelSignal
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -14,6 +14,7 @@ var nrOfPlanets
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.visible = false
+	self.connect("planetPanelSignal", self, "updatePanel")
 	cameraHolder = get_parent().get_parent().get_parent().get_node("OrbitalCamera")
 	if cameraHolder:
 		camera = cameraHolder.get_child(0).get_child(0).get_child(0)
