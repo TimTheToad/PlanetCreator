@@ -89,10 +89,16 @@ func _process(delta):
 				freecamHolder.rotate_x(cameraNewRotation[1] * 0.01)
 			else:
 				freecamHolder.rotation.x = -deg2rad(79)
-				
+
 			self.rotate_y(cameraNewRotation[0] * 0.01)
 			cameraNewRotation = Vector2(0.0, 0.0)
-				
+#	if InputEventMouseMotion:
+#		if thirdCamera.is_current():
+#
+#			freecamHolder.rotate_x(-cameraNewRotation[1] * 0.01)
+#
+#			self.rotate_y(cameraNewRotation[0] * 0.01)
+#			cameraNewRotation = Vector2(0.0, 0.0)
 	updateLookAt()
 	
 	if target and firstCamera.is_current():
