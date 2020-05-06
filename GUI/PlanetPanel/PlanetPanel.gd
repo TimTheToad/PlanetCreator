@@ -35,6 +35,14 @@ func _GoToPlanet(name):
 	cameraHolder.target = planetInstance
 	cameraHolder.updateLookAt()
 
+func updatePanel():
+	nrOfPlanets = planets.get_child_count()
+	for i in range(nrOfPlanets):
+		planetContainer.get_child(i).queue_free()
+		var button = Button.new()
+		button.text = planets.get_child(i).get_name()
+		button.connect("pressed", self, "_GoToPlanet", [button.text])
+		planetContainer.add_child(button)
 
 		
 

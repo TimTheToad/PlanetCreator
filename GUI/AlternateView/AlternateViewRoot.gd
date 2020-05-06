@@ -267,12 +267,18 @@ func _on_LineEdit_text_entered(new_text):
 		var planet = vp.get_child(0)
 		
 		if planet.name == selectedPlanet.name:
+			for i in range(planetsInScene.get_child_count()):
+				if planetsInScene.get_child(i).name == selectedPlanet.name:
+					planetsInScene.get_child(i).name = new_text
 			nameDic.erase(selectedPlanet.name)
 			selectedPlanet.name = new_text
+
 			tempNameDic[selectedPlanet.name] = selectedPlanet
 			planet.get_node("nameLabel").text = "Name: " + new_text
 		tempNameDic[planet.name ] = planet
 	nameDic = tempNameDic
 	nameEdit.clear()
+	
+
 	selectedPlanet = null
 	pass # Replace with function body.
