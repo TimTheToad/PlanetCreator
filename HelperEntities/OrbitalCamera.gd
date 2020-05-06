@@ -9,6 +9,11 @@ var cameraHolderX
 
 var zoomSpeed = 0.1
 
+# for the free moving camera (w,a,s,d)
+var thirdCamera
+var moveSpeed = 1.5
+var freecamHolder
+
 var cameraHolderY
 var cameraNewRotation
 # Called when the node enters the scene tree for the first time.
@@ -20,6 +25,8 @@ func _ready():
 	cameraHolderX = self.get_node("CameraHolderY/ComeraHolderX")
 	firstCamera = self.get_node("CameraHolderY/ComeraHolderX/Camera")
 	secondCamera = self.get_node("TopViewCamera")
+	freecamHolder = self.get_node("FreecamHolder")
+	thirdCamera = self.get_node("FreecamHolder/Freecam")
 	
 	firstCamera.translate(cameraOffset)
 	currentCamera = getCurrentCamera()
@@ -31,6 +38,28 @@ func setTarget(target):
 	self.target = target
 
 func _process(delta):
+	if thirdCamera.is_current():
+		var movement := Vector3()
+		if Input.is_action_pressed("move_forward"):
+			movement -= thirdCamera.global_transform.basis.z 
+		elif Input.is_action_pressed("move_back"):
+			movement += thirdCamera.global_transform.basis.z 
+		else:
+			movement = Vector3(0,0,0)
+			
+		if Input.is_action_pressed("move_right"):
+			movement += thirdCamera.global_transform.basis.x
+		elif Input.is_action_pressed("move_left"):
+			movement -= thirdCamera.global_transform.basis.x
+		else:
+			movement += Vector3(0,0,0)
+		# normalized so if both forward and left is pressed it won't double the speed
+		movement = movement.normalized()
+		var speed = moveSpeed
+		if Input.is_action_pressed("speed_boost"):
+			speed = moveSpeed * 2
+			
+		self.translation += movement * speed * delta
 	
 	if Input.is_mouse_button_pressed(BUTTON_RIGHT):
 		if firstCamera.is_current():
@@ -50,7 +79,20 @@ func _process(delta):
 		elif secondCamera.is_current():
 			self.translate(Vector3(cameraNewRotation[0] * 0.1, 0.0, cameraNewRotation[1] * 0.1))
 			cameraNewRotation = Vector2(0.0, 0.0)
+		elif thirdCamera.is_current():
+			if freecamHolder.rotation.x < deg2rad(80):
+				freecamHolder.rotate_x(cameraNewRotation[1] * 0.01)
+			else:
+				freecamHolder.rotation.x = deg2rad(79)
 
+			if freecamHolder.rotation.x > -deg2rad(80):
+				freecamHolder.rotate_x(cameraNewRotation[1] * 0.01)
+			else:
+				freecamHolder.rotation.x = -deg2rad(79)
+				
+			self.rotate_y(cameraNewRotation[0] * 0.01)
+			cameraNewRotation = Vector2(0.0, 0.0)
+				
 	updateLookAt()
 	
 	if target and firstCamera.is_current():
@@ -85,10 +127,7 @@ func _input(event):
 				currentCamera.translation = currentCamera.translation + direction * zoomSpeed
 		if event.button_index == BUTTON_WHEEL_DOWN:
 			if (currentCamera == firstCamera or secondCamera.translation.y < 40.0):
-				currentCamera.translation = currentCamera.translation - direction * zoomSpeed
-
-				
-			
+				currentCamera.translation = currentCamera.translation - direction * zoomSpeed			
 	pass
 	
 func updateLookAt():
@@ -105,6 +144,8 @@ func getCurrentCamera():
 		return firstCamera
 	elif secondCamera.is_current():
 		return secondCamera
+	elif thirdCamera.is_current():
+		return thirdCamera
 	pass
 
 
@@ -116,5 +157,11 @@ func _on_TopViewButton_pressed():
 
 func _on_OrbitalViewButton_pressed():
 	firstCamera.make_current()
+	updateLookAt()
+	pass # Replace with function body.
+
+
+func _on_FreeCamViewButton_pressed():
+	thirdCamera.make_current()
 	updateLookAt()
 	pass # Replace with function body.
