@@ -1,6 +1,6 @@
 extends Spatial
 
-var target
+var target = null
 var secondCamera
 var direction
 var firstCamera
@@ -115,7 +115,7 @@ func _input(event):
 			currentCamera = secondCamera
 			
 			# Temp solution
-			get_tree().current_scene.get_node("Control/Blueprint Editor").visible = false
+#			get_tree().current_scene.get_node("Control/Blueprint Editor").visible = false
 			
 		if event.is_action_pressed("ui_down") and !event.echo:
 			firstCamera.make_current()
@@ -123,7 +123,7 @@ func _input(event):
 			currentCamera = firstCamera
 			
 			# Temp solution
-			get_tree().current_scene.get_node("Control/Blueprint Editor").visible = true
+#			get_tree().current_scene.get_node("Control/Blueprint Editor").visible = true
 			
 	if event is InputEventMouseMotion:
 		cameraNewRotation = event.get_relative()
