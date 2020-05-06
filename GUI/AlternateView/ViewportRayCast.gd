@@ -21,19 +21,18 @@ func _ready():
 func _handleGuiEvent(event):	
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.is_pressed():
-#			print("snopp")
 			# Get essential data for raycast
 			var viewport = self
 			var mousePos = viewport.get_mouse_position()
-			print(mousePos)
-			print(event.position)
+#			print(mousePos)
+#			print(event.position)
 			# Project ray
 			camera = self.get_node("camera")
 			rayOrigin = camera.project_ray_origin(event.position)
 			var rayDir = camera.project_ray_normal(event.position)
 #			print(get_child(0).global_transform.origin)
 #			print(rayDir)
-			print(rayOrigin)
+#			print(rayOrigin)
 			var rayDist = 1000
 
 			var from = rayOrigin
@@ -43,7 +42,7 @@ func _handleGuiEvent(event):
 			if hit.size() != 0:
 				# collider will be the node you hit
 				selected = hit.collider.get_parent()
-				print(selected)
+#				print(selected)
 				emit_signal("selectPlanet", selected)
 #				print(selected)
 
