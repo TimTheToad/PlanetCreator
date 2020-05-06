@@ -65,6 +65,7 @@ func _process(delta):
 			if button.is_hovered():
 				isHovered = true
 				button.emit_signal("pressed")
+
 			else:
 				isHovered = false
 	if radialReleased and !isHovered:
@@ -82,6 +83,8 @@ func PositionButtonsInRadial(mousePos):
 	
 func _showWindow(instance, anchorPreset):
 	instance.visible = true
+	if instance.name == "PlanetPanel":
+		instance.updatePanel()
 	instance.set_anchors_preset(anchorPreset, true);
 	buttonGroup.visible = false
 
