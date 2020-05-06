@@ -50,6 +50,8 @@ func _input(event):
 				elif selected.name == "zArrow":
 					zArr = selected
 					selected = null
+					
+				# if planet is selected
 				else:
 					if prevSelected:
 						prevSelected.makeOrbitArrowVisible(false)
@@ -57,8 +59,8 @@ func _input(event):
 					selected.makeOrbitArrowVisible(true)
 					selected.highlight(true)
 					
-					if camera.name != "TopViewCamera":
-						blueprintEditor.showPlanetBlueprint(selected)
+#					if camera.name != "TopViewCamera":
+#						blueprintEditor.showPlanetBlueprint(selected)
 
 		if event.button_index == BUTTON_LEFT and !event.is_pressed():
 			if selected:

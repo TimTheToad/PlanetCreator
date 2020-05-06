@@ -1,0 +1,1 @@
+{"Blueprint":{"Name":"Snow","Layers":{"Base":{"0":{"type":0,"color":"ffc4c4c4"},"1":{"type":1,"period":1.5,"octave":5,"color":"ff5e5e5e"},"2":{"type":1,"period":3.5,"octave":5,"color":"ff747474"},"3":{"type":1,"period":0.7,"octave":5,"color":"ffffffff"}},"Liquid":{"0":{"type":1,"period":1.4,"octave":5,"color":"ffa5c7e7"}},"Lava":{}}}}

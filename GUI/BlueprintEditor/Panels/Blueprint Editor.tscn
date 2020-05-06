@@ -29,6 +29,7 @@ corner_radius_top_left = 5
 corner_radius_bottom_left = 5
 
 [node name="Blueprint Editor" type="WindowDialog"]
+visible = true
 margin_right = 400.0
 margin_bottom = 300.0
 rect_min_size = Vector2( 300, 200 )
@@ -59,75 +60,75 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer2" type="MarginContainer" parent="Panel/VBoxContainer"]
+[node name="Settings" type="MarginContainer" parent="Panel/VBoxContainer"]
 margin_right = 380.0
 margin_bottom = 72.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Settings"]
 margin_right = 380.0
 margin_bottom = 72.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
 margin_right = 124.0
 margin_bottom = 72.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label" type="TextEdit" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer"]
+[node name="Label" type="TextEdit" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer"]
 margin_right = 124.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 0, 20 )
 text = "Planet Name"
 
-[node name="ShowClouds" type="CheckBox" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer"]
+[node name="ShowClouds" type="CheckBox" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer"]
 margin_top = 24.0
 margin_right = 124.0
 margin_bottom = 48.0
 text = "Show Clouds"
 
-[node name="ColorPickerButton" type="ColorPickerButton" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer"]
+[node name="ColorPickerButton" type="ColorPickerButton" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer"]
 margin_top = 52.0
 margin_right = 124.0
 margin_bottom = 72.0
 theme = SubResource( 1 )
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
 margin_left = 128.0
 margin_right = 252.0
 margin_bottom = 72.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="AddFill" type="Button" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer2"]
+[node name="AddFill" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2"]
 margin_right = 124.0
 margin_bottom = 20.0
 text = "Add Fill"
 
-[node name="AddNoise" type="Button" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer2"]
+[node name="AddNoise" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2"]
 margin_top = 24.0
 margin_right = 124.0
 margin_bottom = 44.0
 text = "Add Noise"
 
-[node name="AddMoon" type="Button" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer2"]
+[node name="AddMoon" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2"]
 margin_top = 48.0
 margin_right = 124.0
 margin_bottom = 68.0
 text = "Add Moon"
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
 margin_left = 256.0
 margin_right = 380.0
 margin_bottom = 72.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Save" type="Button" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer3"]
+[node name="Save" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer3"]
 margin_right = 124.0
 margin_bottom = 20.0
 text = "Save"
 
-[node name="Load" type="Button" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer3"]
+[node name="Load" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer3"]
 margin_top = 24.0
 margin_right = 124.0
 margin_bottom = 44.0
@@ -253,9 +254,9 @@ __meta__ = {
 }
 
 [node name="Tween" type="Tween" parent="BlueprintLibrary"]
-[connection signal="toggled" from="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer/ShowClouds" to="." method="_on_ShowClouds_toggled"]
-[connection signal="pressed" from="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer2/AddFill" to="." method="_on_AddFill_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer2/AddNoise" to="." method="_on_AddNoise_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer2/AddMoon" to="." method="_on_AddMoon_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer3/Save" to="." method="_on_Save_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/MarginContainer2/HBoxContainer/VBoxContainer3/Load" to="." method="_on_Load_pressed"]
+[connection signal="toggled" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/ShowClouds" to="." method="_on_ShowClouds_toggled"]
+[connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/AddFill" to="." method="_on_AddFill_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/AddNoise" to="." method="_on_AddNoise_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/AddMoon" to="." method="_on_AddMoon_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer3/Save" to="." method="_on_Save_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer3/Load" to="." method="_on_Load_pressed"]

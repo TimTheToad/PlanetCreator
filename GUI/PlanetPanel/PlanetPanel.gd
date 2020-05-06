@@ -29,7 +29,6 @@ func _ready():
 	pass # Replace with function body.
 
 func _GoToPlanet(name):
-	print(name)
 	var planetInstance = planets.get_node(name)
 	cameraHolder.firstCamera.make_current()
 	cameraHolder.global_transform.origin = planetInstance.global_transform.origin

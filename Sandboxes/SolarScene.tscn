@@ -39,8 +39,12 @@ script = ExtResource( 8 )
 environment = SubResource( 2 )
 
 [node name="Control" type="Control" parent="."]
-margin_right = 1024.0
-margin_bottom = 600.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.50745
+margin_top = -1.50735
+margin_right = 1.50745
+margin_bottom = -1.50732
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -50,6 +54,7 @@ margin_left = 319.171
 margin_top = 52.8142
 margin_right = 709.171
 margin_bottom = 314.814
+hint_tooltip = "YTOlo mutheafucka"
 resizable = true
 
 [node name="PlanetPanel" type="WindowDialog" parent="Control"]
@@ -64,7 +69,6 @@ margin_right = 107.5
 popup_exclusive = true
 script = ExtResource( 3 )
 __meta__ = {
-"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
@@ -128,18 +132,7 @@ text = "Orbital View"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="FreeCamViewButton" type="Button" parent="Control"]
-margin_left = 311.905
-margin_top = 10.2169
-margin_right = 323.905
-margin_bottom = 30.2169
-text = "FreeCam View"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 [connection signal="toggled" from="Control/PatternsButton" to="Control/PatternsButton" method="_on_PatternsButton_toggled"]
 [connection signal="toggled" from="Control/HelpButton" to="Control/HelpButton" method="_on_HelpButton_toggled"]
 [connection signal="pressed" from="Control/TopViewButton" to="OrbitalCamera" method="_on_TopViewButton_pressed"]
 [connection signal="pressed" from="Control/OrbitalViewButton" to="OrbitalCamera" method="_on_OrbitalViewButton_pressed"]
-[connection signal="pressed" from="Control/FreeCamViewButton" to="OrbitalCamera" method="_on_FreeCamViewButton_pressed"]
