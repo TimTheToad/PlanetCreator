@@ -132,7 +132,7 @@ __meta__ = {
 [node name="FreeCamViewButton" type="Button" parent="Control"]
 margin_left = 311.905
 margin_top = 10.2169
-margin_right = 323.905
+margin_right = 413.905
 margin_bottom = 30.2169
 text = "FreeCam View"
 __meta__ = {
