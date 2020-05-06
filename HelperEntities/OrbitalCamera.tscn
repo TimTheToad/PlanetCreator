@@ -22,4 +22,3 @@ transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 18, 
 [node name="FreecamHolder" type="Spatial" parent="."]
 
 [node name="Freecam" type="Camera" parent="FreecamHolder"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.700113, 1.75113, 1.28909 )

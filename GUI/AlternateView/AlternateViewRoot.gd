@@ -83,14 +83,16 @@ func _ready():
 
 	updateView()
 	pass # Replace with function body.
-
+var mouseInView = false
 func _on_ViewPortContainer_mouse_entered(container):
 	hoveredViewPortContainer = container
+	mouseInView = true
 	pass
 	
 func _on_ViewPortContainer_mouse_exited():
 #	hoveredViewPortContainer = null
 #	planet = null
+	mouseInView = false
 	pass
 
 var selectedPlanet
@@ -115,7 +117,8 @@ func _input(event):
 	if hoveredViewPortContainer:
 		if event is InputEventMouseMotion and pressed:
 			if selectedPlanet:
-				selectedPlanet.rotatePlanet(event.get_relative())
+				if mouseInView:
+					selectedPlanet.rotatePlanet(event.get_relative())
 #				vPort.warp_mouse(mousePos)
 		
 	pass

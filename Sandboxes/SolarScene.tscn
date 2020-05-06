@@ -39,12 +39,8 @@ script = ExtResource( 8 )
 environment = SubResource( 2 )
 
 [node name="Control" type="Control" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 104.698
-margin_top = 54.3448
-margin_right = 104.698
-margin_bottom = 54.3448
+margin_right = 1024.0
+margin_bottom = 600.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
