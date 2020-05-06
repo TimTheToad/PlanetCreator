@@ -13,7 +13,7 @@ var alternateViewRoot
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
-	alternateViewRoot = get_parent().get_parent().get_parent().get_parent()
+	alternateViewRoot = get_parent().get_parent().get_parent().get_parent().get_parent()
 	self.connect("selectPlanet", alternateViewRoot, "_selectPlanetName")
 	get_parent().connect("gui_input", self, "_handleGuiEvent")
 	pass # Replace with function body.
