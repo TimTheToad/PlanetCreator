@@ -19,3 +19,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+
+func _on_Button3_pressed():
+	items[2].clear()
+	pass # Replace with function body.

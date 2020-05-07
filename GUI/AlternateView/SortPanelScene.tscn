@@ -11,7 +11,7 @@ corner_radius_bottom_left = 20
 show_behind_parent = true
 margin_right = 359.0
 margin_bottom = 64.0
-rect_min_size = Vector2( 258, 64 )
+rect_min_size = Vector2( 420, 64 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 1 )
@@ -25,23 +25,23 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -170.5
-margin_top = -12.5
-margin_right = 170.5
-margin_bottom = 12.5
+margin_left = -196.0
+margin_top = -12.0
+margin_right = 196.0
+margin_bottom = 12.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Button" type="Button" parent="HBoxContainer"]
 margin_right = 87.0
-margin_bottom = 25.0
+margin_bottom = 24.0
 text = "Sort By Size"
 
 [node name="Button2" type="Button" parent="HBoxContainer"]
 margin_left = 91.0
 margin_right = 190.0
-margin_bottom = 25.0
+margin_bottom = 24.0
 text = "Sort By Name"
 
 [node name="Label" type="Label" parent="HBoxContainer"]
@@ -54,5 +54,12 @@ text = "Search:"
 [node name="LineEdit" type="LineEdit" parent="HBoxContainer"]
 margin_left = 244.0
 margin_right = 344.0
-margin_bottom = 25.0
+margin_bottom = 24.0
 rect_min_size = Vector2( 100, 0 )
+
+[node name="Button3" type="Button" parent="HBoxContainer"]
+margin_left = 348.0
+margin_right = 392.0
+margin_bottom = 24.0
+text = "Clear"
+[connection signal="pressed" from="HBoxContainer/Button3" to="." method="_on_Button3_pressed"]

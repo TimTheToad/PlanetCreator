@@ -10,7 +10,9 @@ onready var window = self
 onready var planetsInScene = get_parent().get_parent().get_parent().get_child(0)
 onready var environment = get_parent().get_parent().get_parent().get_node("WorldEnvironment")
 onready var rayScript = load("res://GUI/AlternateView/ViewportRayCast.gd")
-
+onready var sizeScript = load("res://GUI/AlternateView/ViewportRayCast.gd")
+onready var panelStyleNotSelected = load("res://GUI/AlternateView/AlternatePanelStyleNotSelected.tres")
+onready var panelStyleSelected = load("res://GUI/AlternateView/AlternatePanelStyleSelected.tres")
 
 var namePanel
 var hoveredViewPortContainer
@@ -18,7 +20,7 @@ var planetsInView = []
 var cameras = []
 var nameLabel
 var sizeLabel
-var viewPortContainers = []
+var panelContainers = []
 var viewPorts = []
 onready var nameEdit = get_node("NamePanel/HBoxContainer/LineEdit")
 
@@ -30,13 +32,35 @@ func _ready():
 	window.visible = false
 	namePanel = get_node("NamePanel")
 	for i in range(planetsInScene.get_child_count()):
+		var panel = Panel.new()
+		panel.set_h_size_flags(3)
+		panel.set_v_size_flags(3)
+		panel.rect_min_size = Vector2(150,0)
+		panel.anchor_bottom = 1
+		panel.anchor_right = 1
+		panel.set('custom_styles/panel', panelStyleNotSelected)
+		hBoxContainer.add_child(panel)
+		
 		var vBoxContainer = VBoxContainer.new()
-		hBoxContainer.add_child(vBoxContainer)
+		vBoxContainer.margin_bottom = -10
+		vBoxContainer.margin_right = -10
+		vBoxContainer.margin_left = 10
+		vBoxContainer.margin_top = 10
+		vBoxContainer.anchor_bottom = 1
+		vBoxContainer.anchor_right = 1
+		vBoxContainer.set_h_size_flags(3)
+		vBoxContainer.set_v_size_flags(3)
+#		vBoxContainer.rect_min_size = Vector2(200,0)
+#		vBoxContainer.set_script(sizeScript)
+		panel.add_child(vBoxContainer)
+		
 		var viewPortContainer = ViewportContainer.new()
 		viewPortContainer.stretch = true
 		viewPortContainer.set_h_size_flags(3) #Expand horizontal
 		viewPortContainer.set_v_size_flags(3)
-		viewPortContainer.rect_min_size = Vector2(128,128)
+#		viewPortContainer.rect_min_size = Vector2(160,100)
+		viewPortContainer.anchor_bottom = 1
+		viewPortContainer.anchor_right = 1
 		viewPortContainer.connect("mouse_entered", self, "_on_ViewPortContainer_mouse_entered", [viewPortContainer])
 		viewPortContainer.connect("mouse_exited", self, "_on_ViewPortContainer_mouse_exited")
 		vBoxContainer.add_child(viewPortContainer)
@@ -45,15 +69,17 @@ func _ready():
 		viewPort.render_target_update_mode = Viewport.UPDATE_WHEN_VISIBLE
 		viewPort.set_script(rayScript)
 		viewPorts.append(viewPort)
+#		viewPort.size = Vector2(100, 100)
 		var world = World.new()
 		var environmentDupe = environment.environment.duplicate()
 		environmentDupe.ambient_light_color = Color.white
+		environmentDupe.ambient_light_energy = 4
 		world.environment = environmentDupe
 		
 		
 		
 		viewPort.world = world
-		viewPortContainers.append(viewPortContainer)
+		panelContainers.append(panel)
 		viewPortContainer.add_child(viewPort)
 		
 		nameLabel = Label.new()
@@ -65,7 +91,7 @@ func _ready():
 		sizeDic[planet.scale[0]] = planet
 		planet.get_node("OrbitMeshNode").queue_free()
 		sizeLabel = Label.new()
-		sizeLabel.text = "Radius: " + String(stepify(planet.scale[0] * 100, 0.01)) + "Km"
+		sizeLabel.text = "Radius: " + String(stepify(planet.scale[0] * 1000, 0.01)) + "Km"
 		vBoxContainer.add_child(nameLabel)
 		vBoxContainer.add_child(sizeLabel)
 		sizeLabel.set_anchors_and_margins_preset(Control.PRESET_BOTTOM_LEFT)
@@ -81,7 +107,7 @@ func _ready():
 		var omniLight = OmniLight.new()
 		planetsInView.append(viewPort.get_child(0))
 		viewPort.add_child(omniLight)
-		omniLight.translate(Vector3(2.0, 1.0, 0.0))
+		omniLight.translate(Vector3(2.0, 0.0, 0.0))
 
 	updateView()
 	pass # Replace with function body.
@@ -106,11 +132,12 @@ func _input(event):
 	
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT:
-			
 			if hoveredViewPortContainer:
 				vPort = hoveredViewPortContainer.get_child(0)
 				mousePos = event.position
-#				print(planet.name)
+		if event.is_action_pressed("LMB"):
+			if selectedPlanet:
+				getPanel(selectedPlanet).set('custom_styles/panel', panelStyleNotSelected)
 
 		if event.is_pressed():
 			pressed = true
@@ -126,7 +153,7 @@ func _input(event):
 	pass
 
 func getViewPorts():
-	return viewPortContainers
+	return panelContainers
 	pass
 
 func _planetUpdateChange(changedPlanet):
@@ -145,10 +172,15 @@ func _process(delta):
 
 	pass
 
+func getPanel(planet):
+	return planet.get_parent().get_parent().get_parent().get_parent()
+	pass
+
 func _selectPlanetName(planet):
 	print(planet)
 	selectedPlanet = planet
 	namePanel.visible = true
+	getPanel(selectedPlanet).set('custom_styles/panel', panelStyleSelected)
 	pass
 
 var planets = []
@@ -183,9 +215,9 @@ func sortByName():
 	print(names)
 	var size = hBoxContainer.get_child_count()
 	for i in range(names.size()):
-		hBoxContainer.remove_child(viewPortContainers[i])
+		hBoxContainer.remove_child(panelContainers[i])
 	for i in range(names.size()):
-		hBoxContainer.add_child(viewPortContainers[planetIndexArr[i]])
+		hBoxContainer.add_child(panelContainers[planetIndexArr[i]])
 	pass
 
 func tweenIt(time, color1, color2):
@@ -216,13 +248,13 @@ func searchPlanet(text):
 		if !name.matchn(text + "*"):
 			 nonMatchingNames.append(name)
 
-	for viewP in viewPortContainers:
-		if nonMatchingNames.has(viewP.get_child(0).get_child(0).name):
-			viewP.visible = false
+	for panel in panelContainers:
+		if nonMatchingNames.has(panel.get_child(0).get_child(0).get_child(0).get_child(0).name):
+			panel.visible = false
 #			viewP.set_h_size_flags(3) #Expand horizontal
 #			viewP.set_v_size_flags(3)
 		else:
-			viewP.visible = true
+			panel.visible = true
 #			viewP.set_h_size_flags(0) #Expand horizontal
 #			viewP.set_v_size_flags(0)
 	pass
@@ -250,9 +282,9 @@ func sortBySize():
 		
 	var size = hBoxContainer.get_child_count()
 	for i in range(sizes.size()):
-		hBoxContainer.remove_child(viewPortContainers[i])
+		hBoxContainer.remove_child(panelContainers[i])
 	for i in range(sizes.size()):
-		hBoxContainer.add_child(viewPortContainers[planetIndexArr[i]])
+		hBoxContainer.add_child(panelContainers[planetIndexArr[i]])
 	pass
 
 func getPlanetsInScene():
@@ -276,7 +308,7 @@ func _on_LineEdit_text_entered(new_text):
 			selectedPlanet.name = new_text
 
 			tempNameDic[selectedPlanet.name] = selectedPlanet
-			planet.get_node("nameLabel").text = "Name: " + new_text
+			planet.get_parent().get_parent().get_parent().get_node("nameLabel").text = "Name: " + new_text
 		tempNameDic[planet.name ] = planet
 	nameDic = tempNameDic
 	nameEdit.clear()
