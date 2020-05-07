@@ -11,7 +11,6 @@ onready var planetsInScene = get_parent().get_parent().get_parent().get_child(0)
 onready var environment = get_parent().get_parent().get_parent().get_node("WorldEnvironment")
 onready var rayScript = load("res://GUI/AlternateView/ViewportRayCast.gd")
 
-
 var namePanel
 var hoveredViewPortContainer
 var planetsInView = []
