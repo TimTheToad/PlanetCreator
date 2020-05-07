@@ -71,6 +71,29 @@ func _input(event):
 			if zArr:
 				zArr = null
 				print("Released planet")
+		
+		if event.button_index == BUTTON_LEFT and event.is_pressed() and event.doubleclick:
+			var viewport = get_viewport()
+			var mousePos = viewport.get_mouse_position()
+			camera = cameraHolder.getCurrentCamera()
+			# Project ray
+			rayOrigin = camera.project_ray_origin(mousePos)
+			var rayDir = camera.project_ray_normal(mousePos)
+			var rayDist = 1000
+
+			var from = rayOrigin
+			var to = rayOrigin + rayDir * rayDist
+			var spaceState = viewport.get_world().get_direct_space_state()
+			var hit = spaceState.intersect_ray(from, to)
+			if hit.size() != 0:
+				# collider will be the node you hit
+				var planetInstance = hit.collider.get_parent()
+				#think this is correct way to only double click planets
+				if  planetInstance.get_parent().name == "Planets":
+					cameraHolder.firstCamera.make_current()
+					cameraHolder.global_transform.origin = planetInstance.global_transform.origin
+					cameraHolder.target = planetInstance
+					cameraHolder.updateLookAt()
 
 	if xArr:
 		if event is InputEventMouseMotion:
@@ -124,4 +147,5 @@ func _input(event):
 			zArr.translation = arrowPosition
 			
 			planet.updateOrbitLines()
+		
 
