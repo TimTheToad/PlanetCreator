@@ -201,6 +201,7 @@ func getCurrentCamera():
 
 func _on_TopViewButton_pressed():
 	secondCamera.make_current()
+	currentCamera = secondCamera
 	updateLookAt()
 	
 	if planetRadialInstance:
@@ -211,6 +212,7 @@ func _on_TopViewButton_pressed():
 
 func _on_OrbitalViewButton_pressed():
 	firstCamera.make_current()
+	currentCamera = firstCamera
 	updateLookAt()
 	pass # Replace with function body.
 

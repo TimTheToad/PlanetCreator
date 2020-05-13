@@ -67,6 +67,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AlternateView" type="Button" parent="StartButtons"]
+margin_left = 9.10974
+margin_top = 98.1846
+margin_right = 122.11
+margin_bottom = 168.185
+hint_tooltip = "Advanced Settings - Access blueprint editor"
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/normal = ExtResource( 9 )
+toggle_mode = true
+text = "Alternate View"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="LayerButtons" type="Control" parent="."]
 __meta__ = {
 "_edit_use_anchors_": false

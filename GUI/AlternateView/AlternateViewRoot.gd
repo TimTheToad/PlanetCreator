@@ -1,117 +1,24 @@
-extends Control
+extends "AlternateViewSetup.gd"
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-onready var hBoxContainer = get_node("ScrollContainer/HBoxContainer")
 onready var window = self
-onready var planetsInScene = get_parent().get_parent().get_parent().get_child(0)
-onready var environment = get_parent().get_parent().get_parent().get_node("WorldEnvironment")
-onready var rayScript = load("res://GUI/AlternateView/ViewportRayCast.gd")
-onready var sizeScript = load("res://GUI/AlternateView/ViewportRayCast.gd")
-onready var panelStyleNotSelected = load("res://GUI/AlternateView/AlternatePanelStyleNotSelected.tres")
-onready var panelStyleSelected = load("res://GUI/AlternateView/AlternatePanelStyleSelected.tres")
+
 
 var namePanel
 var hoveredViewPortContainer
-var planetsInView = []
-var cameras = []
-var nameLabel
-var sizeLabel
-var panelContainers = []
-var viewPorts = []
+var mouseInView = false
+
 onready var nameEdit = get_node("NamePanel/HBoxContainer/LineEdit")
 
-var nameDic = {}
-var sizeDic = {}
-var camDic = {}
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	window.visible = false
 	namePanel = get_node("NamePanel")
-	for i in range(planetsInScene.get_child_count()):
-		var panel = Panel.new()
-		panel.set_h_size_flags(3)
-		panel.set_v_size_flags(3)
-		panel.rect_min_size = Vector2(150,0)
-		panel.anchor_bottom = 1
-		panel.anchor_right = 1
-		panel.set('custom_styles/panel', panelStyleNotSelected)
-		hBoxContainer.add_child(panel)
-		
-		var vBoxContainer = VBoxContainer.new()
-		vBoxContainer.margin_bottom = -10
-		vBoxContainer.margin_right = -10
-		vBoxContainer.margin_left = 10
-		vBoxContainer.margin_top = 10
-		vBoxContainer.anchor_bottom = 1
-		vBoxContainer.anchor_right = 1
-		vBoxContainer.set_h_size_flags(3)
-		vBoxContainer.set_v_size_flags(3)
-#		vBoxContainer.rect_min_size = Vector2(200,0)
-#		vBoxContainer.set_script(sizeScript)
-		panel.add_child(vBoxContainer)
-		
-		var viewPortContainer = ViewportContainer.new()
-		viewPortContainer.stretch = true
-		viewPortContainer.set_h_size_flags(3) #Expand horizontal
-		viewPortContainer.set_v_size_flags(3)
-#		viewPortContainer.rect_min_size = Vector2(160,100)
-		viewPortContainer.anchor_bottom = 1
-		viewPortContainer.anchor_right = 1
-		viewPortContainer.connect("mouse_entered", self, "_on_ViewPortContainer_mouse_entered", [viewPortContainer])
-		viewPortContainer.connect("mouse_exited", self, "_on_ViewPortContainer_mouse_exited")
-		vBoxContainer.add_child(viewPortContainer)
-		
-		var viewPort = Viewport.new()
-		viewPort.render_target_update_mode = Viewport.UPDATE_WHEN_VISIBLE
-		viewPort.set_script(rayScript)
-		viewPorts.append(viewPort)
-#		viewPort.size = Vector2(100, 100)
-		var world = World.new()
-		var environmentDupe = environment.environment.duplicate()
-		environmentDupe.ambient_light_color = Color.white
-		environmentDupe.ambient_light_energy = 4
-		world.environment = environmentDupe
-		
-		
-		
-		viewPort.world = world
-		panelContainers.append(panel)
-		viewPortContainer.add_child(viewPort)
-		
-		nameLabel = Label.new()
-		nameLabel.text = "Name: " + planetsInScene.get_child(i).get_name()
-		nameLabel.name = "nameLabel"
-		var planet = planetsInScene.get_child(i).duplicate()
-		planet.name = planetsInScene.get_child(i).get_name()
-		nameDic[planet.name] = planet
-		sizeDic[planet.scale[0]] = planet
-		planet.get_node("OrbitMeshNode").queue_free()
-		sizeLabel = Label.new()
-		sizeLabel.text = "Radius: " + String(stepify(planet.scale[0] * 1000, 0.01)) + "Km"
-		vBoxContainer.add_child(nameLabel)
-		vBoxContainer.add_child(sizeLabel)
-		sizeLabel.set_anchors_and_margins_preset(Control.PRESET_BOTTOM_LEFT)
-		viewPort.add_child(planet)
-		
-		var camera = Camera.new()
-		camera.name = "camera"
-		camera.set_orthogonal(3.0, 0.05, 50.0)
-		camera.translate(Vector3(5.0, 0.0, 0.0))
-		camera.look_at(planet.translation, Vector3(0.0, 1.0, 0.0))
-		viewPort.add_child(camera)
-		cameras.append(camera)
-		var omniLight = OmniLight.new()
-		planetsInView.append(viewPort.get_child(0))
-		viewPort.add_child(omniLight)
-		omniLight.translate(Vector3(2.0, 0.0, 0.0))
+	intiAlternateView()
 
 	updateView()
 	pass # Replace with function body.
-var mouseInView = false
+	
 func _on_ViewPortContainer_mouse_entered(container):
 	hoveredViewPortContainer = container
 	mouseInView = true
@@ -176,8 +83,8 @@ func getPanel(planet):
 	return planet.get_parent().get_parent().get_parent().get_parent()
 	pass
 
+
 func _selectPlanetName(planet):
-	print(planet)
 	selectedPlanet = planet
 	namePanel.visible = true
 	getPanel(selectedPlanet).set('custom_styles/panel', panelStyleSelected)
