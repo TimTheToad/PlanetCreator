@@ -106,7 +106,7 @@ size_flags_vertical = 2
 icon = ExtResource( 6 )
 expand_icon = true
 
-[node name="Load" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/SaveLoad"]
+[node name="ShowLib" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/SaveLoad"]
 margin_top = 41.0
 margin_right = 36.0
 margin_bottom = 77.0
@@ -114,6 +114,7 @@ rect_min_size = Vector2( 36, 36 )
 hint_tooltip = "Load blueprint"
 size_flags_horizontal = 2
 size_flags_vertical = 2
+toggle_mode = true
 icon = ExtResource( 7 )
 expand_icon = true
 
@@ -237,12 +238,15 @@ __meta__ = {
 }
 
 [node name="BlueprintLibrary" type="Panel" parent="."]
+visible = false
 anchor_left = -0.0417042
 anchor_top = 0.089701
 anchor_right = -0.00226763
 anchor_bottom = 0.843854
-margin_left = -109.195
-margin_right = 1.80501
+margin_left = 95.1612
+margin_top = 71.3042
+margin_right = 206.161
+margin_bottom = 71.3042
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 4 )
 script = ExtResource( 3 )
@@ -269,8 +273,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
 margin_top = 19.95
-margin_right = -4.0
-margin_bottom = -4.0
+margin_right = -3.99962
+margin_bottom = -36.2959
 custom_styles/bg = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -280,21 +284,29 @@ __meta__ = {
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 116.775
-margin_bottom = 200.296
+margin_bottom = 2.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Tween" type="Tween" parent="BlueprintLibrary"]
 
-[node name="PopupMenu" type="PopupMenu" parent="."]
-margin_right = 20.0
-margin_bottom = 20.0
-items = [ "test", null, 0, false, false, 0, 0, null, "", false ]
+[node name="Load" type="Button" parent="BlueprintLibrary"]
+anchor_left = 0.5
+anchor_top = 0.913
+anchor_right = 0.5
+anchor_bottom = 0.913
+margin_left = -55.341
+margin_top = -10.0
+margin_right = 55.341
+margin_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Load"
 [connection signal="toggled" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/ShowClouds" to="." method="_on_ShowClouds_toggled"]
 [connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/SaveLoad/Save" to="." method="_on_Save_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/SaveLoad/Load" to="." method="_on_Load_pressed"]
+[connection signal="toggled" from="Panel/VBoxContainer/Settings/HBoxContainer/SaveLoad/ShowLib" to="." method="_on_ShowLib_toggled"]
 [connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/FillNoise/AddFill" to="." method="_on_AddFill_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/FillNoise/AddNoise" to="." method="_on_AddNoise_pressed"]
+[connection signal="pressed" from="BlueprintLibrary/Load" to="." method="_on_Load_pressed"]

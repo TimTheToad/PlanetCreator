@@ -163,6 +163,13 @@ func _on_Load_pressed():
 		self.currentPlanet.blueprint = self.currentBlueprint
 		currentPlanet.applyBlueprint()
 		showPlanetBlueprint(self.currentPlanet)
+		
+	blueprintLibraryPanel.visible = false;
+	self.get_node("Panel/VBoxContainer/Settings/HBoxContainer/SaveLoad/ShowLib").pressed = false
+	pass # Replace with function body.
+
+func _on_ShowLib_toggled(button_pressed):
+	blueprintLibraryPanel.visible = button_pressed;
 	pass # Replace with function body.
 
 
@@ -170,3 +177,4 @@ func _on_AddMoon_pressed():
 	self.currentBlueprint.addMoon(self.currentPlanet)
 	currentPlanet.applyBlueprint()
 	pass # Replace with function body.
+
