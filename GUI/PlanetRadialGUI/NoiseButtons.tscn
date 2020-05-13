@@ -1,0 +1,141 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Icons/undo.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Icons/done.png" type="Texture" id=2]
+[ext_resource path="res://GUI/PlanetRadialGUI/ButtonHoverBoxFlat.tres" type="StyleBox" id=3]
+[ext_resource path="res://GUI/PlanetRadialGUI/ButtonNormalBoxFlat.tres" type="StyleBox" id=4]
+[ext_resource path="res://GUI/PlanetRadialGUI/ButtonPressedBoxFlat.tres" type="StyleBox" id=5]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.168627, 0.168627, 0.168627, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.47451, 0.47451, 0.47451, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[node name="NoiseButtons" type="Control"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Button" parent="."]
+margin_left = -168.632
+margin_top = -242.611
+margin_right = -92.6318
+margin_bottom = -172.611
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/normal = ExtResource( 4 )
+icon = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Period" type="Control" parent="."]
+margin_left = -61.9888
+margin_top = -225.279
+margin_right = -21.9888
+margin_bottom = -185.279
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Period"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Period/HBoxContainer"]
+margin_top = 13.0
+margin_right = 41.0
+margin_bottom = 27.0
+text = "Period"
+
+[node name="HSlider" type="HSlider" parent="Period/HBoxContainer"]
+margin_left = 45.0
+margin_right = 145.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_vertical = 1
+custom_styles/slider = SubResource( 1 )
+max_value = 5.0
+step = 0.1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Octave" type="Control" parent="."]
+margin_left = 101.473
+margin_top = -223.94
+margin_right = 141.473
+margin_bottom = -183.94
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Octave"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 109.0
+margin_bottom = -3.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Octave/HBoxContainer"]
+margin_top = 11.0
+margin_right = 45.0
+margin_bottom = 25.0
+text = "Octave"
+
+[node name="HSlider" type="HSlider" parent="Octave/HBoxContainer"]
+margin_left = 49.0
+margin_right = 149.0
+margin_bottom = 37.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_vertical = 1
+custom_styles/slider = SubResource( 1 )
+max_value = 8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Color" type="ColorPickerButton" parent="."]
+margin_left = 265.927
+margin_top = -232.021
+margin_right = 335.927
+margin_bottom = -162.021
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/normal = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Done" type="Button" parent="."]
+margin_left = 366.001
+margin_top = -233.001
+margin_right = 442.001
+margin_bottom = -163.001
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/normal = ExtResource( 4 )
+icon = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

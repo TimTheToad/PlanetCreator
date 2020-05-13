@@ -18,6 +18,10 @@ class FillEvent extends LayerEvent:
 		self.type = type
 		self.layer = layer
 		self.color = color
+		
+	func setColor(c):
+		self.color = c
+		self.setUpdated(true)
 
 class NoiseEvent extends LayerEvent:
 	var period
@@ -30,15 +34,29 @@ class NoiseEvent extends LayerEvent:
 		self.period = period
 		self.octave = octave
 		self.color = color
+		
+	func setPeriod(p):
+		self.period = p
+		self.setUpdated(true)
+		
+	func setOctave(o):
+		self.octave = o
+		self.setUpdated(true)
+		
+	func setColor(c):
+		self.color = c
+		self.setUpdated(true)
 
 var events = []
 var name
 var layerIndex
 var update = false
+var layerIcon = null
 
-func _init(name, index):
+func _init(name, index, icon = null):
 	self.name = name
 	self.layerIndex = index
+	self.layerIcon = icon
 	pass
 
 func getUpdated():

@@ -1,0 +1,176 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://GUI/PlanetRadialGUI/PlanetRadialControl.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Icons/LayerIcons/Liquid.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Icons/LayerIcons/Lava.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Icons/LayerIcons/Base.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Icons/undo.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Icons/EventIcons/noise.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Icons/EventIcons/fill.png" type="Texture" id=7]
+[ext_resource path="res://GUI/PlanetRadialGUI/ButtonNormalBoxFlat.tres" type="StyleBox" id=9]
+[ext_resource path="res://GUI/PlanetRadialGUI/ButtonPressedBoxFlat.tres" type="StyleBox" id=10]
+[ext_resource path="res://GUI/PlanetRadialGUI/ButtonHoverBoxFlat.tres" type="StyleBox" id=11]
+
+[node name="PlanetRadialControl" type="Control"]
+margin_right = 32.0
+margin_bottom = 32.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartButtons" type="Control" parent="."]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Close" type="Button" parent="StartButtons"]
+margin_left = -163.828
+margin_top = 85.92
+margin_right = -87.8276
+margin_bottom = 155.92
+hint_tooltip = "Go back to sun orbit and deselect planet"
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/normal = ExtResource( 9 )
+icon = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Add" type="Button" parent="StartButtons"]
+margin_left = -78.749
+margin_top = 99.0419
+margin_right = 5.25104
+margin_bottom = 169.042
+hint_tooltip = "Add new Layer detail"
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/normal = ExtResource( 9 )
+text = "Add Detail"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Advanced" type="Button" parent="StartButtons"]
+margin_left = 9.10974
+margin_top = 98.1846
+margin_right = 122.11
+margin_bottom = 168.185
+hint_tooltip = "Advanced Settings - Access blueprint editor"
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/normal = ExtResource( 9 )
+toggle_mode = true
+text = "Advanced"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LayerButtons" type="Control" parent="."]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Button" parent="LayerButtons"]
+margin_left = -167.327
+margin_top = 5.4415
+margin_right = -91.3267
+margin_bottom = 75.4415
+hint_tooltip = "Go back to main settings selection"
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/normal = ExtResource( 9 )
+icon = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Base" type="Button" parent="LayerButtons"]
+margin_left = -81.9832
+margin_top = 6.80188
+margin_right = -5.98315
+margin_bottom = 76.8019
+hint_tooltip = "Base layer - details with this setting will have properties of terrain."
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/normal = ExtResource( 9 )
+icon = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Liquid" type="Button" parent="LayerButtons"]
+margin_left = -4.0
+margin_top = 7.0
+margin_right = 80.0
+margin_bottom = 91.0
+hint_tooltip = "Water layer - details with this setting will have properties of water."
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/normal = ExtResource( 9 )
+icon = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lava" type="Button" parent="LayerButtons"]
+margin_left = 102.831
+margin_top = 11.1027
+margin_right = 186.831
+margin_bottom = 95.1027
+hint_tooltip = "Lava layer - details with this setting will have properties of lava."
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/normal = ExtResource( 9 )
+icon = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EventButtons" type="Control" parent="."]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Button" parent="EventButtons"]
+margin_left = -165.966
+margin_top = -70.7397
+margin_right = -89.9662
+margin_bottom = -0.739746
+hint_tooltip = "Go back to layer selection"
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/normal = ExtResource( 9 )
+icon = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fill" type="Button" parent="EventButtons"]
+margin_left = -81.6228
+margin_top = -70.7397
+margin_right = -5.6228
+margin_bottom = -0.739746
+hint_tooltip = "Fill detail - fills whole layer with a color of your choice"
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/normal = ExtResource( 9 )
+icon = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Noise" type="Button" parent="EventButtons"]
+margin_left = -1.36035
+margin_top = -72.1001
+margin_right = 74.6396
+margin_bottom = -2.10013
+hint_tooltip = "Noise detail - adds noise to selected layer"
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/normal = ExtResource( 9 )
+icon = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -16,7 +16,10 @@ var freecamHolder
 
 var cameraHolderY
 var cameraNewRotation
-# Called when the node enters the scene tree for the first time.
+
+onready var PlanetRadialGUI = preload("res://GUI/PlanetRadialGUI/PlanetRadialControl.tscn")
+var planetRadialInstance = null
+onready var sunInstance = get_tree().current_scene.get_node("Sun")
 
 func _ready():
 	var cameraOffset = Vector3(5, 0, 0)
@@ -114,6 +117,11 @@ func _input(event):
 			zoomSpeed = 0.9
 			currentCamera = secondCamera
 			
+			
+			if planetRadialInstance:
+				planetRadialInstance.queue_free()
+				planetRadialInstance = null
+			
 			# Temp solution
 #			get_tree().current_scene.get_node("Control/Blueprint Editor").visible = false
 			
@@ -122,6 +130,7 @@ func _input(event):
 			zoomSpeed = 0.1
 			currentCamera = firstCamera
 			
+						
 			# Temp solution
 #			get_tree().current_scene.get_node("Control/Blueprint Editor").visible = true
 			
@@ -136,6 +145,36 @@ func _input(event):
 				currentCamera.translation = currentCamera.translation - direction * zoomSpeed			
 	pass
 	
+
+
+func GoToSun():
+	currentCamera = self.firstCamera
+	currentCamera.make_current()
+	self.global_transform.origin = sunInstance.global_transform.origin
+	self.target = sunInstance
+	self.updateLookAt()
+
+	if planetRadialInstance:
+		planetRadialInstance.queue_free()
+		planetRadialInstance = null
+
+func GoToPlanet(planetInstance):
+	currentCamera = self.firstCamera
+	currentCamera.make_current()
+	self.global_transform.origin = planetInstance.global_transform.origin
+	self.target = planetInstance
+	self.updateLookAt()
+
+	# Add radial planet GUI
+	if planetRadialInstance:
+		planetRadialInstance.queue_free()
+
+	var screenCoords = get_viewport().get_camera().unproject_position(planetInstance.translation)
+
+	planetRadialInstance = PlanetRadialGUI.instance()
+	planetRadialInstance.init(screenCoords, 128)
+	planetInstance.add_child(planetRadialInstance)
+
 func updateLookAt():
 	direction = -currentCamera.transform.origin.normalized()
 	if firstCamera.is_current():
@@ -158,6 +197,10 @@ func getCurrentCamera():
 func _on_TopViewButton_pressed():
 	secondCamera.make_current()
 	updateLookAt()
+	
+	if planetRadialInstance:
+		planetRadialInstance.queue_free()
+		planetRadialInstance = null
 	pass # Replace with function body.
 
 

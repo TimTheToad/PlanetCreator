@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://HelperEntities/OrbitalCamera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Planet/NewPlanet/MasterPlanet.gd" type="Script" id=2]
@@ -10,6 +10,9 @@
 [ext_resource path="res://HelperEntities/Scripts/PlanetMover.gd" type="Script" id=8]
 [ext_resource path="res://Assets/spaceHDR.png" type="Texture" id=9]
 [ext_resource path="res://GUI/HUDButtons/PatternsButton.gd" type="Script" id=10]
+[ext_resource path="res://Assets/Icons/camera.png" type="Texture" id=11]
+[ext_resource path="res://Sandboxes/CameraViewsButton.gd" type="Script" id=12]
+[ext_resource path="res://Assets/Icons/help.png" type="Texture" id=13]
 
 [sub_resource type="PanoramaSky" id=1]
 panorama = ExtResource( 9 )
@@ -91,10 +94,10 @@ margin_bottom = 225.0
 [node name="PatternsButton" type="Button" parent="Control"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 13.9853
-margin_top = -26.0294
-margin_right = 78.9853
-margin_bottom = -6.02942
+margin_left = 15.2777
+margin_top = -27.3218
+margin_right = 80.2777
+margin_bottom = -7.32178
 toggle_mode = true
 text = "Patterns"
 script = ExtResource( 10 )
@@ -102,38 +105,105 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HelpButton" type="Button" parent="Control"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 75.0
-margin_bottom = 30.0
+[node name="Camera Buttons" type="Control" parent="Control"]
+anchor_left = 0.008
+anchor_top = 0.016
+anchor_right = 0.016
+anchor_bottom = 0.016
+margin_right = 343.0
+margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/Camera Buttons"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -251.192
+margin_bottom = 1.90735e-06
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 11
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HelpButton" type="Button" parent="Control/Camera Buttons/HBoxContainer2"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
 toggle_mode = true
-text = "Help"
+icon = ExtResource( 13 )
+expand_icon = true
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TopViewButton" type="Button" parent="Control"]
-margin_left = 100.0
-margin_top = 10.0
-margin_right = 12.0
+[node name="CameraViewsButton" type="Button" parent="Control/Camera Buttons/HBoxContainer2"]
+margin_left = 43.0
+margin_right = 75.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+toggle_mode = true
+icon = ExtResource( 11 )
+expand_icon = true
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonContainer" type="VBoxContainer" parent="Control/Camera Buttons/HBoxContainer2/CameraViewsButton"]
+visible = false
+margin_left = -36.0
+margin_top = 39.0
+margin_right = 66.0
+margin_bottom = 139.0
+rect_pivot_offset = Vector2( 44.4619, 28.3888 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopViewButton" type="Button" parent="Control/Camera Buttons/HBoxContainer2/CameraViewsButton/ButtonContainer"]
+margin_right = 102.0
 margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/hseparation = 6
 text = "Top View"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OrbitalViewButton" type="Button" parent="Control"]
-margin_left = 200.0
-margin_top = 10.0
-margin_right = 12.0
-margin_bottom = 20.0
+[node name="OrbitalViewButton" type="Button" parent="Control/Camera Buttons/HBoxContainer2/CameraViewsButton/ButtonContainer"]
+margin_top = 40.0
+margin_right = 102.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/hseparation = 6
 text = "Orbital View"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="FreeCamViewButton" type="Button" parent="Control/Camera Buttons/HBoxContainer2/CameraViewsButton/ButtonContainer"]
+margin_top = 80.0
+margin_right = 102.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/hseparation = 6
+text = "FreeCam View"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="toggled" from="Control/PatternsButton" to="Control/PatternsButton" method="_on_PatternsButton_toggled"]
-[connection signal="toggled" from="Control/HelpButton" to="Control/HelpButton" method="_on_HelpButton_toggled"]
-[connection signal="pressed" from="Control/TopViewButton" to="OrbitalCamera" method="_on_TopViewButton_pressed"]
-[connection signal="pressed" from="Control/OrbitalViewButton" to="OrbitalCamera" method="_on_OrbitalViewButton_pressed"]
+[connection signal="toggled" from="Control/Camera Buttons/HBoxContainer2/HelpButton" to="Control/Camera Buttons/HBoxContainer2/HelpButton" method="_on_HelpButton_toggled"]
+[connection signal="toggled" from="Control/Camera Buttons/HBoxContainer2/CameraViewsButton" to="Control/Camera Buttons/HBoxContainer2/CameraViewsButton" method="_on_CameraViewsButton_toggled"]
+[connection signal="pressed" from="Control/Camera Buttons/HBoxContainer2/CameraViewsButton/ButtonContainer/TopViewButton" to="OrbitalCamera" method="_on_TopViewButton_pressed"]
+[connection signal="pressed" from="Control/Camera Buttons/HBoxContainer2/CameraViewsButton/ButtonContainer/OrbitalViewButton" to="OrbitalCamera" method="_on_OrbitalViewButton_pressed"]
+[connection signal="pressed" from="Control/Camera Buttons/HBoxContainer2/CameraViewsButton/ButtonContainer/FreeCamViewButton" to="OrbitalCamera" method="_on_FreeCamViewButton_pressed"]

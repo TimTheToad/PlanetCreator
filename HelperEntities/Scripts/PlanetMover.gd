@@ -90,10 +90,7 @@ func _input(event):
 				var planetInstance = hit.collider.get_parent()
 				#think this is correct way to only double click planets
 				if  planetInstance.get_parent().name == "Planets":
-					cameraHolder.firstCamera.make_current()
-					cameraHolder.global_transform.origin = planetInstance.global_transform.origin
-					cameraHolder.target = planetInstance
-					cameraHolder.updateLookAt()
+					cameraHolder.GoToPlanet(planetInstance)
 
 	if xArr:
 		if event is InputEventMouseMotion:
