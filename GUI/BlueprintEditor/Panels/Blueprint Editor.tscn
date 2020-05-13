@@ -33,7 +33,6 @@ corner_radius_top_left = 5
 corner_radius_bottom_left = 5
 
 [node name="Blueprint Editor" type="WindowDialog"]
-visible = true
 margin_right = 400.0
 margin_bottom = 300.0
 rect_min_size = Vector2( 300, 200 )
@@ -289,6 +288,11 @@ __meta__ = {
 }
 
 [node name="Tween" type="Tween" parent="BlueprintLibrary"]
+
+[node name="PopupMenu" type="PopupMenu" parent="."]
+margin_right = 20.0
+margin_bottom = 20.0
+items = [ "test", null, 0, false, false, 0, 0, null, "", false ]
 [connection signal="toggled" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/ShowClouds" to="." method="_on_ShowClouds_toggled"]
 [connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/SaveLoad/Save" to="." method="_on_Save_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/SaveLoad/Load" to="." method="_on_Load_pressed"]
