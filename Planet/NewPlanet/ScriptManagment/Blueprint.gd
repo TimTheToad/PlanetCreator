@@ -46,7 +46,7 @@ func applyLayers(planet):
 		if layers[i].getUpdated():
 			planet.updateLayer(layers[i])
 
-func addLayer(name, index):
-	var layer = PlanetLayer.new(name, index)
+func addLayer(name, index, icon = null):
+	var layer = PlanetLayer.new(name, index, icon)
 	layers.append(layer)
 	return layer

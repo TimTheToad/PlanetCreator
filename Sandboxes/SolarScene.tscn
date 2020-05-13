@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://HelperEntities/OrbitalCamera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Planet/NewPlanet/MasterPlanet.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://HelperEntities/Scripts/PlanetMover.gd" type="Script" id=8]
 [ext_resource path="res://Assets/spaceHDR.png" type="Texture" id=9]
 [ext_resource path="res://GUI/HUDButtons/PatternsButton.gd" type="Script" id=10]
+[ext_resource path="res://Assets/Icons/camera.png" type="Texture" id=11]
 
 [sub_resource type="PanoramaSky" id=1]
 panorama = ExtResource( 9 )
@@ -109,37 +110,84 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TopViewButton" type="Button" parent="Control"]
-margin_left = 100.0
+[node name="Camera Buttons" type="Control" parent="Control"]
+margin_left = 87.0
 margin_top = 10.0
-margin_right = 12.0
-margin_bottom = 20.0
+margin_right = 430.0
+margin_bottom = 42.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/Camera Buttons"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 11
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Toggle" type="Button" parent="Control/Camera Buttons/HBoxContainer2"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+toggle_mode = true
+icon = ExtResource( 11 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonContainer" type="HBoxContainer" parent="Control/Camera Buttons/HBoxContainer2"]
+margin_left = 43.0
+margin_right = 344.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 44.4619, 28.3888 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopViewButton" type="Button" parent="Control/Camera Buttons/HBoxContainer2/ButtonContainer"]
+margin_right = 69.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/hseparation = 6
 text = "Top View"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OrbitalViewButton" type="Button" parent="Control"]
-margin_left = 200.0
-margin_top = 10.0
-margin_right = 12.0
-margin_bottom = 20.0
+[node name="OrbitalViewButton" type="Button" parent="Control/Camera Buttons/HBoxContainer2/ButtonContainer"]
+margin_left = 89.0
+margin_right = 179.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/hseparation = 6
 text = "Orbital View"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FreeCamViewButton" type="Button" parent="Control"]
-margin_left = 311.905
-margin_top = 10.2169
-margin_right = 413.905
-margin_bottom = 30.2169
+[node name="FreeCamViewButton" type="Button" parent="Control/Camera Buttons/HBoxContainer2/ButtonContainer"]
+margin_left = 199.0
+margin_right = 301.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/hseparation = 6
 text = "FreeCam View"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="toggled" from="Control/PatternsButton" to="Control/PatternsButton" method="_on_PatternsButton_toggled"]
 [connection signal="toggled" from="Control/HelpButton" to="Control/HelpButton" method="_on_HelpButton_toggled"]
-[connection signal="pressed" from="Control/TopViewButton" to="OrbitalCamera" method="_on_TopViewButton_pressed"]
-[connection signal="pressed" from="Control/OrbitalViewButton" to="OrbitalCamera" method="_on_OrbitalViewButton_pressed"]
-[connection signal="pressed" from="Control/FreeCamViewButton" to="OrbitalCamera" method="_on_FreeCamViewButton_pressed"]
+[connection signal="pressed" from="Control/Camera Buttons/HBoxContainer2/ButtonContainer/TopViewButton" to="OrbitalCamera" method="_on_TopViewButton_pressed"]
+[connection signal="pressed" from="Control/Camera Buttons/HBoxContainer2/ButtonContainer/OrbitalViewButton" to="OrbitalCamera" method="_on_OrbitalViewButton_pressed"]
+[connection signal="pressed" from="Control/Camera Buttons/HBoxContainer2/ButtonContainer/FreeCamViewButton" to="OrbitalCamera" method="_on_FreeCamViewButton_pressed"]

@@ -2,7 +2,8 @@ extends ColorRect
 
 onready var eventPanel = preload("res://GUI/BlueprintEditor/Panels/EventPanel.tscn")
 onready var container = get_node("ScrollContainer/VBoxContainer")
-onready var label = get_node("Base/Label")
+onready var label = get_node("Base/HBoxContainer/Label")
+onready var LayerIcon = get_node("Base/HBoxContainer/LayerIcon")
 
 var mLayer
 
@@ -10,6 +11,9 @@ enum PanelType {
 	FILL,
 	NOISE
 }
+
+func setIcon(tex):
+	LayerIcon.texture = tex
 
 func setLabel(text):
 	label.set_text(text)

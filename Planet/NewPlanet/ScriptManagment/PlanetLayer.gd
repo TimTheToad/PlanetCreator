@@ -51,10 +51,12 @@ var events = []
 var name
 var layerIndex
 var update = false
+var layerIcon = null
 
-func _init(name, index):
+func _init(name, index, icon = null):
 	self.name = name
 	self.layerIndex = index
+	self.layerIcon = icon
 	pass
 
 func getUpdated():

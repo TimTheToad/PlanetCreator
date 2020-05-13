@@ -1,10 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://GUI/BlueprintEditor/Panels/Blueprint Editor.gd" type="Script" id=1]
 [ext_resource path="res://GUI/BlueprintEditor/Panels/EventSettings.gd" type="Script" id=2]
 [ext_resource path="res://GUI/BlueprintEditor/Panels/LibraryPanel.gd" type="Script" id=3]
-
-[sub_resource type="Theme" id=1]
+[ext_resource path="res://Assets/Icons/EventIcons/noise.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Icons/EventIcons/fill.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Icons/save.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Icons/load.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Icons/redo.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Icons/undo.png" type="Texture" id=9]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.290196, 0.290196, 0.290196, 1 )
@@ -29,6 +33,7 @@ corner_radius_top_left = 5
 corner_radius_bottom_left = 5
 
 [node name="Blueprint Editor" type="WindowDialog"]
+visible = true
 margin_right = 400.0
 margin_bottom = 300.0
 rect_min_size = Vector2( 300, 200 )
@@ -61,87 +66,118 @@ __meta__ = {
 
 [node name="Settings" type="MarginContainer" parent="Panel/VBoxContainer"]
 margin_right = 380.0
-margin_bottom = 72.0
+margin_bottom = 77.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Settings"]
 margin_right = 380.0
-margin_bottom = 72.0
+margin_bottom = 77.0
+custom_constants/separation = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
-margin_right = 124.0
-margin_bottom = 72.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+margin_right = 108.0
+margin_bottom = 77.0
 
 [node name="Label" type="TextEdit" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer"]
-margin_right = 124.0
+margin_right = 108.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 0, 20 )
 text = "Planet Name"
 
 [node name="ShowClouds" type="CheckBox" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer"]
 margin_top = 24.0
-margin_right = 124.0
+margin_right = 108.0
 margin_bottom = 48.0
 text = "Show Clouds"
 
-[node name="ColorPickerButton" type="ColorPickerButton" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer"]
-margin_top = 52.0
-margin_right = 124.0
-margin_bottom = 72.0
-theme = SubResource( 1 )
+[node name="SaveLoad" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
+margin_left = 113.0
+margin_right = 149.0
+margin_bottom = 77.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_constants/separation = 5
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
-margin_left = 128.0
-margin_right = 252.0
-margin_bottom = 72.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="Save" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/SaveLoad"]
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+hint_tooltip = "Save blueprint"
+size_flags_horizontal = 2
+size_flags_vertical = 2
+icon = ExtResource( 6 )
+expand_icon = true
 
-[node name="AddFill" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2"]
-margin_right = 124.0
-margin_bottom = 20.0
-text = "Add Fill"
+[node name="Load" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/SaveLoad"]
+margin_top = 41.0
+margin_right = 36.0
+margin_bottom = 77.0
+rect_min_size = Vector2( 36, 36 )
+hint_tooltip = "Load blueprint"
+size_flags_horizontal = 2
+size_flags_vertical = 2
+icon = ExtResource( 7 )
+expand_icon = true
 
-[node name="AddNoise" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2"]
-margin_top = 24.0
-margin_right = 124.0
-margin_bottom = 44.0
-text = "Add Noise"
+[node name="UndoRedo" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
+margin_left = 154.0
+margin_right = 190.0
+margin_bottom = 77.0
+custom_constants/separation = 5
 
-[node name="AddMoon" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2"]
-margin_top = 48.0
-margin_right = 124.0
-margin_bottom = 68.0
-text = "Add Moon"
+[node name="Undo" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/UndoRedo"]
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+icon = ExtResource( 9 )
+align = 0
+expand_icon = true
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
-margin_left = 256.0
-margin_right = 380.0
-margin_bottom = 72.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="Redo" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/UndoRedo"]
+margin_top = 41.0
+margin_right = 36.0
+margin_bottom = 77.0
+rect_min_size = Vector2( 36, 36 )
+rect_pivot_offset = Vector2( 40, 0 )
+icon = ExtResource( 8 )
+align = 0
+expand_icon = true
 
-[node name="Save" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer3"]
-margin_right = 124.0
-margin_bottom = 20.0
-text = "Save"
+[node name="FillNoise" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
+margin_left = 195.0
+margin_right = 231.0
+margin_bottom = 77.0
+custom_constants/separation = 5
 
-[node name="Load" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer3"]
-margin_top = 24.0
-margin_right = 124.0
-margin_bottom = 44.0
-text = "Load"
+[node name="AddFill" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FillNoise"]
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+hint_tooltip = "Add Fill"
+size_flags_horizontal = 2
+size_flags_vertical = 2
+icon = ExtResource( 5 )
+expand_icon = true
+
+[node name="AddNoise" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FillNoise"]
+margin_top = 41.0
+margin_right = 36.0
+margin_bottom = 77.0
+rect_min_size = Vector2( 36, 36 )
+hint_tooltip = "Add Noise"
+size_flags_horizontal = 2
+size_flags_vertical = 2
+icon = ExtResource( 4 )
+expand_icon = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer"]
-margin_top = 76.0
+margin_top = 81.0
 margin_right = 380.0
 margin_bottom = 282.0
 size_flags_vertical = 3
 scroll_vertical_enabled = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/ScrollContainer"]
-margin_bottom = 206.0
+margin_bottom = 201.0
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -254,8 +290,7 @@ __meta__ = {
 
 [node name="Tween" type="Tween" parent="BlueprintLibrary"]
 [connection signal="toggled" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/ShowClouds" to="." method="_on_ShowClouds_toggled"]
-[connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/AddFill" to="." method="_on_AddFill_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/AddNoise" to="." method="_on_AddNoise_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/AddMoon" to="." method="_on_AddMoon_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer3/Save" to="." method="_on_Save_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer3/Load" to="." method="_on_Load_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/SaveLoad/Save" to="." method="_on_Save_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/SaveLoad/Load" to="." method="_on_Load_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/FillNoise/AddFill" to="." method="_on_AddFill_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/FillNoise/AddNoise" to="." method="_on_AddNoise_pressed"]

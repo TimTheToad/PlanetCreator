@@ -39,6 +39,8 @@ func showPlanetBlueprint(planet):
 		
 		# Add events and set name to new layer
 		p.setLabel(l.name)
+		if l.layerIcon != null:
+			p.setIcon(l.layerIcon)
 		p.setLayer(l)
 		
 		for event in l.getEvents():

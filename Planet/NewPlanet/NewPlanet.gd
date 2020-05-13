@@ -1,5 +1,8 @@
 extends "Planet.gd"
 
+onready var BaseIcon = preload("res://Assets/Icons/LayerIcons/Base.png")
+onready var LiquidIcon = preload("res://Assets/Icons/LayerIcons/Liquid.png")
+onready var LavaIcon = preload("res://Assets/Icons/LayerIcons/Lava.png")
 
 onready var viewports = get_node("Textures").get_children()
 onready var highlight = get_node("Highlight")
@@ -37,9 +40,9 @@ func _ready():
 #		self.add_child(ringInstance)
 	
 	blueprint = Blueprint.new()
-	blueprint.addLayer("Base", LayerType.BASE)
-	blueprint.addLayer("Liquid", LayerType.LIQUID)
-	blueprint.addLayer("Lava", LayerType.LAVA)
+	blueprint.addLayer("Base", LayerType.BASE, BaseIcon)
+	blueprint.addLayer("Liquid", LayerType.LIQUID, LiquidIcon)
+	blueprint.addLayer("Lava", LayerType.LAVA, LavaIcon)
 	pass # Replace with function body.
 
 func highlight(toggle):
