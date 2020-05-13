@@ -14,7 +14,14 @@ func setClouds(show):
 
 func getClouds():
 	return showClouds
-	
+
+func getLayer(layerName):
+	for layer in layers:
+		if layer.name == layerName:
+			return layer
+			
+	return null
+
 func getLayers():
 	return layers
 
