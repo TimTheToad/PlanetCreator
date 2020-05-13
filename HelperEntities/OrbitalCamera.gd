@@ -169,6 +169,11 @@ func GoToPlanet(planetInstance):
 	if planetRadialInstance:
 		planetRadialInstance.queue_free()
 
+	# UYpdate blueprint editor
+	var bpEditor = get_tree().current_scene.get_node("Control/Blueprint Editor")
+	if bpEditor.visible:
+		bpEditor.showPlanetBlueprint(planetInstance)
+	
 	var screenCoords = get_viewport().get_camera().unproject_position(planetInstance.translation)
 
 	planetRadialInstance = PlanetRadialGUI.instance()

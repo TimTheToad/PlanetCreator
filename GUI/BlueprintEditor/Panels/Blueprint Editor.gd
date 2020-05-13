@@ -56,9 +56,10 @@ func _input(event):
 	if event is InputEventKey and event.is_pressed():
 		if event.scancode == KEY_DELETE and selectedEvent != null:
 			for layer in currentBlueprint.getLayers():
-				layer.removeEvent(selectedEvent.layerEvent)
-				selectedEvent.visible = false
-				selectedEvent.queue_free()
+				if selectedEvent != null:
+					layer.removeEvent(selectedEvent.layerEvent)
+					selectedEvent.visible = false
+					selectedEvent.queue_free()
 			
 			eventSettings.visible = false
 			currentPlanet.applyBlueprint()

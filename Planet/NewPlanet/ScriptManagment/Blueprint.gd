@@ -2,7 +2,6 @@ class_name Blueprint extends Reference
 
 var PlanetLayer = preload("res://Planet/NewPlanet/ScriptManagment/PlanetLayer.gd")
 
-
 var layers = []
 var showClouds = false
 var cloudColor = Color.white
