@@ -83,6 +83,7 @@ func getPanel(planet):
 	return planet.get_parent().get_parent().get_parent().get_parent()
 	pass
 
+
 func _selectPlanetName(planet):
 	selectedPlanet = planet
 	namePanel.visible = true
