@@ -2,7 +2,7 @@ extends WindowDialog
 
 onready var LayerPanel = preload("res://GUI/BlueprintEditor/LayerPanel.tscn")
 onready var container = get_node("Panel/VBoxContainer/ScrollContainer/HBoxContainer")
-onready var blueprintNameLabel = get_node("Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/Label")
+onready var blueprintNameLabel = get_node("Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/HBoxContainer/Label")
 onready var moonScene = preload("res://Planet/NewPlanet/Moon/Moon.tscn")
 onready var eventSettings = get_node("EventSettings")
 onready var blueprintLibraryPanel = get_node("BlueprintLibrary")
@@ -10,6 +10,7 @@ onready var blueprintLibraryPanel = get_node("BlueprintLibrary")
 var currentPlanet
 var currentBlueprint
 
+var layerPanels = []
 var selectedLayers = []
 var selectedEvent = null
 
@@ -31,9 +32,11 @@ func showPlanetBlueprint(planet):
 		for c in container.get_children():
 			c.visible = false
 			c.queue_free()
-			
+	
+	layerPanels.clear()
 	for l in currentBlueprint.getLayers():
 		var p = LayerPanel.instance()
+		layerPanels.append(p)
 		container.add_child(p)
 		createPanelSelectionSignal(p)
 		
@@ -74,6 +77,11 @@ func createPanelSelectionSignal(instance):
 		instance.connect("selected", self, "_selection")
 
 func _eventSelection(eventPanel):
+	
+	for layer in layerPanels:
+		for panel in layer.container.get_children():
+			panel.pressed = false
+	
 	selectedEvent = eventPanel
 	
 	eventSettings.updateSettings(eventPanel.layerEvent)
@@ -166,7 +174,7 @@ func _on_Load_pressed():
 		showPlanetBlueprint(self.currentPlanet)
 		
 	blueprintLibraryPanel.visible = false;
-	self.get_node("Panel/VBoxContainer/Settings/HBoxContainer/SaveLoad/ShowLib").pressed = false
+	self.get_node("Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/HBoxContainer2/ShowLib").pressed = false
 	pass # Replace with function body.
 
 func _on_ShowLib_toggled(button_pressed):
@@ -179,3 +187,20 @@ func _on_AddMoon_pressed():
 	currentPlanet.applyBlueprint()
 	pass # Replace with function body.
 
+
+
+func _on_Delete_pressed():
+	
+	for layer in currentBlueprint.getLayers():
+		if selectedEvent != null:
+			layer.removeEvent(selectedEvent.layerEvent)
+			selectedEvent.visible = false
+			selectedEvent.queue_free()
+	eventSettings.visible = false
+	currentPlanet.applyBlueprint()
+	pass # Replace with function body.
+
+
+func _on_Button3_toggled(button_pressed):
+	get_node("Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel").visible = button_pressed
+	pass # Replace with function body.

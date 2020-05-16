@@ -61,6 +61,7 @@ func _ready():
 	# Connect eventLayer options
 	eventButtons[1].connect("pressed", self, "_connectAddLayerEvent", [0])
 	eventButtons[2].connect("pressed", self, "_connectAddLayerEvent", [1])
+	eventButtons[5].connect("toggled", self, "_showMore")
 
 func _showBlueprintEdtior(toggle):
 	var bpEditor = get_tree().current_scene.get_node("Control/Blueprint Editor")
@@ -84,6 +85,9 @@ func _removeCurrentEvent():
 func _removeCurrentEventButtons():
 	currLayerEventButtons.visible = false
 	currLayerEventButtons.queue_free()
+
+func _showMore(toggle):
+	self.get_node("EventButtons/More/Panel").visible = toggle;
 
 func _connectAddLayerEvent(type):
 	for child in self.get_children():

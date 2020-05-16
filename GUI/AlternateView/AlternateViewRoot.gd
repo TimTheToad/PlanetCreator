@@ -42,7 +42,7 @@ func _input(event):
 			if hoveredViewPortContainer:
 				vPort = hoveredViewPortContainer.get_child(0)
 				mousePos = event.position
-		if event.is_action_pressed("LMB"):
+		if event.button_index == BUTTON_LEFT:
 			if selectedPlanet:
 				getPanel(selectedPlanet).set('custom_styles/panel', panelStyleNotSelected)
 
