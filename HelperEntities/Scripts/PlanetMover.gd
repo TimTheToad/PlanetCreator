@@ -91,6 +91,7 @@ func _input(event):
 				#think this is correct way to only double click planets
 				if  planetInstance.get_parent().name == "Planets":
 					cameraHolder.GoToPlanet(planetInstance)
+					HelpfulGuide.chosenText = 2
 
 	if xArr:
 		if event is InputEventMouseMotion:
