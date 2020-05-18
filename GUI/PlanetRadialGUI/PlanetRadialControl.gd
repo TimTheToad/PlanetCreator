@@ -49,6 +49,7 @@ func _ready():
 	# Connect jump to next stage of buttons
 	_connectJump(startButtons[1], 1)
 	startButtons[2].connect("toggled", self , "_showBlueprintEdtior")
+	startButtons[3].connect("toggled", self, "_goToAlternateView")
 	
 	_connectAllJump(layerButtons.slice(1, layerButtons.size()), 2)
 	
@@ -60,13 +61,22 @@ func _ready():
 	# Connect eventLayer options
 	eventButtons[1].connect("pressed", self, "_connectAddLayerEvent", [0])
 	eventButtons[2].connect("pressed", self, "_connectAddLayerEvent", [1])
+	eventButtons[5].connect("toggled", self, "_showMore")
 
 func _showBlueprintEdtior(toggle):
 	var bpEditor = get_tree().current_scene.get_node("Control/Blueprint Editor")
 	bpEditor.visible = toggle
 	if toggle:
 		bpEditor.showPlanetBlueprint(parent)
-		
+
+func _goToAlternateView(toggle):
+	var alternateView = get_tree().current_scene.get_child(4).get_child(2).get_child(2)
+	alternateView.searchPlanet(parent.name)
+	alternateView.visible = toggle
+	alternateView.set_anchors_preset(Control.PRESET_CENTER, true);
+	alternateView._set_size(Vector2(500,500))
+	pass
+
 func _removeCurrentEvent():
 	currLayer.removeEvent(currLayerEvent)
 	parent.applyBlueprint()
@@ -75,6 +85,9 @@ func _removeCurrentEvent():
 func _removeCurrentEventButtons():
 	currLayerEventButtons.visible = false
 	currLayerEventButtons.queue_free()
+
+func _showMore(toggle):
+	self.get_node("EventButtons/More/Panel").visible = toggle;
 
 func _connectAddLayerEvent(type):
 	for child in self.get_children():

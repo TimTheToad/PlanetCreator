@@ -171,6 +171,11 @@ func GoToPlanet(planetInstance):
 	if planetRadialInstance:
 		planetRadialInstance.queue_free()
 
+	# UYpdate blueprint editor
+	var bpEditor = get_tree().current_scene.get_node("Control/Blueprint Editor")
+	if bpEditor.visible:
+		bpEditor.showPlanetBlueprint(planetInstance)
+	
 	var screenCoords = get_viewport().get_camera().unproject_position(planetInstance.translation)
 
 	planetRadialInstance = PlanetRadialGUI.instance()
@@ -199,6 +204,7 @@ func getCurrentCamera():
 func _on_TopViewButton_pressed():
 	HelpfulGuide.chosenText = 1
 	secondCamera.make_current()
+	currentCamera = secondCamera
 	updateLookAt()
 	
 	if planetRadialInstance:
@@ -209,6 +215,7 @@ func _on_TopViewButton_pressed():
 
 func _on_OrbitalViewButton_pressed():
 	firstCamera.make_current()
+	currentCamera = firstCamera
 	updateLookAt()
 	pass # Replace with function body.
 

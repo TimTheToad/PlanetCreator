@@ -1,5 +1,7 @@
 extends Node
 
+var layerIcons = {}
+
 var blueprints = []
 
 var directory = Directory.new()
@@ -8,6 +10,9 @@ var dirPath = "res://BlueprintStorage/"
 var eventType = preload("res://Planet/NewPlanet/NewPlanet.gd").EventType
 
 func _init():
+	layerIcons["Base"] =  load("res://Assets/Icons/LayerIcons/Base.png")
+	layerIcons["Liquid"] = load("res://Assets/Icons/LayerIcons/Liquid.png")
+	layerIcons["Lava"] = load("res://Assets/Icons/LayerIcons/Lava.png")
 	
 	var error = directory.open(dirPath)
 	if error != OK:
@@ -39,7 +44,7 @@ func loadBlueprint(fileName):
 	
 	for layerName in blueprintDict["Blueprint"]["Layers"]:
 		
-		var layer = blueprint.addLayer(layerName, index)
+		var layer = blueprint.addLayer(layerName, index, layerIcons[layerName])
 		index += 1
 		
 		var layerDict = blueprintDict["Blueprint"]["Layers"][layerName]

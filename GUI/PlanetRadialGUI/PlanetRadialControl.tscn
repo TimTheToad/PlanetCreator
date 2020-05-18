@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://GUI/PlanetRadialGUI/PlanetRadialControl.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Icons/LayerIcons/Liquid.png" type="Texture" id=2]
@@ -10,6 +10,10 @@
 [ext_resource path="res://GUI/PlanetRadialGUI/ButtonNormalBoxFlat.tres" type="StyleBox" id=9]
 [ext_resource path="res://GUI/PlanetRadialGUI/ButtonPressedBoxFlat.tres" type="StyleBox" id=10]
 [ext_resource path="res://GUI/PlanetRadialGUI/ButtonHoverBoxFlat.tres" type="StyleBox" id=11]
+[ext_resource path="res://GUI/Fake/FakeFavoriteLibrary.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Assets/Icons/EventIcons/Gas.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Icons/dot.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Icons/EventIcons/Crystal.png" type="Texture" id=16]
 
 [node name="PlanetRadialControl" type="Control"]
 margin_right = 32.0
@@ -39,30 +43,48 @@ __meta__ = {
 }
 
 [node name="Add" type="Button" parent="StartButtons"]
-margin_left = -78.749
-margin_top = 99.0419
-margin_right = 5.25104
-margin_bottom = 169.042
-hint_tooltip = "Add new Layer detail"
+margin_left = -71.0
+margin_top = 99.0
+margin_right = 1.0
+margin_bottom = 172.0
+hint_tooltip = "Adds a visual layer to the planet mantle."
 custom_styles/hover = ExtResource( 11 )
 custom_styles/pressed = ExtResource( 10 )
 custom_styles/normal = ExtResource( 9 )
-text = "Add Detail"
+text = "Add Layer"
+expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Advanced" type="Button" parent="StartButtons"]
-margin_left = 9.10974
-margin_top = 98.1846
-margin_right = 122.11
-margin_bottom = 168.185
-hint_tooltip = "Advanced Settings - Access blueprint editor"
+margin_left = 215.528
+margin_top = 96.5635
+margin_right = 328.528
+margin_bottom = 166.564
+hint_tooltip = "Advanced Settings - Access blueprint editor 
+in which you can modify, remove 
+and visualise the planets layers."
 custom_styles/hover = ExtResource( 11 )
 custom_styles/pressed = ExtResource( 10 )
 custom_styles/normal = ExtResource( 9 )
 toggle_mode = true
 text = "Advanced"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AlternateView" type="Button" parent="StartButtons"]
+margin_left = 85.8412
+margin_top = 98.725
+margin_right = 198.841
+margin_bottom = 168.725
+hint_tooltip = "Advanced Settings - Access blueprint editor"
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/normal = ExtResource( 9 )
+toggle_mode = true
+text = "Alternate View"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -174,3 +196,49 @@ icon = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Noise2" type="Button" parent="EventButtons"]
+margin_left = -1.36035
+margin_top = -72.1001
+margin_right = 74.6396
+margin_bottom = -2.10013
+hint_tooltip = "Noise detail - adds noise to selected layer"
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/normal = ExtResource( 9 )
+icon = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Noise3" type="Button" parent="EventButtons"]
+margin_left = 100.74
+margin_top = -79.0329
+margin_right = 184.74
+margin_bottom = 4.96713
+hint_tooltip = "Noise detail - adds noise to selected layer"
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/normal = ExtResource( 9 )
+icon = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="More" type="Button" parent="EventButtons"]
+margin_left = 179.986
+margin_top = -77.7724
+margin_right = 263.986
+margin_bottom = 6.22765
+hint_tooltip = "Noise detail - adds noise to selected layer"
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/normal = ExtResource( 9 )
+toggle_mode = true
+icon = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" parent="EventButtons/More" instance=ExtResource( 12 )]
+visible = false

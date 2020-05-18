@@ -3,7 +3,7 @@ extends Node
 onready var blueprintEditor = get_parent().get_node("Control/Blueprint Editor")
 
 var ray
-
+var alternateView
 var cameraHolder
 var selected
 var xArr
@@ -14,6 +14,7 @@ var rayOrigin
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Retrive camera
+	
 	cameraHolder = get_tree().current_scene.get_node("OrbitalCamera")
 
 	if !cameraHolder:
@@ -65,7 +66,7 @@ func _input(event):
 		if event.button_index == BUTTON_LEFT and !event.is_pressed():
 			if selected:
 				prevSelected = selected #saves the previously selected planet so we may "destroy" the arrows upon deselected
-				selected = null
+#				selected = null
 			if xArr:
 				xArr = null
 			if zArr:
@@ -91,7 +92,10 @@ func _input(event):
 				#think this is correct way to only double click planets
 				if  planetInstance.get_parent().name == "Planets":
 					cameraHolder.GoToPlanet(planetInstance)
-					HelpfulGuide.chosenText = 2
+					#HelpfulGuide.chosenText = 2
+			alternateView = get_tree().current_scene.get_child(4).get_child(2).get_child(2)
+			if alternateView.visible:
+				alternateView.searchPlanet(selected.name)
 
 	if xArr:
 		if event is InputEventMouseMotion:

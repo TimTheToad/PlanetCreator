@@ -8,8 +8,8 @@ const PLANET_COUNT = 5
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
-	var minDist = 30
-	var randDist = 20
+	var minDist = 15
+	var randDist = 10
 	randomize()
 	for i in range(PLANET_COUNT):
 		var instance = planetScene.instance()

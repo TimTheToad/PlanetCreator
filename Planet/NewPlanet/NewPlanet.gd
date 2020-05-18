@@ -1,9 +1,5 @@
 extends "Planet.gd"
 
-onready var BaseIcon = preload("res://Assets/Icons/LayerIcons/Base.png")
-onready var LiquidIcon = preload("res://Assets/Icons/LayerIcons/Liquid.png")
-onready var LavaIcon = preload("res://Assets/Icons/LayerIcons/Lava.png")
-
 onready var viewports = get_node("Textures").get_children()
 onready var highlight = get_node("Highlight")
 # Brushes
@@ -29,7 +25,6 @@ enum LayerType {
 
 var eventQueue = []
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	meshes = self.get_node("Meshes").get_children()
@@ -40,9 +35,9 @@ func _ready():
 #		self.add_child(ringInstance)
 	
 	blueprint = Blueprint.new()
-	blueprint.addLayer("Base", LayerType.BASE, BaseIcon)
-	blueprint.addLayer("Liquid", LayerType.LIQUID, LiquidIcon)
-	blueprint.addLayer("Lava", LayerType.LAVA, LavaIcon)
+	blueprint.addLayer("Base", LayerType.BASE, BlueprintLibrary.layerIcons["Base"])
+	blueprint.addLayer("Liquid", LayerType.LIQUID, BlueprintLibrary.layerIcons["Liquid"])
+	blueprint.addLayer("Lava", LayerType.LAVA, BlueprintLibrary.layerIcons["Lava"])
 	pass # Replace with function body.
 
 func highlight(toggle):

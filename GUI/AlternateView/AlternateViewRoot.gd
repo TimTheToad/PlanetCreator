@@ -42,7 +42,7 @@ func _input(event):
 			if hoveredViewPortContainer:
 				vPort = hoveredViewPortContainer.get_child(0)
 				mousePos = event.position
-		if event.is_action_pressed("LMB"):
+		if event.button_index == BUTTON_LEFT:
 			if selectedPlanet:
 				getPanel(selectedPlanet).set('custom_styles/panel', panelStyleNotSelected)
 
@@ -82,6 +82,7 @@ func _process(delta):
 func getPanel(planet):
 	return planet.get_parent().get_parent().get_parent().get_parent()
 	pass
+
 
 func _selectPlanetName(planet):
 	selectedPlanet = planet

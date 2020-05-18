@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://GUI/BlueprintEditor/Panels/Blueprint Editor.gd" type="Script" id=1]
 [ext_resource path="res://GUI/BlueprintEditor/Panels/EventSettings.gd" type="Script" id=2]
@@ -9,6 +9,36 @@
 [ext_resource path="res://Assets/Icons/load.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Icons/redo.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Icons/undo.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Icons/trash.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Icons/EventIcons/temp.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Icons/EventIcons/brush.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Icons/EventIcons/Crystal2.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Icons/EventIcons/Gas.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Icons/dot.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Icons/EventIcons/Crystal.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Icons/EventIcons/symbol2.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Icons/EventIcons/rings.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Icons/EventIcons/symbol1.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Icons/EventIcons/Lyft.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Icons/favorite.png" type="Texture" id=21]
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.309804, 0.309804, 0.309804, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.360784, 0.360784, 0.360784, 1 )
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing_size = 2
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.290196, 0.290196, 0.290196, 1 )
@@ -33,6 +63,7 @@ corner_radius_top_left = 5
 corner_radius_bottom_left = 5
 
 [node name="Blueprint Editor" type="WindowDialog"]
+visible = true
 margin_right = 400.0
 margin_bottom = 300.0
 rect_min_size = Vector2( 300, 200 )
@@ -73,30 +104,45 @@ margin_bottom = 77.0
 custom_constants/separation = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
-margin_right = 108.0
+margin_right = 161.0
 margin_bottom = 77.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Label" type="TextEdit" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer"]
-margin_right = 108.0
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer"]
+margin_right = 161.0
+margin_bottom = 20.0
+
+[node name="Label2" type="Label" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_top = 3.0
+margin_right = 42.0
+margin_bottom = 17.0
+text = "Name:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="TextEdit" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 46.0
+margin_right = 161.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 0, 20 )
-text = "Planet Name"
+size_flags_horizontal = 3
+text = "Untitled"
 
 [node name="ShowClouds" type="CheckBox" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer"]
-margin_top = 24.0
-margin_right = 108.0
-margin_bottom = 48.0
+visible = false
+margin_top = 64.0
+margin_right = 1837.0
+margin_bottom = 88.0
 text = "Show Clouds"
 
-[node name="SaveLoad" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
-margin_left = 113.0
-margin_right = 149.0
-margin_bottom = 77.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-custom_constants/separation = 5
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 161.0
+margin_bottom = 60.0
 
-[node name="Save" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/SaveLoad"]
+[node name="Save" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/HBoxContainer2"]
 margin_right = 36.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 36, 36 )
@@ -106,44 +152,46 @@ size_flags_vertical = 2
 icon = ExtResource( 6 )
 expand_icon = true
 
-[node name="Load" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/SaveLoad"]
-margin_top = 41.0
-margin_right = 36.0
-margin_bottom = 77.0
+[node name="ShowLib" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 42.0
+margin_right = 78.0
+margin_bottom = 36.0
 rect_min_size = Vector2( 36, 36 )
 hint_tooltip = "Load blueprint"
 size_flags_horizontal = 2
 size_flags_vertical = 2
+toggle_mode = true
 icon = ExtResource( 7 )
 expand_icon = true
 
-[node name="UndoRedo" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
-margin_left = 154.0
-margin_right = 190.0
-margin_bottom = 77.0
-custom_constants/separation = 5
-
-[node name="Undo" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/UndoRedo"]
-margin_right = 36.0
+[node name="Undo" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 84.0
+margin_right = 120.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 36, 36 )
 icon = ExtResource( 9 )
 align = 0
 expand_icon = true
 
-[node name="Redo" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/UndoRedo"]
-margin_top = 41.0
-margin_right = 36.0
-margin_bottom = 77.0
+[node name="Redo" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 124.0
+margin_right = 160.0
+margin_bottom = 36.0
 rect_min_size = Vector2( 36, 36 )
 rect_pivot_offset = Vector2( 40, 0 )
 icon = ExtResource( 8 )
 align = 0
 expand_icon = true
 
+[node name="Control" type="Control" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
+margin_left = 166.0
+margin_right = 216.0
+margin_bottom = 77.0
+rect_min_size = Vector2( 50, 0 )
+
 [node name="FillNoise" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
-margin_left = 195.0
-margin_right = 231.0
+margin_left = 221.0
+margin_right = 257.0
 margin_bottom = 77.0
 custom_constants/separation = 5
 
@@ -167,6 +215,325 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 icon = ExtResource( 4 )
 expand_icon = true
+
+[node name="FakeButtons" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
+margin_left = 262.0
+margin_right = 298.0
+margin_bottom = 77.0
+
+[node name="Button" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons"]
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+icon = ExtResource( 12 )
+expand_icon = true
+
+[node name="Button2" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons"]
+margin_top = 40.0
+margin_right = 36.0
+margin_bottom = 76.0
+rect_min_size = Vector2( 36, 36 )
+icon = ExtResource( 14 )
+expand_icon = true
+
+[node name="FakeButtons2" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
+margin_left = 303.0
+margin_right = 339.0
+margin_bottom = 77.0
+
+[node name="Button4" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons2"]
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+icon = ExtResource( 16 )
+expand_icon = true
+
+[node name="Button3" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons2"]
+margin_top = 40.0
+margin_right = 36.0
+margin_bottom = 76.0
+rect_min_size = Vector2( 36, 36 )
+icon = ExtResource( 13 )
+expand_icon = true
+
+[node name="FakeButtons3" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
+margin_left = 344.0
+margin_right = 380.0
+margin_bottom = 77.0
+
+[node name="Button4" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3"]
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+icon = ExtResource( 11 )
+expand_icon = true
+
+[node name="Button3" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3"]
+margin_top = 40.0
+margin_right = 36.0
+margin_bottom = 76.0
+rect_min_size = Vector2( 36, 36 )
+toggle_mode = true
+icon = ExtResource( 15 )
+expand_icon = true
+
+[node name="Panel" type="Panel" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3"]
+visible = false
+margin_left = -193.964
+margin_top = -189.62
+margin_right = 4.03613
+margin_bottom = 8.3802
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 41.0
+margin_right = -5.0
+margin_bottom = -10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer"]
+margin_right = 168.0
+margin_bottom = 270.0
+custom_constants/vseparation = 10
+custom_constants/hseparation = 15
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+margin_right = 46.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 46, 46 )
+icon = ExtResource( 4 )
+expand_icon = true
+
+[node name="Favourite" type="TextureRect" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer/Button"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -8.90378
+margin_top = -7.83037
+margin_right = 5.09622
+margin_bottom = 6.16963
+texture = ExtResource( 21 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button2" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+margin_left = 61.0
+margin_right = 107.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 46, 46 )
+icon = ExtResource( 5 )
+expand_icon = true
+
+[node name="TextureRect2" type="TextureRect" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer/Button2"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 21 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button3" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+margin_left = 122.0
+margin_right = 168.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 46, 46 )
+icon = ExtResource( 12 )
+expand_icon = true
+
+[node name="TextureRect4" type="TextureRect" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer/Button3"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -11.0
+margin_top = -8.0
+margin_right = 3.0
+margin_bottom = 6.0
+texture = ExtResource( 21 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button6" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+margin_top = 56.0
+margin_right = 46.0
+margin_bottom = 102.0
+rect_min_size = Vector2( 46, 46 )
+icon = ExtResource( 14 )
+expand_icon = true
+
+[node name="TextureRect3" type="TextureRect" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer/Button6"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -11.0
+margin_top = -8.0
+margin_right = 3.0
+margin_bottom = 6.0
+texture = ExtResource( 21 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button5" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+margin_left = 61.0
+margin_top = 56.0
+margin_right = 107.0
+margin_bottom = 102.0
+rect_min_size = Vector2( 46, 46 )
+icon = ExtResource( 11 )
+expand_icon = true
+
+[node name="Button4" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+margin_left = 122.0
+margin_top = 56.0
+margin_right = 168.0
+margin_bottom = 102.0
+rect_min_size = Vector2( 46, 46 )
+icon = ExtResource( 13 )
+expand_icon = true
+
+[node name="TextureRect4" type="TextureRect" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer/Button4"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -11.0
+margin_top = -8.0
+margin_right = 3.0
+margin_bottom = 6.0
+texture = ExtResource( 21 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button9" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+margin_top = 112.0
+margin_right = 46.0
+margin_bottom = 158.0
+rect_min_size = Vector2( 46, 46 )
+icon = ExtResource( 17 )
+expand_icon = true
+
+[node name="Button8" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+margin_left = 61.0
+margin_top = 112.0
+margin_right = 107.0
+margin_bottom = 158.0
+rect_min_size = Vector2( 46, 46 )
+icon = ExtResource( 18 )
+expand_icon = true
+
+[node name="Button7" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+margin_left = 122.0
+margin_top = 112.0
+margin_right = 168.0
+margin_bottom = 158.0
+rect_min_size = Vector2( 46, 46 )
+icon = ExtResource( 19 )
+expand_icon = true
+
+[node name="Button12" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+margin_top = 168.0
+margin_right = 46.0
+margin_bottom = 214.0
+rect_min_size = Vector2( 46, 46 )
+icon = ExtResource( 20 )
+expand_icon = true
+
+[node name="Button11" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+margin_left = 61.0
+margin_top = 168.0
+margin_right = 107.0
+margin_bottom = 214.0
+rect_min_size = Vector2( 46, 46 )
+icon = ExtResource( 16 )
+expand_icon = true
+
+[node name="TextureRect4" type="TextureRect" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer/Button11"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -11.0
+margin_top = -8.0
+margin_right = 3.0
+margin_bottom = 6.0
+texture = ExtResource( 21 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button10" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+margin_left = 122.0
+margin_top = 168.0
+margin_right = 168.0
+margin_bottom = 214.0
+rect_min_size = Vector2( 46, 46 )
+icon = ExtResource( 16 )
+expand_icon = true
+
+[node name="Button15" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+margin_top = 224.0
+margin_right = 46.0
+margin_bottom = 270.0
+rect_min_size = Vector2( 46, 46 )
+icon = ExtResource( 16 )
+expand_icon = true
+
+[node name="Button14" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+margin_left = 61.0
+margin_top = 224.0
+margin_right = 107.0
+margin_bottom = 270.0
+rect_min_size = Vector2( 46, 46 )
+icon = ExtResource( 16 )
+expand_icon = true
+
+[node name="Button13" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+margin_left = 122.0
+margin_top = 224.0
+margin_right = 168.0
+margin_bottom = 270.0
+rect_min_size = Vector2( 46, 46 )
+icon = ExtResource( 16 )
+expand_icon = true
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel"]
+margin_left = 8.0
+margin_top = 4.0
+margin_right = 189.0
+margin_bottom = 35.0
+text = "Press on layer effect to favorite"
+autowrap = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer"]
 margin_top = 81.0
@@ -202,11 +569,11 @@ __meta__ = {
 [node name="Label" type="Label" parent="EventSettings"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -45.0
+margin_left = -64.5
 margin_top = 8.0
-margin_right = 45.0
-margin_bottom = 14.0
-text = "Cascading List"
+margin_right = 64.5
+margin_bottom = 22.0
+text = "Component Settings"
 align = 1
 valign = 1
 __meta__ = {
@@ -218,8 +585,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
 margin_top = 28.0
-margin_right = -4.0
-margin_bottom = -4.0
+margin_right = -3.87201
+margin_bottom = -38.6017
 custom_styles/bg = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -228,21 +595,39 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="EventSettings/ScrollContainer"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 137.872
-margin_bottom = 242.602
+margin_right = 138.0
+margin_bottom = 208.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Delete" type="Button" parent="EventSettings"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -16.0
+margin_top = -35.0
+margin_right = 16.0
+margin_bottom = -3.0
+icon = ExtResource( 10 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="BlueprintLibrary" type="Panel" parent="."]
+visible = false
 anchor_left = -0.0417042
 anchor_top = 0.089701
 anchor_right = -0.00226763
 anchor_bottom = 0.843854
-margin_left = -109.195
-margin_right = 1.80501
+margin_left = 95.1612
+margin_top = 71.3042
+margin_right = 206.161
+margin_bottom = 71.3042
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 4 )
 script = ExtResource( 3 )
@@ -269,8 +654,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
 margin_top = 19.95
-margin_right = -4.0
-margin_bottom = -4.0
+margin_right = -3.99962
+margin_bottom = -36.2959
 custom_styles/bg = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -280,21 +665,31 @@ __meta__ = {
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 116.775
-margin_bottom = 200.296
+margin_bottom = 2.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Tween" type="Tween" parent="BlueprintLibrary"]
 
-[node name="PopupMenu" type="PopupMenu" parent="."]
-margin_right = 20.0
-margin_bottom = 20.0
-items = [ "test", null, 0, false, false, 0, 0, null, "", false ]
+[node name="Load" type="Button" parent="BlueprintLibrary"]
+anchor_left = 0.5
+anchor_top = 0.913
+anchor_right = 0.5
+anchor_bottom = 0.913
+margin_left = -55.341
+margin_top = -10.0
+margin_right = 55.341
+margin_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Load"
 [connection signal="toggled" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/ShowClouds" to="." method="_on_ShowClouds_toggled"]
-[connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/SaveLoad/Save" to="." method="_on_Save_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/SaveLoad/Load" to="." method="_on_Load_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/HBoxContainer2/Save" to="." method="_on_Save_pressed"]
+[connection signal="toggled" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/HBoxContainer2/ShowLib" to="." method="_on_ShowLib_toggled"]
 [connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/FillNoise/AddFill" to="." method="_on_AddFill_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/FillNoise/AddNoise" to="." method="_on_AddNoise_pressed"]
+[connection signal="toggled" from="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3" to="." method="_on_Button3_toggled"]
+[connection signal="pressed" from="EventSettings/Delete" to="." method="_on_Delete_pressed"]
+[connection signal="pressed" from="BlueprintLibrary/Load" to="." method="_on_Load_pressed"]
