@@ -205,6 +205,7 @@ margin_left = -260.0
 margin_top = -0.400002
 margin_right = 271.0
 margin_bottom = 141.6
+mouse_filter = 2
 bbcode_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
