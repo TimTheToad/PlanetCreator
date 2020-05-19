@@ -92,6 +92,7 @@ func _input(event):
 				#think this is correct way to only double click planets
 				if  planetInstance.get_parent().name == "Planets":
 					cameraHolder.GoToPlanet(planetInstance)
+					#HelpfulGuide.chosenText = 2
 			alternateView = get_tree().current_scene.get_child(4).get_child(2).get_child(2)
 			if alternateView.visible:
 				alternateView.searchPlanet(selected.name)

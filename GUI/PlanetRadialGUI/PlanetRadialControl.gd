@@ -96,9 +96,9 @@ func _connectAddLayerEvent(type):
 	var children
 	match type:
 		0:
+			HelpfulGuide.chosenText = 5
 			currLayerEvent = currLayer.addFill(Color.white)
 			currLayerEventButtons =  FillButtonsScene.instance()
-			
 			# Add as child
 			self.add_child(currLayerEventButtons)
 			children = currLayerEventButtons.get_children()
@@ -112,6 +112,7 @@ func _connectAddLayerEvent(type):
 			colorPickerButton.color = currLayerEvent.color
 			colorPickerButton.connect("color_changed", currLayerEvent, "setColor")
 		1:
+			HelpfulGuide.chosenText = 6
 			currLayerEvent = currLayer.addNoise(0.8, 5, Color.white)
 			currLayerEventButtons = NoiseButtonsScene.instance()
 			
@@ -145,6 +146,7 @@ func _connectAddLayerEvent(type):
 func _connectGetLayer(layer):
 	currLayer = parent.blueprint.getLayer(layer)
 
+
 func _connectAllJump(buttons, index):
 	for button in buttons:
 		_connectJump(button, index)
@@ -152,7 +154,9 @@ func _connectAllJump(buttons, index):
 func _connectJump(button, index):
 	button.connect("pressed", self, "_goTo", [index])
 
+
 func _goTo(index):
+	HelpfulGuide.chosenText = index + 2
 	for child in self.get_children():
 		child.visible = false
 	
