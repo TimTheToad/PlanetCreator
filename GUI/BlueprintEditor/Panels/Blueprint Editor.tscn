@@ -96,22 +96,28 @@ __meta__ = {
 
 [node name="Settings" type="MarginContainer" parent="Panel/VBoxContainer"]
 margin_right = 380.0
-margin_bottom = 77.0
+margin_bottom = 95.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Settings"]
 margin_right = 380.0
-margin_bottom = 77.0
+margin_bottom = 95.0
 custom_constants/separation = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
-margin_right = 161.0
-margin_bottom = 77.0
+margin_right = 160.0
+margin_bottom = 95.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer"]
+margin_right = 160.0
+margin_bottom = 14.0
+text = "Settings"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer"]
-margin_right = 161.0
-margin_bottom = 20.0
+margin_top = 18.0
+margin_right = 160.0
+margin_bottom = 38.0
 
 [node name="Label2" type="Label" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/HBoxContainer"]
 margin_top = 3.0
@@ -124,7 +130,7 @@ __meta__ = {
 
 [node name="Label" type="TextEdit" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/HBoxContainer"]
 margin_left = 46.0
-margin_right = 161.0
+margin_right = 160.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
@@ -138,9 +144,9 @@ margin_bottom = 88.0
 text = "Show Clouds"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer"]
-margin_top = 24.0
-margin_right = 161.0
-margin_bottom = 60.0
+margin_top = 42.0
+margin_right = 160.0
+margin_bottom = 78.0
 
 [node name="Save" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/HBoxContainer2"]
 margin_right = 36.0
@@ -184,18 +190,34 @@ align = 0
 expand_icon = true
 
 [node name="Control" type="Control" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
-margin_left = 166.0
-margin_right = 216.0
-margin_bottom = 77.0
+margin_left = 165.0
+margin_right = 215.0
+margin_bottom = 95.0
 rect_min_size = Vector2( 50, 0 )
 
-[node name="FillNoise" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
-margin_left = 221.0
-margin_right = 257.0
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
+margin_left = 220.0
+margin_right = 380.0
+margin_bottom = 95.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2"]
+margin_right = 160.0
+margin_bottom = 14.0
+text = "Components"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2"]
+margin_top = 18.0
+margin_right = 160.0
+margin_bottom = 95.0
+
+[node name="FillNoise" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_right = 36.0
 margin_bottom = 77.0
 custom_constants/separation = 5
 
-[node name="AddFill" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FillNoise"]
+[node name="AddFill" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FillNoise"]
 margin_right = 36.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 36, 36 )
@@ -205,7 +227,7 @@ size_flags_vertical = 2
 icon = ExtResource( 5 )
 expand_icon = true
 
-[node name="AddNoise" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FillNoise"]
+[node name="AddNoise" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FillNoise"]
 margin_top = 41.0
 margin_right = 36.0
 margin_bottom = 77.0
@@ -216,19 +238,19 @@ size_flags_vertical = 2
 icon = ExtResource( 4 )
 expand_icon = true
 
-[node name="FakeButtons" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
-margin_left = 262.0
-margin_right = 298.0
+[node name="FakeButtons" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_left = 40.0
+margin_right = 76.0
 margin_bottom = 77.0
 
-[node name="Button" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons"]
+[node name="Button" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons"]
 margin_right = 36.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 36, 36 )
 icon = ExtResource( 12 )
 expand_icon = true
 
-[node name="Button2" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons"]
+[node name="Button2" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons"]
 margin_top = 40.0
 margin_right = 36.0
 margin_bottom = 76.0
@@ -236,19 +258,19 @@ rect_min_size = Vector2( 36, 36 )
 icon = ExtResource( 14 )
 expand_icon = true
 
-[node name="FakeButtons2" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
-margin_left = 303.0
-margin_right = 339.0
+[node name="FakeButtons2" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_left = 80.0
+margin_right = 116.0
 margin_bottom = 77.0
 
-[node name="Button4" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons2"]
+[node name="Button4" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons2"]
 margin_right = 36.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 36, 36 )
 icon = ExtResource( 16 )
 expand_icon = true
 
-[node name="Button3" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons2"]
+[node name="Button3" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons2"]
 margin_top = 40.0
 margin_right = 36.0
 margin_bottom = 76.0
@@ -256,19 +278,19 @@ rect_min_size = Vector2( 36, 36 )
 icon = ExtResource( 13 )
 expand_icon = true
 
-[node name="FakeButtons3" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer"]
-margin_left = 344.0
-margin_right = 380.0
+[node name="FakeButtons3" type="VBoxContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_left = 120.0
+margin_right = 156.0
 margin_bottom = 77.0
 
-[node name="Button4" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3"]
+[node name="Button4" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3"]
 margin_right = 36.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 36, 36 )
 icon = ExtResource( 11 )
 expand_icon = true
 
-[node name="Button3" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3"]
+[node name="Button3" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3"]
 margin_top = 40.0
 margin_right = 36.0
 margin_bottom = 76.0
@@ -277,7 +299,7 @@ toggle_mode = true
 icon = ExtResource( 15 )
 expand_icon = true
 
-[node name="Panel" type="Panel" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3"]
+[node name="Panel" type="Panel" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3"]
 visible = false
 margin_left = -193.964
 margin_top = -189.62
@@ -289,7 +311,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 5.0
@@ -300,7 +322,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GridContainer" type="GridContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer"]
+[node name="GridContainer" type="GridContainer" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer"]
 margin_right = 168.0
 margin_bottom = 270.0
 custom_constants/vseparation = 10
@@ -310,14 +332,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+[node name="Button" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
 margin_right = 46.0
 margin_bottom = 46.0
 rect_min_size = Vector2( 46, 46 )
 icon = ExtResource( 4 )
 expand_icon = true
 
-[node name="Favourite" type="TextureRect" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer/Button"]
+[node name="Favourite" type="TextureRect" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer/Button"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -332,7 +354,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button2" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+[node name="Button2" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
 margin_left = 61.0
 margin_right = 107.0
 margin_bottom = 46.0
@@ -340,7 +362,7 @@ rect_min_size = Vector2( 46, 46 )
 icon = ExtResource( 5 )
 expand_icon = true
 
-[node name="TextureRect2" type="TextureRect" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer/Button2"]
+[node name="TextureRect2" type="TextureRect" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer/Button2"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -355,7 +377,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button3" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+[node name="Button3" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
 margin_left = 122.0
 margin_right = 168.0
 margin_bottom = 46.0
@@ -363,7 +385,7 @@ rect_min_size = Vector2( 46, 46 )
 icon = ExtResource( 12 )
 expand_icon = true
 
-[node name="TextureRect4" type="TextureRect" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer/Button3"]
+[node name="TextureRect4" type="TextureRect" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer/Button3"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -378,7 +400,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button6" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+[node name="Button6" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
 margin_top = 56.0
 margin_right = 46.0
 margin_bottom = 102.0
@@ -386,7 +408,7 @@ rect_min_size = Vector2( 46, 46 )
 icon = ExtResource( 14 )
 expand_icon = true
 
-[node name="TextureRect3" type="TextureRect" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer/Button6"]
+[node name="TextureRect3" type="TextureRect" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer/Button6"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -401,7 +423,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button5" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+[node name="Button5" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
 margin_left = 61.0
 margin_top = 56.0
 margin_right = 107.0
@@ -410,7 +432,7 @@ rect_min_size = Vector2( 46, 46 )
 icon = ExtResource( 11 )
 expand_icon = true
 
-[node name="Button4" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+[node name="Button4" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
 margin_left = 122.0
 margin_top = 56.0
 margin_right = 168.0
@@ -419,7 +441,7 @@ rect_min_size = Vector2( 46, 46 )
 icon = ExtResource( 13 )
 expand_icon = true
 
-[node name="TextureRect4" type="TextureRect" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer/Button4"]
+[node name="TextureRect4" type="TextureRect" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer/Button4"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -434,7 +456,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button9" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+[node name="Button9" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
 margin_top = 112.0
 margin_right = 46.0
 margin_bottom = 158.0
@@ -442,7 +464,7 @@ rect_min_size = Vector2( 46, 46 )
 icon = ExtResource( 17 )
 expand_icon = true
 
-[node name="Button8" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+[node name="Button8" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
 margin_left = 61.0
 margin_top = 112.0
 margin_right = 107.0
@@ -451,7 +473,7 @@ rect_min_size = Vector2( 46, 46 )
 icon = ExtResource( 18 )
 expand_icon = true
 
-[node name="Button7" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+[node name="Button7" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
 margin_left = 122.0
 margin_top = 112.0
 margin_right = 168.0
@@ -460,7 +482,7 @@ rect_min_size = Vector2( 46, 46 )
 icon = ExtResource( 19 )
 expand_icon = true
 
-[node name="Button12" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+[node name="Button12" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
 margin_top = 168.0
 margin_right = 46.0
 margin_bottom = 214.0
@@ -468,7 +490,7 @@ rect_min_size = Vector2( 46, 46 )
 icon = ExtResource( 20 )
 expand_icon = true
 
-[node name="Button11" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+[node name="Button11" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
 margin_left = 61.0
 margin_top = 168.0
 margin_right = 107.0
@@ -477,7 +499,7 @@ rect_min_size = Vector2( 46, 46 )
 icon = ExtResource( 16 )
 expand_icon = true
 
-[node name="TextureRect4" type="TextureRect" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer/Button11"]
+[node name="TextureRect4" type="TextureRect" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer/Button11"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -492,7 +514,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button10" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+[node name="Button10" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
 margin_left = 122.0
 margin_top = 168.0
 margin_right = 168.0
@@ -501,7 +523,7 @@ rect_min_size = Vector2( 46, 46 )
 icon = ExtResource( 16 )
 expand_icon = true
 
-[node name="Button15" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+[node name="Button15" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
 margin_top = 224.0
 margin_right = 46.0
 margin_bottom = 270.0
@@ -509,7 +531,7 @@ rect_min_size = Vector2( 46, 46 )
 icon = ExtResource( 16 )
 expand_icon = true
 
-[node name="Button14" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+[node name="Button14" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
 margin_left = 61.0
 margin_top = 224.0
 margin_right = 107.0
@@ -518,7 +540,7 @@ rect_min_size = Vector2( 46, 46 )
 icon = ExtResource( 16 )
 expand_icon = true
 
-[node name="Button13" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
+[node name="Button13" type="Button" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel/ScrollContainer/GridContainer"]
 margin_left = 122.0
 margin_top = 224.0
 margin_right = 168.0
@@ -527,7 +549,7 @@ rect_min_size = Vector2( 46, 46 )
 icon = ExtResource( 16 )
 expand_icon = true
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel"]
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel"]
 margin_left = 8.0
 margin_top = 4.0
 margin_right = 189.0
@@ -536,14 +558,14 @@ text = "Press on layer effect to favorite"
 autowrap = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer"]
-margin_top = 81.0
+margin_top = 99.0
 margin_right = 380.0
-margin_bottom = 282.0
+margin_bottom = 325.0
 size_flags_vertical = 3
 scroll_vertical_enabled = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/ScrollContainer"]
-margin_bottom = 201.0
+margin_bottom = 226.0
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -688,8 +710,8 @@ text = "Load"
 [connection signal="toggled" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/ShowClouds" to="." method="_on_ShowClouds_toggled"]
 [connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/HBoxContainer2/Save" to="." method="_on_Save_pressed"]
 [connection signal="toggled" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/HBoxContainer2/ShowLib" to="." method="_on_ShowLib_toggled"]
-[connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/FillNoise/AddFill" to="." method="_on_AddFill_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/FillNoise/AddNoise" to="." method="_on_AddNoise_pressed"]
-[connection signal="toggled" from="Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3" to="." method="_on_Button3_toggled"]
+[connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FillNoise/AddFill" to="." method="_on_AddFill_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FillNoise/AddNoise" to="." method="_on_AddNoise_pressed"]
+[connection signal="toggled" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3" to="." method="_on_Button3_toggled"]
 [connection signal="pressed" from="EventSettings/Delete" to="." method="_on_Delete_pressed"]
 [connection signal="pressed" from="BlueprintLibrary/Load" to="." method="_on_Load_pressed"]
