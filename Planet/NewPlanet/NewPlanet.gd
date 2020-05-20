@@ -25,7 +25,6 @@ enum LayerType {
 
 var eventQueue = []
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	meshes = self.get_node("Meshes").get_children()

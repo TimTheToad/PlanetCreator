@@ -148,6 +148,7 @@ func _input(event):
 
 
 func GoToSun():
+	HelpfulGuide.chosenText = 1
 	currentCamera = self.firstCamera
 	currentCamera.make_current()
 	self.global_transform.origin = sunInstance.global_transform.origin
@@ -159,6 +160,7 @@ func GoToSun():
 		planetRadialInstance = null
 
 func GoToPlanet(planetInstance):
+	HelpfulGuide.chosenText = 2
 	currentCamera = self.firstCamera
 	currentCamera.make_current()
 	self.global_transform.origin = planetInstance.global_transform.origin
@@ -200,6 +202,7 @@ func getCurrentCamera():
 
 
 func _on_TopViewButton_pressed():
+	HelpfulGuide.chosenText = 1
 	secondCamera.make_current()
 	currentCamera = secondCamera
 	updateLookAt()
@@ -218,6 +221,10 @@ func _on_OrbitalViewButton_pressed():
 
 
 func _on_FreeCamViewButton_pressed():
+	HelpfulGuide.chosenText = 1
 	thirdCamera.make_current()
+	if planetRadialInstance:
+		planetRadialInstance.queue_free()
+		planetRadialInstance = null
 	updateLookAt()
 	pass # Replace with function body.

@@ -59,13 +59,13 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="Period/HBoxContainer"]
 margin_top = 13.0
-margin_right = 41.0
+margin_right = 135.0
 margin_bottom = 27.0
-text = "Period"
+text = "Quantity Distribution"
 
 [node name="HSlider" type="HSlider" parent="Period/HBoxContainer"]
-margin_left = 45.0
-margin_right = 145.0
+margin_left = 139.0
+margin_right = 239.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 100, 0 )
 size_flags_vertical = 1
@@ -98,13 +98,13 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="Octave/HBoxContainer"]
 margin_top = 11.0
-margin_right = 45.0
+margin_right = 38.0
 margin_bottom = 25.0
-text = "Octave"
+text = "Detail"
 
 [node name="HSlider" type="HSlider" parent="Octave/HBoxContainer"]
-margin_left = 49.0
-margin_right = 149.0
+margin_left = 42.0
+margin_right = 142.0
 margin_bottom = 37.0
 rect_min_size = Vector2( 100, 0 )
 size_flags_vertical = 1

@@ -31,10 +31,12 @@ func addPanel(event):
 			p = eventPanel.instance()
 			container.add_child(p)
 			p.init("Fill", event)
+			p.icon = load("res://Assets/Icons/EventIcons/fill.png")
 		PanelType.NOISE:
 			p = eventPanel.instance()
 			container.add_child(p)
 			p.init("Noise", event)
+			p.icon = load("res://Assets/Icons/EventIcons/noise.png")
 	
 	return p
 
