@@ -117,7 +117,7 @@ func createViewPort(index):
 	var omniLight = OmniLight.new()
 	planetsInView.append(viewPort.get_child(0))
 	viewPort.add_child(omniLight)
-	omniLight.translate(Vector3(2.0, 0.0, 0.0))
+	omniLight.translate(Vector3(3.0, 0.0, 0.0))
 	return viewPort
 	pass
 
