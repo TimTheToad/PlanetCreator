@@ -94,7 +94,7 @@ func _input(event):
 					cameraHolder.GoToPlanet(planetInstance)
 					#HelpfulGuide.chosenText = 2
 			alternateView = get_tree().current_scene.get_child(4).get_child(2).get_child(2)
-			if alternateView.visible:
+			if alternateView.visible and selected:
 				alternateView.searchPlanet(selected.name)
 
 	if xArr:
