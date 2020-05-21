@@ -225,5 +225,5 @@ func _on_Delete_pressed():
 
 
 func _on_Button3_toggled(button_pressed):
-	get_node("Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel").visible = button_pressed
+	get_node("Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel").visible = button_pressed
 	pass # Replace with function body.

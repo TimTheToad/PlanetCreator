@@ -71,7 +71,6 @@ ambient_light_color = Color( 1, 1, 1, 1 )
 environment = SubResource( 5 )
 
 [node name="Blueprint Editor" type="WindowDialog"]
-visible = true
 margin_right = 400.0
 margin_bottom = 300.0
 rect_min_size = Vector2( 300, 200 )
