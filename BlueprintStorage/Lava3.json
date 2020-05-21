@@ -1,0 +1,1 @@
+{"Blueprint":{"Name":"Lava3","Layers":{"Base":{"0":{"type":0,"color":"ff1c0c0c"},"1":{"type":1,"period":1.5,"octave":5,"color":"ff130606"},"2":{"type":1,"period":1.1,"octave":5,"color":"ff150404"}},"Liquid":{},"Lava":{"0":{"type":1,"period":1.5,"octave":5,"color":"ffff3000"}}}}}

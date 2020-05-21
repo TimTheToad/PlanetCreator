@@ -3,6 +3,8 @@ extends Panel
 onready var container = get_node("ScrollContainer/VBoxContainer")
 onready var scrollContainer = get_node("ScrollContainer")
 
+onready var preview = get_node("PlanetPreview")
+
 func getSelectedBlueprint():
 	var index = 0
 	for child in container.get_children():
@@ -33,6 +35,9 @@ func loadBlueprints():
 		button.align = button.ALIGN_CENTER
 		
 		button.connect("button_down", self, "_deselectAll")
+		button.connect("mouse_entered", preview, "set_visible", [true])
+		button.connect("mouse_exited", preview, "set_visible", [false])
+		button.connect("mouse_entered", preview, "changeBlueprint", [blueprint])
 		
 		container.add_child(button)
 

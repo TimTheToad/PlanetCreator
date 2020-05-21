@@ -22,6 +22,10 @@ class FillEvent extends LayerEvent:
 	func setColor(c):
 		self.color = c
 		self.setUpdated(true)
+		
+	func duplicate():
+		var dupe = FillEvent.new(self.type, self.layer, self.color)
+		return dupe
 
 class NoiseEvent extends LayerEvent:
 	var period
@@ -46,6 +50,10 @@ class NoiseEvent extends LayerEvent:
 	func setColor(c):
 		self.color = c
 		self.setUpdated(true)
+		
+	func duplicate():
+		var dupe = NoiseEvent.new(self.type, self.layer, self.period, self.octave, self.color)
+		return dupe
 
 var events = []
 var name
@@ -79,6 +87,9 @@ func removeEvent(event):
 
 func getEvents():
 	return events	
+
+func addEvent(event):
+	events.append(event)
 
 func addFill(color):
 	var e = FillEvent.new(planetClass.EventType.FILL, self, color)

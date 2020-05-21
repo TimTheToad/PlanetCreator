@@ -1,6 +1,6 @@
 class_name Blueprint extends Reference
 
-var PlanetLayer = preload("res://Planet/NewPlanet/ScriptManagment/PlanetLayer.gd")
+var PlanetLayer = load("res://Planet/NewPlanet/ScriptManagment/PlanetLayer.gd")
 
 var layers = []
 var showClouds = false
@@ -45,6 +45,10 @@ func applyLayers(planet):
 		if layers[i].getUpdated():
 			planet.updateLayer(layers[i])
 
+func addLayerCopy(layer):
+	layers.append(layer)
+	return layer
+	
 func addLayer(name, index, icon = null):
 	var layer = PlanetLayer.new(name, index, icon)
 	layers.append(layer)

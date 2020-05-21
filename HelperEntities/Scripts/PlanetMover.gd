@@ -124,6 +124,7 @@ func _input(event):
 			xArr.translation = arrowPosition
 
 			planet.updateOrbitLines()
+			planet.orbit(0)
 			
 	elif zArr:
 		if event is InputEventMouseMotion:
@@ -149,5 +150,5 @@ func _input(event):
 			zArr.translation = arrowPosition
 			
 			planet.updateOrbitLines()
-		
+			planet.orbit(0)		
 

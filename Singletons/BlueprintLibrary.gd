@@ -107,7 +107,7 @@ func saveBlueprint(blueprint, fileName):
 	file.open(dirPath + fileName + ".json", File.WRITE)
 	file.store_string(JSON.print(jsonBlueprint))
 	file.close()
-	
+
 
 	
 	pass
