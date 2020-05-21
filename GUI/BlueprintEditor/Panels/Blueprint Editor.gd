@@ -210,8 +210,6 @@ func _on_AddMoon_pressed():
 	currentPlanet.applyBlueprint()
 	pass # Replace with function body.
 
-
-
 func _on_Delete_pressed():
 	
 	for layer in currentBlueprint.getLayers():
