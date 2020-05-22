@@ -75,7 +75,7 @@ func applyBlueprint():
 		
 func updateLayer(layer):
 	var viewport = viewports[layer.layerIndex]
-	print(self.name)
+#	print(self.name)
 	var brushes = viewport.get_children()
 	var events = layer.getEvents()
 	for i in range(events.size()):

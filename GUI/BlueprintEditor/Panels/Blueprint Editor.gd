@@ -6,7 +6,7 @@ onready var blueprintNameLabel = get_node("Panel/VBoxContainer/Settings/HBoxCont
 onready var moonScene = preload("res://Planet/NewPlanet/Moon/Moon.tscn")
 onready var eventSettings = get_node("EventSettings")
 onready var blueprintLibraryPanel = get_node("BlueprintLibrary")
-
+onready var planetsInScene = get_tree().current_scene.get_node("Planets")
 var currentPlanet
 var currentBlueprint
 
@@ -127,7 +127,10 @@ func _on_AddFill_pressed():
 			
 			eventSettings.updateSettings(eventPanel.layerEvent)
 			eventSettings.visible = true
-	
+			
+		if planetsInScene.modifiedPlanets.has(currentPlanet):
+			planetsInScene.modifiedPlanets.erase(currentPlanet)
+		planetsInScene.modifiedPlanets.push_front(currentPlanet)
 	pass # Replace with function body.
 
 func _on_AddNoise_pressed():
@@ -153,6 +156,10 @@ func _on_AddNoise_pressed():
 			eventSettings.visible = true
 			
 			currentPlanet.applyBlueprint()
+			
+		if planetsInScene.modifiedPlanets.has(currentPlanet):
+			planetsInScene.modifiedPlanets.erase(currentPlanet)
+		planetsInScene.modifiedPlanets.push_front(currentPlanet)
 	pass # Replace with function body.
 
 func _on_ShowClouds_toggled(button_pressed):

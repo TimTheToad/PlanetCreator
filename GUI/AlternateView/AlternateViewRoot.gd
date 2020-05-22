@@ -158,19 +158,42 @@ func searchPlanet(text):
 	for panel in panelContainers:
 		if nonMatchingNames.has(panel.get_child(0).get_child(0).get_child(0).get_child(0).name):
 			panel.visible = false
-#			viewP.set_h_size_flags(3) #Expand horizontal
-#			viewP.set_v_size_flags(3)
 		else:
 			panel.visible = true
 #			viewP.set_h_size_flags(0) #Expand horizontal
 #			viewP.set_v_size_flags(0)
 	pass
 
+func sortByLastEdited():
+	tweenIt(2.0, Color.white, Color.black)
+	var indexArray = []
+	print(planetsInScene.modifiedPlanets)
+	var modifiedOrder = []
+	for i in range(planetsInScene.modifiedPlanets.size()):
+		modifiedOrder.append(planetsInScene.modifiedPlanets[i].name)
+#	modifiedOrder.invert()
+	print(modifiedOrder)
+	for i in range(hBoxContainer.get_child_count()):
+		var childPlanet = hBoxContainer.get_child(i).get_child(0).get_child(0).get_child(0).get_child(0)
+		if not modifiedOrder.has(childPlanet.name):
+			modifiedOrder.append(childPlanet.name)
+
+	for i in range(panelContainers.size()):
+		hBoxContainer.remove_child(panelContainers[i])
+		
+	for i in range(modifiedOrder.size()):
+		for j in range(panelContainers.size()):
+			var childPlanet = panelContainers[j].get_child(0).get_child(0).get_child(0).get_child(0)
+			if modifiedOrder[i] == childPlanet.name:
+				hBoxContainer.add_child(panelContainers[j])
+
+	pass
+
 func sortBySize():
 	tweenIt(2.0, Color.white, Color.black)
-	var planetIndexArr = []
-	var planetIndex = 0
-	var sizes = []
+	var planetIndexArr 	= []
+	var planetIndex 	= 0
+	var sizes 			= []
 	var minId
 	for size in sizeDic:
 		sizes.append(size)

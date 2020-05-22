@@ -111,6 +111,9 @@ func _connectAddLayerEvent(type):
 			var colorPickerButton = currLayerEventButtons.get_node("Color")
 			colorPickerButton.color = currLayerEvent.color
 			colorPickerButton.connect("color_changed", currLayerEvent, "setColor")
+			if self.get_parent().get_parent().modifiedPlanets.has(self.parent):
+				self.get_parent().get_parent().modifiedPlanets.erase(self.parent)
+			self.get_parent().get_parent().modifiedPlanets.push_front(self.parent)
 		1:
 			HelpfulGuide.chosenText = 6
 			currLayerEvent = currLayer.addNoise(0.8, 5, Color.white)
@@ -136,6 +139,9 @@ func _connectAddLayerEvent(type):
 			var colorPickerButton = currLayerEventButtons.get_node("Color")
 			colorPickerButton.color = currLayerEvent.color
 			colorPickerButton.connect("color_changed", currLayerEvent, "setColor")
+			if self.get_parent().get_parent().modifiedPlanets.has(self.parent):
+				self.get_parent().get_parent().modifiedPlanets.erase(self.parent)
+			self.get_parent().get_parent().modifiedPlanets.push_front(self.parent)
 			
 	positionButtons(PI * 0.5, children)
 	_connectJump(children[0], 2)

@@ -4,7 +4,7 @@ onready var planetScene = preload("res://Planet/NewPlanet/NewPlanet.tscn")
 onready var alternateView = preload("res://GUI/AlternateView/AlternateViewRoot.tscn")
 onready var alternateInstance = alternateView.instance()
 const PLANET_COUNT = 5
-
+var modifiedPlanets = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
