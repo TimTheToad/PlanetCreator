@@ -145,6 +145,11 @@ func swap(a,b, arr):
 	arr[b] = temp
 	pass
 
+func searchAndAddTextPlanet(text):
+	get_child(2).items[2].set_text(text)
+	searchPlanet(text)
+	pass
+
 func searchPlanet(text):
 	var names = []
 	for name in nameDic:

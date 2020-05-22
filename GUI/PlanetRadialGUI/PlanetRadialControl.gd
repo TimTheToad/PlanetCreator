@@ -71,10 +71,10 @@ func _showBlueprintEdtior(toggle):
 
 func _goToAlternateView(toggle):
 	var alternateView = get_tree().current_scene.get_child(4).get_child(2).get_child(2)
-	alternateView.searchPlanet(parent.name)
+	alternateView.searchAndAddTextPlanet(parent.name)
 	alternateView.visible = toggle
 	alternateView.set_anchors_preset(Control.PRESET_CENTER, true)
-	alternateView._set_size(Vector2(500, 500))
+	alternateView._set_size(Vector2(650, 500))
 	pass
 
 func _removeCurrentEvent():
