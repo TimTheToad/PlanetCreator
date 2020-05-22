@@ -5,16 +5,23 @@ onready var alternateView = preload("res://GUI/AlternateView/AlternateViewRoot.t
 onready var alternateInstance = alternateView.instance()
 const PLANET_COUNT = 5
 var modifiedPlanets = []
+
+var minDist = 15
+var randDist = 10
+var totalDist = 0.0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
-	var minDist = 15
-	var randDist = 10
+
 	randomize()
 	for i in range(PLANET_COUNT):
 		var instance = planetScene.instance()
-		instance.minor_axis = minDist + randDist * ((randf() -0.5) * 2)
-		instance.major_axis = instance.minor_axis + 2 * ((randf() - 0.5) * 2)
+		
+		totalDist = minDist + randDist * ((randf() -0.5) * 2)
+		
+		instance.minor_axis = totalDist
+		instance.major_axis = totalDist + 2 * ((randf() - 0.5) * 2)
 		instance.phi = PI * 2.0 * randf()
 		var s = 0.25 + randf()
 		instance.scale = Vector3(s,s,s)
@@ -33,3 +40,11 @@ func _process(dt):
 	
 
 
+
+
+func _on_Pause_toggled(button_pressed):
+	
+	for child in self.get_children():
+		child.shouldOrbit = !button_pressed
+	
+	pass # Replace with function body.

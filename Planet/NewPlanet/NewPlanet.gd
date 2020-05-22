@@ -75,7 +75,6 @@ func applyBlueprint():
 		
 func updateLayer(layer):
 	var viewport = viewports[layer.layerIndex]
-#	print(self.name)
 	var brushes = viewport.get_children()
 	var events = layer.getEvents()
 	for i in range(events.size()):
@@ -119,11 +118,9 @@ func _createNoiseBrush(viewport, event):
 	
 	viewport.add_child(brush)
 
-
 func _process(dt):
 	if blueprint:
 		blueprint.apply(self)
-
 
 func getMaterial(type):
 	return meshes[type].material_override

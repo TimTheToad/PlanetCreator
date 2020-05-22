@@ -168,7 +168,31 @@ func _on_ShowClouds_toggled(button_pressed):
 	pass # Replace with function body.
 
 func _on_Save_pressed():
-	BlueprintLibrary.saveBlueprint(currentBlueprint, blueprintNameLabel.text)
+	var found = false
+	for blueprint in BlueprintLibrary.blueprints:
+		if blueprintNameLabel.text == blueprint.title:
+			found = true
+			
+	if not found:
+		var dupe = Blueprint.new()
+		dupe.title = blueprintNameLabel.text
+
+		for layer in currentBlueprint.getLayers():
+			var dupeLayer = PlanetLayer.new(layer.name, layer.layerIndex, layer.layerIcon)
+			
+			for event in layer.getEvents():
+				dupeLayer.addEvent(event.duplicate())
+			
+			dupe.addLayerCopy(dupeLayer)
+	
+		BlueprintLibrary.saveBlueprint(dupe, blueprintNameLabel.text)
+		
+		self.currentBlueprint = dupe
+		self.currentPlanet.blueprint = currentBlueprint
+		currentPlanet.applyBlueprint()
+		showPlanetBlueprint(self.currentPlanet)
+		eventSettings.visible = false
+		
 	blueprintLibraryPanel.loadBlueprints()
 	pass # Replace with function body.
 
@@ -188,13 +212,10 @@ func _on_ShowLib_toggled(button_pressed):
 	blueprintLibraryPanel.visible = button_pressed;
 	pass # Replace with function body.
 
-
 func _on_AddMoon_pressed():
 	self.currentBlueprint.addMoon(self.currentPlanet)
 	currentPlanet.applyBlueprint()
 	pass # Replace with function body.
-
-
 
 func _on_Delete_pressed():
 	
@@ -209,5 +230,5 @@ func _on_Delete_pressed():
 
 
 func _on_Button3_toggled(button_pressed):
-	get_node("Panel/VBoxContainer/Settings/HBoxContainer/FakeButtons3/Button3/Panel").visible = button_pressed
+	get_node("Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel").visible = button_pressed
 	pass # Replace with function body.

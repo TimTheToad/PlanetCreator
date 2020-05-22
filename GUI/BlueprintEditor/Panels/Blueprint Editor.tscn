@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://GUI/BlueprintEditor/Panels/Blueprint Editor.gd" type="Script" id=1]
 [ext_resource path="res://GUI/BlueprintEditor/Panels/EventSettings.gd" type="Script" id=2]
@@ -21,6 +21,8 @@
 [ext_resource path="res://Assets/Icons/EventIcons/symbol1.png" type="Texture" id=19]
 [ext_resource path="res://Assets/Icons/EventIcons/Lyft.png" type="Texture" id=20]
 [ext_resource path="res://Assets/Icons/favorite.png" type="Texture" id=21]
+[ext_resource path="res://Planet/NewPlanet/NewPlanet.tscn" type="PackedScene" id=22]
+[ext_resource path="res://GUI/BlueprintEditor/Panels/PlanetPreview.gd" type="Script" id=23]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 5.0
@@ -62,8 +64,13 @@ bg_color = Color( 0.290196, 0.290196, 0.290196, 1 )
 corner_radius_top_left = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="Environment" id=5]
+ambient_light_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="World" id=6]
+environment = SubResource( 5 )
+
 [node name="Blueprint Editor" type="WindowDialog"]
-visible = true
 margin_right = 400.0
 margin_bottom = 300.0
 rect_min_size = Vector2( 300, 200 )
@@ -163,7 +170,7 @@ margin_left = 42.0
 margin_right = 78.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 36, 36 )
-hint_tooltip = "Load blueprint"
+hint_tooltip = "Load finished blueprint to get an understanding of the blueprint structure."
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = true
@@ -560,12 +567,12 @@ autowrap = true
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer"]
 margin_top = 99.0
 margin_right = 380.0
-margin_bottom = 325.0
+margin_bottom = 282.0
 size_flags_vertical = 3
 scroll_vertical_enabled = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/ScrollContainer"]
-margin_bottom = 226.0
+margin_bottom = 183.0
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -707,6 +714,38 @@ margin_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Load"
+
+[node name="PlanetPreview" type="ColorRect" parent="BlueprintLibrary"]
+visible = false
+margin_right = 128.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 128, 128 )
+mouse_filter = 2
+color = Color( 0.145098, 0.145098, 0.145098, 0 )
+script = ExtResource( 23 )
+
+[node name="ViewportContainer" type="ViewportContainer" parent="BlueprintLibrary/PlanetPreview"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="BlueprintLibrary/PlanetPreview/ViewportContainer"]
+size = Vector2( 128, 128 )
+own_world = true
+world = SubResource( 6 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 0
+
+[node name="NewPlanet" parent="BlueprintLibrary/PlanetPreview/ViewportContainer/Viewport" instance=ExtResource( 22 )]
+
+[node name="Camera" type="Camera" parent="BlueprintLibrary/PlanetPreview/ViewportContainer/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0313601, 2.72439 )
+projection = 1
+size = 2.25
 [connection signal="toggled" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/ShowClouds" to="." method="_on_ShowClouds_toggled"]
 [connection signal="pressed" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/HBoxContainer2/Save" to="." method="_on_Save_pressed"]
 [connection signal="toggled" from="Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer/HBoxContainer2/ShowLib" to="." method="_on_ShowLib_toggled"]
