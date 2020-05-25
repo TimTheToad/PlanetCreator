@@ -15,7 +15,7 @@ func _ready():
 	window.visible = false
 	namePanel = get_node("NamePanel")
 	intiAlternateView()
-
+	
 	updateView()
 	pass # Replace with function body.
 	
@@ -35,6 +35,15 @@ var pressed
 var vPort
 var mousePos
 
+func getPlanetInScene(planetName):
+	var planets = planetsInScene.get_children()
+	for planet in planets:
+		if planetName == planet.name:
+			return planet
+		else:
+			return false
+	pass
+
 func _input(event):
 	
 	if event is InputEventMouseButton:
@@ -44,7 +53,10 @@ func _input(event):
 				mousePos = event.position
 		if event.button_index == BUTTON_LEFT:
 			if selectedPlanet:
-				getPanel(selectedPlanet).set('custom_styles/panel', panelStyleNotSelected)
+				var planetInScene = getPlanetInScene(selectedPlanet.name)
+				if planetInScene:
+					radialGUI = planetInScene.get_node("PlanetRadialControl")
+
 
 		if event.is_pressed():
 			pressed = true
@@ -76,7 +88,9 @@ func updateView():
 		iter += 1
 
 func _process(delta):
-
+	if not radialGUI and selectedPlanet:
+		radialGUI = null
+		getPanel(selectedPlanet).set('custom_styles/panel', panelStyleNotSelected)
 	pass
 
 func getPanel(planet):
@@ -150,6 +164,7 @@ func searchAndAddTextPlanet(text):
 	searchPlanet(text)
 	pass
 
+var matchingPlanets: = 0
 func searchPlanet(text):
 	var names = []
 	for name in nameDic:
@@ -162,11 +177,19 @@ func searchPlanet(text):
 
 	for panel in panelContainers:
 		if nonMatchingNames.has(panel.get_child(0).get_child(0).get_child(0).get_child(0).name):
+			
 			panel.visible = false
 		else:
+			matchingPlanets += 1
 			panel.visible = true
 #			viewP.set_h_size_flags(0) #Expand horizontal
 #			viewP.set_v_size_flags(0)
+	print(matchingPlanets)
+	if matchingPlanets < 5:
+		hBoxContainer.columns = matchingPlanets
+	else:
+		hBoxContainer.columns = 4
+		matchingPlanets = 0
 	pass
 
 func sortByLastEdited():
