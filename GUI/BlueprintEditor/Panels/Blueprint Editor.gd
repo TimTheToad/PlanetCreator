@@ -225,3 +225,11 @@ func _on_Delete_pressed():
 func _on_Button3_toggled(button_pressed):
 	get_node("Panel/VBoxContainer/Settings/HBoxContainer/VBoxContainer2/HBoxContainer/FakeButtons3/Button3/Panel").visible = button_pressed
 	pass # Replace with function body.
+
+func _on_Camera_toggled(button_pressed):
+	var alternateView = get_tree().current_scene.get_child(4).get_child(2).get_child(2)
+	alternateView.searchPlanet(currentPlanet.name)
+	alternateView.visible = button_pressed
+	alternateView.set_anchors_preset(Control.PRESET_CENTER, true)
+	alternateView._set_size(Vector2(500, 500))
+	pass # Replace with function body.
