@@ -3,7 +3,8 @@ extends Spatial
 onready var planetScene = preload("res://Planet/NewPlanet/NewPlanet.tscn")
 onready var alternateView = preload("res://GUI/AlternateView/AlternateViewRoot.tscn")
 onready var alternateInstance = alternateView.instance()
-const PLANET_COUNT = 5
+const PLANET_COUNT = 20
+var modifiedPlanets = []
 
 var minDist = 15
 var randDist = 10

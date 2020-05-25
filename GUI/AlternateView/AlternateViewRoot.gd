@@ -15,7 +15,7 @@ func _ready():
 	window.visible = false
 	namePanel = get_node("NamePanel")
 	intiAlternateView()
-
+	
 	updateView()
 	pass # Replace with function body.
 	
@@ -35,6 +35,15 @@ var pressed
 var vPort
 var mousePos
 
+func getPlanetInScene(planetName):
+	var planets = planetsInScene.get_children()
+	for planet in planets:
+		if planetName == planet.name:
+			return planet
+		else:
+			return false
+	pass
+
 func _input(event):
 	
 	if event is InputEventMouseButton:
@@ -44,7 +53,10 @@ func _input(event):
 				mousePos = event.position
 		if event.button_index == BUTTON_LEFT:
 			if selectedPlanet:
-				getPanel(selectedPlanet).set('custom_styles/panel', panelStyleNotSelected)
+				var planetInScene = getPlanetInScene(selectedPlanet.name)
+				if planetInScene:
+					radialGUI = planetInScene.get_node("PlanetRadialControl")
+
 
 		if event.is_pressed():
 			pressed = true
@@ -76,7 +88,9 @@ func updateView():
 		iter += 1
 
 func _process(delta):
-
+	if not radialGUI and selectedPlanet:
+		radialGUI = null
+		getPanel(selectedPlanet).set('custom_styles/panel', panelStyleNotSelected)
 	pass
 
 func getPanel(planet):
@@ -145,6 +159,12 @@ func swap(a,b, arr):
 	arr[b] = temp
 	pass
 
+func searchAndAddTextPlanet(text):
+	get_child(2).items[2].set_text(text)
+	searchPlanet(text)
+	pass
+
+var matchingPlanets: = 0
 func searchPlanet(text):
 	var names = []
 	for name in nameDic:
@@ -157,20 +177,51 @@ func searchPlanet(text):
 
 	for panel in panelContainers:
 		if nonMatchingNames.has(panel.get_child(0).get_child(0).get_child(0).get_child(0).name):
+			
 			panel.visible = false
-#			viewP.set_h_size_flags(3) #Expand horizontal
-#			viewP.set_v_size_flags(3)
 		else:
+			matchingPlanets += 1
 			panel.visible = true
 #			viewP.set_h_size_flags(0) #Expand horizontal
 #			viewP.set_v_size_flags(0)
+	print(matchingPlanets)
+	if matchingPlanets < 5:
+		hBoxContainer.columns = matchingPlanets
+	else:
+		hBoxContainer.columns = 4
+		matchingPlanets = 0
+	pass
+
+func sortByLastEdited():
+	tweenIt(2.0, Color.white, Color.black)
+	var indexArray = []
+	print(planetsInScene.modifiedPlanets)
+	var modifiedOrder = []
+	for i in range(planetsInScene.modifiedPlanets.size()):
+		modifiedOrder.append(planetsInScene.modifiedPlanets[i].name)
+#	modifiedOrder.invert()
+	print(modifiedOrder)
+	for i in range(hBoxContainer.get_child_count()):
+		var childPlanet = hBoxContainer.get_child(i).get_child(0).get_child(0).get_child(0).get_child(0)
+		if not modifiedOrder.has(childPlanet.name):
+			modifiedOrder.append(childPlanet.name)
+
+	for i in range(panelContainers.size()):
+		hBoxContainer.remove_child(panelContainers[i])
+		
+	for i in range(modifiedOrder.size()):
+		for j in range(panelContainers.size()):
+			var childPlanet = panelContainers[j].get_child(0).get_child(0).get_child(0).get_child(0)
+			if modifiedOrder[i] == childPlanet.name:
+				hBoxContainer.add_child(panelContainers[j])
+
 	pass
 
 func sortBySize():
 	tweenIt(2.0, Color.white, Color.black)
-	var planetIndexArr = []
-	var planetIndex = 0
-	var sizes = []
+	var planetIndexArr 	= []
+	var planetIndex 	= 0
+	var sizes 			= []
 	var minId
 	for size in sizeDic:
 		sizes.append(size)

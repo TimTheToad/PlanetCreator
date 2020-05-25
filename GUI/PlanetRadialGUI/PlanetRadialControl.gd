@@ -71,10 +71,10 @@ func _showBlueprintEdtior(toggle):
 
 func _goToAlternateView(toggle):
 	var alternateView = get_tree().current_scene.get_child(4).get_child(2).get_child(2)
-	alternateView.searchPlanet(parent.name)
+	alternateView.searchAndAddTextPlanet(parent.name)
 	alternateView.visible = toggle
 	alternateView.set_anchors_preset(Control.PRESET_CENTER, true)
-	alternateView._set_size(Vector2(500, 500))
+	alternateView._set_size(Vector2(650, 500))
 	pass
 
 func _removeCurrentEvent():
@@ -111,6 +111,9 @@ func _connectAddLayerEvent(type):
 			var colorPickerButton = currLayerEventButtons.get_node("Color")
 			colorPickerButton.color = currLayerEvent.color
 			colorPickerButton.connect("color_changed", currLayerEvent, "setColor")
+			if self.get_parent().get_parent().modifiedPlanets.has(self.parent):
+				self.get_parent().get_parent().modifiedPlanets.erase(self.parent)
+			self.get_parent().get_parent().modifiedPlanets.push_front(self.parent)
 		1:
 			HelpfulGuide.chosenText = 6
 			currLayerEvent = currLayer.addNoise(0.8, 5, Color.white)
@@ -136,6 +139,9 @@ func _connectAddLayerEvent(type):
 			var colorPickerButton = currLayerEventButtons.get_node("Color")
 			colorPickerButton.color = currLayerEvent.color
 			colorPickerButton.connect("color_changed", currLayerEvent, "setColor")
+			if self.get_parent().get_parent().modifiedPlanets.has(self.parent):
+				self.get_parent().get_parent().modifiedPlanets.erase(self.parent)
+			self.get_parent().get_parent().modifiedPlanets.push_front(self.parent)
 			
 	positionButtons(PI * 0.5, children)
 	_connectJump(children[0], 2)

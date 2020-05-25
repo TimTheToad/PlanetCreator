@@ -6,7 +6,7 @@ extends Control
 # var b = "text"
 onready var panelStyleNotSelected = load("res://GUI/AlternateView/AlternatePanelStyleNotSelected.tres")
 onready var panelStyleSelected = load("res://GUI/AlternateView/AlternatePanelStyleSelected.tres")
-onready var hBoxContainer = get_node("ScrollContainer/HBoxContainer")
+onready var hBoxContainer = get_node("ScrollContainer/GridContainer")
 onready var environment = get_tree().current_scene.get_node("WorldEnvironment")
 onready var rayScript = load("res://GUI/AlternateView/ViewportRayCast.gd")
 onready var planetsInScene = get_tree().current_scene.get_node("Planets")
@@ -18,6 +18,7 @@ var nameDic = {}
 var sizeDic = {}
 var nameLabel
 var sizeLabel
+var radialGUI
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -72,7 +73,7 @@ func createPanel():
 	var panel = Panel.new()
 	panel.set_h_size_flags(3)
 	panel.set_v_size_flags(3)
-	panel.rect_min_size = Vector2(150,0)
+	panel.rect_min_size = Vector2(150,150)
 	panel.anchor_bottom = 1
 	panel.anchor_right = 1
 	panel.set('custom_styles/panel', panelStyleNotSelected)

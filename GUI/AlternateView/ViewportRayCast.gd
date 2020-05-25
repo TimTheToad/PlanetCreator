@@ -70,10 +70,14 @@ func _handleGuiEvent(event):
 			if hit.size() != 0:
 				# collider will be the node you hit
 				selected = hit.collider.get_parent()
+#				planetsInScene = get_tree().current_scene.get_node("Planets")
 #				print(selected)
 				for i in range(planetsInScene.get_child_count()):
+					print("Selected: " + selected.name)
+					print("PlanetInScene: " + planetsInScene.get_child(i).name)
 					if planetsInScene.get_child(i).name == selected.name:
 						cameraHolder.GoToPlanet(planetsInScene.get_child(i))
+						continue
 						
 #				print(selected)
 	pass

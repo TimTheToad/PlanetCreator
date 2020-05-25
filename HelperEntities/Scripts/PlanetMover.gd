@@ -93,9 +93,9 @@ func _input(event):
 				if  planetInstance.get_parent().name == "Planets":
 					cameraHolder.GoToPlanet(planetInstance)
 					#HelpfulGuide.chosenText = 2
-			alternateView = get_tree().current_scene.get_child(4).get_child(2).get_child(2)
-			if alternateView.visible and selected:
-				alternateView.searchPlanet(selected.name)
+#			alternateView = get_tree().current_scene.get_child(4).get_child(2).get_child(2)
+#			if alternateView.visible and selected:
+#				alternateView.searchPlanet(selected.name)
 
 	if xArr:
 		if event is InputEventMouseMotion:
