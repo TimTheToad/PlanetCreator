@@ -189,7 +189,8 @@ func searchPlanet(text):
 		hBoxContainer.columns = matchingPlanets
 	else:
 		hBoxContainer.columns = 4
-		matchingPlanets = 0
+	
+	matchingPlanets = 0
 	pass
 
 func sortByLastEdited():
