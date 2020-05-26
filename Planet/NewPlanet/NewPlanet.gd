@@ -59,6 +59,7 @@ func applyBlueprint():
 		# Remove older brushes
 		for child in viewport.get_children():
 			child.visible = false
+			viewport.remove_child(child)
 			child.queue_free()
 		
 		# Add new brushes
@@ -68,10 +69,12 @@ func applyBlueprint():
 					_createFillBrush(viewport, event)
 				EventType.NOISE:
 					_createNoiseBrush(viewport, event)
-		viewport.render_target_update_mode = Viewport.UPDATE_ONCE
+					
+					
+#		viewport.render_target_update_mode = Viewport.UPDATE_ONCE
 	
-	for moon in self.blueprint.moons:
-		addMoon(moon)
+#	for moon in self.blueprint.moons:
+#		addMoon(moon)
 		
 func updateLayer(layer):
 	var viewport = viewports[layer.layerIndex]
@@ -92,8 +95,8 @@ func updateLayer(layer):
 				mat.set_shader_param("period", event.period)
 				mat.set_shader_param("octaves", event.octave)
 				mat.set_shader_param("color", event.color)
-	
-	viewport.render_target_update_mode = Viewport.UPDATE_ONCE
+#
+#	viewport.render_target_update_mode = Viewport.UPDATE_ONCE
 
 func addMoon(moon):
 	self.add_child(moon)
@@ -118,9 +121,11 @@ func _createNoiseBrush(viewport, event):
 	
 	viewport.add_child(brush)
 
+
 func _process(dt):
 	if blueprint:
 		blueprint.apply(self)
+	pass
 
 func getMaterial(type):
 	return meshes[type].material_override
