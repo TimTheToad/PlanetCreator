@@ -3,3 +3,6 @@
     Radial menu: [color=green]MMB[/color] / [color=green]MOUSE6[/color]
 
     Select Planet by pressing [color=green]LMB[/color]
+
+    Hide GUI: [color=green]H[/color]
+
