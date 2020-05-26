@@ -90,7 +90,7 @@ func updateView():
 func _process(delta):
 	if not radialGUI and selectedPlanet:
 		radialGUI = null
-		getPanel(selectedPlanet).set('custom_styles/panel', panelStyleNotSelected)
+#		getPanel(selectedPlanet).set('custom_styles/panel', panelStyleNotSelected)
 	pass
 
 func getPanel(planet):
@@ -99,6 +99,8 @@ func getPanel(planet):
 
 
 func _selectPlanetName(planet):
+	if selectedPlanet:
+		getPanel(selectedPlanet).set('custom_styles/panel', panelStyleNotSelected)
 	selectedPlanet = planet
 	namePanel.visible = true
 	getPanel(selectedPlanet).set('custom_styles/panel', panelStyleSelected)

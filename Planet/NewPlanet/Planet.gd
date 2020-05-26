@@ -19,7 +19,7 @@ var camera
 var unPos
 var shouldOrbit
 var orbitMesh
-var vertexCount = 20
+var vertexCount = 50
 
 func _ready():
 	
