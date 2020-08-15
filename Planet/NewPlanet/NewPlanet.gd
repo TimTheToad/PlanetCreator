@@ -41,9 +41,9 @@ func _ready():
 	pass # Replace with function body.
 
 func highlight(toggle):
-	highlight.visible = toggle
-	highlight.emitting = toggle
-
+#	highlight.visible = toggle
+#	highlight.emitting = toggle
+	pass
 func setCloudColor(color):
 	meshes[LayerType.CLOUD].material_override.albedo_color = color
 	

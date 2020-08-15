@@ -16,4 +16,4 @@ func _input(event):
 func changeBlueprint(blueprint):
 	planet.blueprint = blueprint
 	planet.applyBlueprint()
-	viewport.render_target_update_mode = viewport.UPDATE_ONCE
+#	viewport.render_target_update_mode = viewport.UPDATE_ONCE
