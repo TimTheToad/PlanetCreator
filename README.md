@@ -1,4 +1,4 @@
-# PlanetCreater
+# PlanetCreator
 School project for game editor interface course.
 
 
